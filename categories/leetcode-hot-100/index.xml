@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Leetcode Hot 100 on tech-ox</title>
-        <link>http://tech-ox.github.io/categories/leetcode-hot-100/</link>
+        <link>http://tech-ox.com/categories/leetcode-hot-100/</link>
         <description>Recent content in Leetcode Hot 100 on tech-ox</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>tech-ox</copyright>
-        <lastBuildDate>Sun, 04 Jan 2026 10:37:02 +0800</lastBuildDate><atom:link href="http://tech-ox.github.io/categories/leetcode-hot-100/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 04 Jan 2026 10:37:02 +0800</lastBuildDate><atom:link href="http://tech-ox.com/categories/leetcode-hot-100/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Leetcode Hot 100 85. 最大矩形</title>
-        <link>http://tech-ox.github.io/p/leetcode-hot-100-85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</link>
+        <link>http://tech-ox.com/p/leetcode-hot-100-85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</link>
         <pubDate>Sun, 04 Jan 2026 10:37:02 +0800</pubDate>
         
-        <guid>http://tech-ox.github.io/p/leetcode-hot-100-85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</guid>
+        <guid>http://tech-ox.com/p/leetcode-hot-100-85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</guid>
         <description>&lt;h2 id=&#34;题目&#34;&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/maximal-rectangle/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;85. 最大矩形&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://tech-ox.github.io/p/leetcode-hot-100-85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://tech-ox.com/p/leetcode-hot-100-85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image.png&#34;
 	width=&#34;1886&#34;
 	height=&#34;1711&#34;
-	srcset=&#34;http://tech-ox.github.io/p/leetcode-hot-100-85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_b5a13b90d1846b6d.png 480w, http://tech-ox.github.io/p/leetcode-hot-100-85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_18a4be5835af16c2.png 1024w&#34;
+	srcset=&#34;http://tech-ox.com/p/leetcode-hot-100-85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_b5a13b90d1846b6d.png 480w, http://tech-ox.com/p/leetcode-hot-100-85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_18a4be5835af16c2.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;alt text&#34;
