@@ -8,11 +8,11 @@
         <language>zh-cn</language>
         <copyright>tech-ox</copyright>
         <lastBuildDate>Mon, 05 Jan 2026 09:05:34 +0800</lastBuildDate><atom:link href="http://tech-ox.com/tags/%E6%95%B0%E4%BD%8D/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Leetcode Hot 100 338. 比特位计数</title>
-        <link>http://tech-ox.com/p/leetcode-hot-100-338.-%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/</link>
+        <title>338. 比特位计数</title>
+        <link>http://tech-ox.com/p/338.-%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/</link>
         <pubDate>Mon, 05 Jan 2026 09:05:34 +0800</pubDate>
         
-        <guid>http://tech-ox.com/p/leetcode-hot-100-338.-%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/</guid>
+        <guid>http://tech-ox.com/p/338.-%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/</guid>
         <description>&lt;h2 id=&#34;题目&#34;&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/counting-bits/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;338. 比特位计数&lt;/a&gt;
