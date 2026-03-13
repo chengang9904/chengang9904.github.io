@@ -1826,7 +1826,7 @@
 &lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>105. 从前序与中序遍历序列构造二叉树</title><link>http://tech-ox.com/p/105.-%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/</link><pubDate>Wed, 14 Jan 2026 10:58:42 +0800</pubDate><guid>http://tech-ox.com/p/105.-%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
-&gt;105. 从前序与中序遍历序列构造二叉树 &lt;/a&gt;
+&gt;105. 从前序与中序遍历序列构造二叉树&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/solutions/535751/cong-qian-xu-yu-zhong-xu-bian-li-xu-lie-gou-zao-er-cha-shu-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;官方题解&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="方法一-递归"&gt;方法一： 递归
