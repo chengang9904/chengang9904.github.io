@@ -1,4 +1,210 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on tech-ox</title><link>http://tech-ox.com/post/</link><description>Recent content in Posts on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Tue, 31 Mar 2026 19:25:11 +0800</lastBuildDate><atom:link href="http://tech-ox.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>322. 零钱兑换</title><link>http://tech-ox.com/p/322.-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</link><pubDate>Tue, 31 Mar 2026 19:25:11 +0800</pubDate><guid>http://tech-ox.com/p/322.-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</guid><description>&lt;h2 id="题目"&gt;题目
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on tech-ox</title><link>http://tech-ox.com/post/</link><description>Recent content in Posts on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Sat, 25 Apr 2026 10:50:55 +0800</lastBuildDate><atom:link href="http://tech-ox.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>项目学习</title><link>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</link><pubDate>Sat, 25 Apr 2026 10:50:55 +0800</pubDate><guid>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;项目学习的提示词&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Now I have enough material. Let me synthesize the key findings.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="coding-agent-项目上手--快速学习--精选强提示词手册"&gt;Coding Agent 项目上手 &amp;amp; 快速学习 — 精选强提示词手册
+&lt;/h2&gt;&lt;hr&gt;
+&lt;h3 id="一快速理解项目explorer-模式"&gt;一、快速理解项目（Explorer 模式）
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;场景&lt;/th&gt;
+&lt;th&gt;提示词&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;全局概览&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;请给我这个代码库的整体概览&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;架构模式&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;请解释主要的架构模式&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;核心数据模型&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;这个项目的关键数据模型有哪些？&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;技术栈&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;这个项目使用了哪些技术栈和框架？&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;入口流程&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;请从入口点追踪请求流程&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;术语表&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;请给我一份项目专用术语表&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="二定位代码finder-模式"&gt;二、定位代码（Finder 模式）
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;场景&lt;/th&gt;
+&lt;th&gt;提示词&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;找功能文件&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;找到处理[用户认证 / 支付 / ...]的文件&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;理解交互&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;这些文件是如何协同工作的？&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;端到端追踪&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;追踪[登录]流程，从前端一直到数据库&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;找特定用法&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;找到[functionName]的所有用法&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="三规划优先explorer--planner--coder"&gt;三、规划优先（Explorer → Planner → Coder）
+&lt;/h3&gt;&lt;p&gt;这是 &lt;strong&gt;最关键的模式&lt;/strong&gt;——先研究再写代码，效果远超直接让 agent 写：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1. 先探索：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 先阅读这些文件：[file1, file2, file3]。先不要写代码。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2. 用 &amp;#34;think&amp;#34; 系列触发深度思考：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 深入思考实现[X]的最佳方案
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 更深入地思考边界情况 ← 更深思考预算
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ultrathink ← 最大思考预算
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;3. 出方案：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 为实现[feature]制定一个计划，并写下来。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;4. 再编码：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 现在按计划开始实现
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="四tdd-工作流写测试--写代码"&gt;四、TDD 工作流（写测试 → 写代码）
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;先为[feature]编写测试。先不要实现功能。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;运行测试，并确认它们会失败。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;提交这些测试。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;现在实现代码以通过所有测试。不要修改测试。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;持续迭代直到全部通过。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="五修-bug"&gt;五、修 Bug
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;我在运行[command]时看到错误：[粘贴错误信息]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;请找到根因并修复它
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;请给出几种修复[file]中[具体问题]的方法
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="六重构"&gt;六、重构
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;请找出我们代码库中已弃用 API 的使用位置
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;在保持行为一致的前提下，将[file]重构为使用[现代模式]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="七代码审查--pr"&gt;七、代码审查 &amp;amp; PR
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;总结我所做的改动
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;创建一个 PR
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;审查我最近的改动是否存在安全问题
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="八懒人一键组合技"&gt;八、&amp;ldquo;懒人一键&amp;quot;组合技
+&lt;/h3&gt;&lt;p&gt;如果你想一步到位（牺牲一点质量换速度）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;查看[file]中[现有功能]的实现方式。按相同模式实现[新功能]。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;修复这个项目中的所有 lint 错误
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;为[module]补充测试。运行测试并修复失败项。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id="核心原则总结"&gt;核心原则总结
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;先读后写&lt;/strong&gt; — 始终让 agent 先探索/理解，再动手。直接说 &amp;ldquo;don&amp;rsquo;t write code yet&amp;rdquo; 是关键魔法词&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;think 触发器&lt;/strong&gt; — &lt;code&gt;think&lt;/code&gt; / &lt;code&gt;think harder&lt;/code&gt; / &lt;code&gt;ultrathink&lt;/code&gt; 能按档位分配思考预算，复杂问题务必用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;给参考&lt;/strong&gt; — 指定一个已有实现当范例（&amp;ldquo;follow the pattern in X&amp;rdquo;），agent 产出质量大幅提升&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;小步迭代&lt;/strong&gt; — 拆成 &amp;ldquo;探索 → 方案 → 实现 → 测试 → 提交&amp;rdquo;，每步验证，不要一次甩整个需求&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TDD 友好&lt;/strong&gt; — coding agent 在有明确目标（测试用例/视觉 mock）时表现最强&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CLAUDE.md / AGENTS.md&lt;/strong&gt; — 项目级&amp;quot;记忆文件&amp;rdquo;，记录常用命令、代码风格、架构说明，agent 启动时自动加载&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;需要我帮你针对某个具体场景（比如你正在做的项目）定制一套提示词组合吗？&lt;/p&gt;</description></item><item><title>322. 零钱兑换</title><link>http://tech-ox.com/p/322.-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</link><pubDate>Tue, 31 Mar 2026 19:25:11 +0800</pubDate><guid>http://tech-ox.com/p/322.-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/coin-change/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;322. 零钱兑换&lt;/a&gt;&lt;br&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/coin-change/solutions/522557/ling-qian-dui-huan-by-leetcode/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
