@@ -1,4 +1,257 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tech-ox</title><link>http://tech-ox.com/</link><description>Recent content on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Sat, 25 Apr 2026 10:50:55 +0800</lastBuildDate><atom:link href="http://tech-ox.com/index.xml" rel="self" type="application/rss+xml"/><item><title>项目学习</title><link>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</link><pubDate>Sat, 25 Apr 2026 10:50:55 +0800</pubDate><guid>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</guid><description>&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tech-ox</title><link>http://tech-ox.com/</link><description>Recent content on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Sat, 25 Apr 2026 10:55:20 +0800</lastBuildDate><atom:link href="http://tech-ox.com/index.xml" rel="self" type="application/rss+xml"/><item><title>项目开发</title><link>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</link><pubDate>Sat, 25 Apr 2026 10:55:20 +0800</pubDate><guid>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;项目开发的提示词&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="重要工具清单"&gt;重要工具清单
+&lt;/h2&gt;&lt;h3 id="1-任务管理"&gt;1) 任务管理
+&lt;/h3&gt;&lt;p&gt;任务管理工具提供后台任务的全生命周期控制能力，覆盖从创建、查询、更新、监控到停止的完整链路。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;工具名称&lt;/th&gt;
+&lt;th&gt;readOnly&lt;/th&gt;
+&lt;th&gt;destructive&lt;/th&gt;
+&lt;th&gt;concurrencySafe&lt;/th&gt;
+&lt;th&gt;简要说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;TaskCreateTool&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;创建后台任务（条件启用：Todo V2）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TaskGetTool&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;获取单个任务详情&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TaskUpdateTool&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;更新任务状态或内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TaskListTool&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;列出所有任务&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TaskOutputTool&lt;/td&gt;
+&lt;td&gt;动态&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;动态&lt;/td&gt;
+&lt;td&gt;获取任务输出流；当 readOnly 时，concurrencySafe 为 true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TaskStopTool&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;停止正在运行的任务&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;典型工作流&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用 &lt;code&gt;TaskCreateTool&lt;/code&gt; 创建任务。&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;TaskListTool&lt;/code&gt; 查看整体进度。&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;TaskGetTool&lt;/code&gt; 检查单任务详情。&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;TaskOutputTool&lt;/code&gt; 持续获取输出日志。&lt;/li&gt;
+&lt;li&gt;需要中断时，使用 &lt;code&gt;TaskStopTool&lt;/code&gt; 停止任务。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="2-计划"&gt;2) 计划
+&lt;/h3&gt;&lt;p&gt;计划模式工具用于“先规划、后执行”，在复杂变更前提供更安全的分析与决策路径。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;工具名称&lt;/th&gt;
+&lt;th&gt;readOnly&lt;/th&gt;
+&lt;th&gt;destructive&lt;/th&gt;
+&lt;th&gt;concurrencySafe&lt;/th&gt;
+&lt;th&gt;简要说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;EnterPlanModeTool&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;进入计划模式，仅允许使用只读工具集&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ExitPlanModeV2Tool&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;退出计划模式，恢复正常工具权限&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;使用场景&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;计划模式是一种安全策略：进入后，智能体只能使用只读工具（如 &lt;code&gt;FileReadTool&lt;/code&gt;、&lt;code&gt;GrepTool&lt;/code&gt;）进行信息收集与分析，不能执行任何修改操作。该模式适用于复杂需求前的方案设计、风险评估与影响分析。可结合第 14 章“结构化工作流”使用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="3-用户澄清"&gt;3) 用户澄清
+&lt;/h3&gt;&lt;p&gt;当需求不完整、存在多种实现分支，或继续执行可能引发误操作时，应优先通过提问与用户确认。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;工具名称&lt;/th&gt;
+&lt;th&gt;readOnly&lt;/th&gt;
+&lt;th&gt;destructive&lt;/th&gt;
+&lt;th&gt;concurrencySafe&lt;/th&gt;
+&lt;th&gt;简要说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;AskUserQuestionTool&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;向用户发起澄清问题，获取关键决策后再继续执行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;推荐触发时机&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;需求存在歧义（如目标、范围、优先级不明确）。&lt;/li&gt;
+&lt;li&gt;需要用户在多个方案中做选择（如性能优先 vs. 可维护性优先）。&lt;/li&gt;
+&lt;li&gt;涉及潜在破坏性操作前（如删除数据、批量覆盖、重构核心路径）。&lt;/li&gt;
+&lt;li&gt;发现上下文缺失（如缺少环境变量、账号权限、外部依赖信息）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="按计划开发连续工作提示词"&gt;按计划开发连续工作提示词
+&lt;/h2&gt;&lt;p&gt;用于“先计划、再连续执行”的场景，减少来回确认成本。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;基础版（通用）&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;开始开发。请严格按既定计划连续执行，直到所有任务完成前不要主动中断；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;若遇到阻塞、信息缺失或高风险操作，请暂停并向我提问确认。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;增强版（含质量约束）&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;按照当前计划持续开发直到全部任务完成。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;要求：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1) 小步提交，每步可验证；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2) 保持与现有代码风格一致；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;3) 变更后运行相关测试/检查；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;4) 出现失败先定位根因再修复；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;5) 仅在以下情况暂停并提问：需求歧义、权限不足、外部依赖缺失、潜在破坏性操作。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;配套执行规范&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每轮输出包含：当前步骤、完成情况、下一步。&lt;/li&gt;
+&lt;li&gt;对未解决问题给出：影响范围、候选方案、推荐方案。&lt;/li&gt;
+&lt;li&gt;涉及数据库/配置/权限变更时，必须先确认再执行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="从零到一项目开发"&gt;从零到一项目开发
+&lt;/h2&gt;&lt;p&gt;适用于新项目冷启动，目标是从“想法”快速推进到“可运行 MVP”。&lt;/p&gt;
+&lt;h3 id="推荐流程"&gt;推荐流程
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;需求澄清&lt;/strong&gt;：目标用户、核心场景、验收标准。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;技术选型&lt;/strong&gt;：框架、数据存储、部署方式、成本约束。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;架构设计&lt;/strong&gt;：模块划分、接口边界、目录结构。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;里程碑拆分&lt;/strong&gt;：MVP → Beta → 正式版。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实现与验证&lt;/strong&gt;：按优先级逐步交付并测试。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="可复用提示词"&gt;可复用提示词
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;我们要从零开始做一个[项目名称]。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;请先不要写代码，先完成以下任务：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1) 梳理需求与范围（做与不做）；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2) 给出技术选型建议及权衡；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;3) 设计系统架构与目录结构；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;4) 输出分阶段实施计划（MVP/Beta/GA）；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;5) 列出风险与缓解策略。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;确认后再进入编码阶段。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;现在开始实现 MVP：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- 严格按计划执行；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- 每完成一项就更新 Todo 与进度；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- 先实现主链路，再补异常与边界；
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- 完成后给出运行方式与验收结果。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="新增功能需求开发"&gt;新增功能需求开发
+&lt;/h2&gt;&lt;p&gt;适用于已有项目中的增量需求，重点是“兼容存量、控制影响面”。&lt;/p&gt;
+&lt;h3 id="标准步骤"&gt;标准步骤
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;阅读相关模块，确认现有实现模式。&lt;/li&gt;
+&lt;li&gt;明确需求边界与非目标。&lt;/li&gt;
+&lt;li&gt;设计最小改动方案（接口、数据、UI/交互）。&lt;/li&gt;
+&lt;li&gt;先补测试或验收用例，再实现。&lt;/li&gt;
+&lt;li&gt;回归验证并输出变更说明。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="可复用提示词-1"&gt;可复用提示词
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;请先分析[现有功能]在[文件/模块]中的实现方式，不要立即改代码。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;然后给出新增[新功能]的改动方案
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="代码重构与优化"&gt;代码重构与优化
+&lt;/h2&gt;&lt;h2 id="bug-修复"&gt;Bug 修复
+&lt;/h2&gt;&lt;p&gt;修复策略强调“先复现、再定位、后修复、再验证”。&lt;/p&gt;
+&lt;h3 id="可复用提示词-2"&gt;可复用提示词
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;我在执行[命令/操作]时出现错误：[粘贴报错]。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item><item><title>项目学习</title><link>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</link><pubDate>Sat, 25 Apr 2026 10:50:55 +0800</pubDate><guid>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;项目学习的提示词&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Now I have enough material. Let me synthesize the key findings.&lt;/p&gt;
