@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PowerShell on tech-ox</title><link>http://tech-ox.com/tags/powershell/</link><description>Recent content in PowerShell on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Sun, 26 Apr 2026 00:00:00 +0800</lastBuildDate><atom:link href="http://tech-ox.com/tags/powershell/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows 下 Claude Code /resume 显示不全的处理方法</title><link>http://tech-ox.com/p/windows-%E4%B8%8B-claude-code-/resume-%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</link><pubDate>Sun, 26 Apr 2026 00:00:00 +0800</pubDate><guid>http://tech-ox.com/p/windows-%E4%B8%8B-claude-code-/resume-%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</guid><description>&lt;h1 id="windows-下-claude-code-resume-显示不全的处理方法"&gt;Windows 下 Claude Code &lt;code&gt;/resume&lt;/code&gt; 显示不全的处理方法
+&lt;/h1&gt;&lt;p&gt;如果你在 Windows 上使用 Claude Code，可能会遇到这样一个现象：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;正常开发对话时，内容是一点一点输出的，显示完全正常。&lt;/li&gt;
+&lt;li&gt;但使用 &lt;code&gt;/resume&lt;/code&gt; 或 &lt;code&gt;claude -c&lt;/code&gt; 恢复上一次会话时，内容会一次性灌入终端。&lt;/li&gt;
+&lt;li&gt;这时候终端里只能看到后半段，前面的内容像被“吃掉”了一样。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如你原本的对话内容可以抽象成 &lt;code&gt;abcd&lt;/code&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;正常实时输出时，&lt;code&gt;a b c d&lt;/code&gt; 都能看到。&lt;/li&gt;
+&lt;li&gt;但恢复会话时，可能只看到 &lt;code&gt;Claude Code UI 头部 + bcd&lt;/code&gt;，最前面的 &lt;code&gt;a&lt;/code&gt; 不显示。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;很多人第一反应会去调大 Windows Terminal 的 scrollback 行数，但这个问题通常&lt;strong&gt;不是单纯的显示行数不够&lt;/strong&gt;，而更像是 &lt;strong&gt;Claude Code 在 Windows 下恢复长会话时的 TUI 渲染或 scrollback 兼容问题&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id="适用环境"&gt;适用环境
+&lt;/h2&gt;&lt;p&gt;本文适用于类似下面的环境：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows Terminal 最新版&lt;/li&gt;
+&lt;li&gt;PowerShell 7 最新版&lt;/li&gt;
+&lt;li&gt;已经手动调整过终端最大显示行数&lt;/li&gt;
+&lt;li&gt;问题主要出现在 Claude Code 的 &lt;code&gt;/resume&lt;/code&gt; 或 &lt;code&gt;claude -c&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="现象为什么会发生"&gt;现象为什么会发生
+&lt;/h2&gt;&lt;p&gt;从现象上看，这不是“Claude Code 没有恢复完整上下文”，而更像是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;实时流式输出&lt;/strong&gt; 是一行一行刷新的，终端更容易正常显示。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;恢复旧会话&lt;/strong&gt; 时，Claude Code 会一次性重建较长的历史内容。&lt;/li&gt;
+&lt;li&gt;在 Windows Terminal + PowerShell 的组合下，这段恢复出来的内容不一定能完整落进你当前可见的 scrollback 区域。&lt;/li&gt;
+&lt;li&gt;结果就是：你能看到界面头部和后半段内容，但更早的部分看不到。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;所以，问题重点往往不在“终端最多能存多少行”，而在“恢复时这段内容是怎么被渲染和挂接到滚动缓冲区里的”。&lt;/p&gt;
+&lt;h2 id="最有效的解决办法"&gt;最有效的解决办法
+&lt;/h2&gt;&lt;h3 id="1-把-claude-code-切到-fullscreen-renderer"&gt;1. 把 Claude Code 切到 fullscreen renderer
+&lt;/h3&gt;&lt;p&gt;先编辑 Claude Code 的用户配置文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C:\Users\Win\.claude\settings.json
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;加入下面这段：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;tui&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;fullscreen&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这是最关键的一项。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;fullscreen&lt;/code&gt; 模式本身就是为了更稳定地处理长内容显示、滚动和重绘问题。对于 &lt;code&gt;/resume&lt;/code&gt; 或 &lt;code&gt;claude -c&lt;/code&gt; 这种一次性恢复长历史的场景，通常比默认模式更稳。&lt;/p&gt;
+&lt;h3 id="2-恢复后不要只靠终端滚轮回看历史"&gt;2. 恢复后不要只靠终端滚轮回看历史
+&lt;/h3&gt;&lt;p&gt;即便切了 &lt;code&gt;fullscreen&lt;/code&gt;，也不建议只靠鼠标滚轮去赌终端有没有把所有历史都保住。&lt;/p&gt;
+&lt;p&gt;更稳的做法是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;恢复会话后按 &lt;code&gt;Ctrl+O&lt;/code&gt; 打开 transcript viewer。&lt;/li&gt;
+&lt;li&gt;在 transcript viewer 里按 &lt;code&gt;[&lt;/code&gt;，把完整会话写回到终端原生 scrollback。&lt;/li&gt;
+&lt;li&gt;如果还想更稳，按 &lt;code&gt;v&lt;/code&gt;，把会话导出到临时文件，然后用外部编辑器查看。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这个方式通常比直接在主界面里往上翻可靠得多。&lt;/p&gt;
+&lt;h3 id="3-会话特别大时优先用-summary-恢复"&gt;3. 会话特别大时，优先用 summary 恢复
+&lt;/h3&gt;&lt;p&gt;如果是很长、很老的会话，Claude Code 往往会提供从 summary 恢复的方式。&lt;/p&gt;
+&lt;p&gt;如果你的目标是继续工作，而不是逐字重新阅读全部历史，那么 summary 模式通常更稳定，也更不容易触发这类显示问题。&lt;/p&gt;
+&lt;h3 id="4-局部没刷出来时按-ctrll"&gt;4. 局部没刷出来时按 &lt;code&gt;Ctrl+L&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;如果你怀疑只是界面没完整重绘，可以按：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Ctrl+L
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这个操作会强制重绘界面，有时候能把“只显示一部分”的情况刷回来。&lt;/p&gt;
+&lt;h2 id="那另外两个可选参数是做什么的"&gt;那另外两个可选参数是做什么的
+&lt;/h2&gt;&lt;p&gt;除了 &lt;code&gt;tui: &amp;quot;fullscreen&amp;quot;&lt;/code&gt;，还可以加两个辅助项：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;tui&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;fullscreen&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;viewMode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;verbose&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;prefersReducedMotion&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;下面分别解释。&lt;/p&gt;
+&lt;h3 id="viewmode-verbose"&gt;&lt;code&gt;viewMode: &amp;quot;verbose&amp;quot;&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;作用是让 Claude Code 的界面更偏向“完整展示”，少一些折叠和精简。&lt;/p&gt;
+&lt;p&gt;它的价值在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;恢复会话时，显示出来的信息更充分。&lt;/li&gt;
+&lt;li&gt;更容易判断是“内容真的没恢复”，还是“其实恢复了，只是 UI 没给你完整展开”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;它&lt;strong&gt;不是根治项&lt;/strong&gt;，更像一个辅助观察和减少摘要展示的选项。&lt;/p&gt;
+&lt;h3 id="prefersreducedmotion-true"&gt;&lt;code&gt;prefersReducedMotion: true&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;这个配置会尽量减少动画、过渡效果和一些动态重绘。&lt;/p&gt;
+&lt;p&gt;它的价值在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在 Windows Terminal 上，频繁动画和重绘有时会放大显示异常。&lt;/li&gt;
+&lt;li&gt;开启后，界面更静态，某些闪烁、局部没刷出来的问题可能会减轻。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;它同样&lt;strong&gt;不是核心修复项&lt;/strong&gt;，只是一个辅助稳定项。&lt;/p&gt;
+&lt;h2 id="推荐配置"&gt;推荐配置
+&lt;/h2&gt;&lt;p&gt;如果你只想做最小改动，推荐先用：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;tui&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;fullscreen&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果你希望顺便把显示稳定性再往上拉一点，可以改成：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;tui&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;fullscreen&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;viewMode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;verbose&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;prefersReducedMotion&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="建议的排查顺序"&gt;建议的排查顺序
+&lt;/h2&gt;&lt;p&gt;可以按下面顺序排查：&lt;/p&gt;
+&lt;h3 id="方案一先做最小改动"&gt;方案一：先做最小改动
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;升级 Claude Code 到最新版本。&lt;/li&gt;
+&lt;li&gt;在 &lt;code&gt;settings.json&lt;/code&gt; 里只加：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;tui&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;fullscreen&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;li&gt;重新打开 Claude Code。&lt;/li&gt;
+&lt;li&gt;再试一次 &lt;code&gt;/resume&lt;/code&gt; 或 &lt;code&gt;claude -c&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="方案二如果仍然偶发显示不全"&gt;方案二：如果仍然偶发显示不全
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;继续保留 &lt;code&gt;fullscreen&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;增加：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;viewMode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;verbose&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;prefersReducedMotion&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;li&gt;恢复会话后立即按 &lt;code&gt;Ctrl+O&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;[&lt;/code&gt; 或 &lt;code&gt;v&lt;/code&gt; 获取完整 transcript。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;如果你在 Windows Terminal 里已经把最大显示行数调大，但 Claude Code 的 &lt;code&gt;/resume&lt;/code&gt; 或 &lt;code&gt;claude -c&lt;/code&gt; 仍然显示不全，那么大概率&lt;strong&gt;不是终端行数本身不够&lt;/strong&gt;，而是 &lt;strong&gt;恢复长会话时的渲染和 scrollback 兼容问题&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;最值得先试的方案只有一句话：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;tui&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;fullscreen&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果还想更稳，就再加上：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;viewMode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;verbose&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;prefersReducedMotion&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;另外，恢复之后尽量用 &lt;code&gt;Ctrl+O&lt;/code&gt; 打开 transcript viewer，再通过 &lt;code&gt;[&lt;/code&gt; 或 &lt;code&gt;v&lt;/code&gt; 查看完整内容，不要完全依赖终端原生回滚。&lt;/p&gt;</description></item></channel></rss>
