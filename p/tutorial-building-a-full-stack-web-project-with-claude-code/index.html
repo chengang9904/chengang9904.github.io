@@ -1,0 +1,379 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Building a Full-Stack Web Project with Claude Code A concrete, session-by-session walk-through of using Claude Code as a co-developer on a real, multi-module web application — designed around context-window constraints rather than against them.\nThe example project is FocusBoard, a team kanban with time tracking and reports. It&rsquo;s big enough to demonstrate the workflow but small enough to be specific.\nThe Project FocusBoard lets small teams plan work on kanban boards, track time per card, and see weekly reports.\n"><title>Tutorial: Building a Full-Stack Web Project with Claude Code</title><link rel=canonical href=http://tech-ox.com/p/tutorial-building-a-full-stack-web-project-with-claude-code/><link rel=stylesheet href=/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css><meta property='og:title' content="Tutorial: Building a Full-Stack Web Project with Claude Code"><meta property='og:description' content="Building a Full-Stack Web Project with Claude Code A concrete, session-by-session walk-through of using Claude Code as a co-developer on a real, multi-module web application — designed around context-window constraints rather than against them.\nThe example project is FocusBoard, a team kanban with time tracking and reports. It&rsquo;s big enough to demonstrate the workflow but small enough to be specific.\nThe Project FocusBoard lets small teams plan work on kanban boards, track time per card, and see weekly reports.\n"><meta property='og:url' content='http://tech-ox.com/p/tutorial-building-a-full-stack-web-project-with-claude-code/'><meta property='og:site_name' content='tech-ox'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='vibe-coding'><meta property='article:tag' content='coding-agent'><meta property='article:published_time' content='2026-05-06T10:50:55+08:00'><meta property='article:modified_time' content='2026-05-06T10:50:55+08:00'><meta name=twitter:title content="Tutorial: Building a Full-Stack Web Project with Claude Code"><meta name=twitter:description content="Building a Full-Stack Web Project with Claude Code A concrete, session-by-session walk-through of using Claude Code as a co-developer on a real, multi-module web application — designed around context-window constraints rather than against them.\nThe example project is FocusBoard, a team kanban with time tracking and reports. It&rsquo;s big enough to demonstrate the workflow but small enough to be specific.\nThe Project FocusBoard lets small teams plan work on kanban boards, track time per card, and see weekly reports.\n"><link rel="shortcut icon" href=/favicon.svg></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_1e03ac8a4528f217.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>😊</span></figure><div class=site-meta><h1 class=site-name><a href=/>tech-ox</a></h1><h2 class=site-description>记录技术与生活点滴</h2></div></header><ol class=menu-social><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>友情链接</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#the-project>The Project</a><ol><li><a href=#features-in-build-order>Features (in build order)</a></li><li><a href=#stack>Stack</a></li></ol></li><li><a href=#repo-layout>Repo Layout</a></li><li><a href=#phase-0--foundations-before-any-feature>Phase 0 — Foundations (before any feature)</a><ol><li><a href=#01-initial-claude-session-bootstrap-claudemd>0.1 Initial Claude session: bootstrap CLAUDE.md</a></li><li><a href=#02-ci-as-a-forcing-function>0.2 CI as a forcing function</a></li></ol></li><li><a href=#phase-1--auth-session-1-2-hours>Phase 1 — Auth (Session 1, ~2 hours)</a><ol><li><a href=#session-1-prompt>Session 1 prompt</a></li><li><a href=#context-budget-for-this-session-200k-window>Context budget for this session (~200K window)</a></li><li><a href=#output-of-this-session>Output of this session</a></li></ol></li><li><a href=#phase-2--workspaces-session-2>Phase 2 — Workspaces (Session 2)</a></li><li><a href=#phase-3--boards--cards-the-meaty-feature-3-sessions>Phase 3 — Boards & Cards (the meaty feature, 3 sessions)</a><ol><li><a href=#31-contract-session>3.1 Contract session</a></li><li><a href=#32-backend-session>3.2 Backend session</a></li><li><a href=#33-frontend-session>3.3 Frontend session</a></li></ol></li><li><a href=#phase-4--cross-cutting-feature-real-time-session-7>Phase 4 — Cross-cutting Feature: Real-time (Session 7)</a><ol><li><a href=#strategy-an-integration-ledger>Strategy: an integration ledger</a></li></ol></li><li><a href=#phase-5--drift-maintenance-every-5-10-sessions>Phase 5 — Drift Maintenance (every ~5-10 sessions)</a></li><li><a href=#anatomy-of-a-single-session>Anatomy of a Single Session</a></li><li><a href=#context-budget-reference>Context Budget Reference</a></li><li><a href=#common-pitfalls-and-the-fix>Common Pitfalls (and the fix)</a></li><li><a href=#tldr-workflow>TL;DR Workflow</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/vibe-coding/>Vibe-Coding</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/tutorial-building-a-full-stack-web-project-with-claude-code/>Tutorial: Building a Full-Stack Web Project with Claude Code</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2026-05-06T10:50:55+08:00>May 06, 2026</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 11 分钟</time></div></footer></div></header><section class=article-content><h1 id=building-a-full-stack-web-project-with-claude-code>Building a Full-Stack Web Project with Claude Code</h1><p>A concrete, session-by-session walk-through of using Claude Code as a co-developer on a real, multi-module web application — designed around context-window constraints rather than against them.</p><p>The example project is <strong>FocusBoard</strong>, a team kanban with time tracking and reports. It&rsquo;s big enough to demonstrate the workflow but small enough to be specific.</p><hr><h2 id=the-project>The Project</h2><p><strong>FocusBoard</strong> lets small teams plan work on kanban boards, track time per card, and see weekly reports.</p><h3 id=features-in-build-order>Features (in build order)</h3><ol><li>Auth (email + password, sessions)</li><li>Workspaces & memberships (invite by email)</li><li>Boards & columns</li><li>Cards (CRUD, drag/drop, assignees, labels, due dates)</li><li>Comments + activity log</li><li>Time tracking (start/stop timer per card)</li><li>Real-time updates (across users in a workspace)</li><li>Reports (per-user / per-workspace weekly view)</li><li>Settings, billing-ready hooks, deploy</li></ol><h3 id=stack>Stack</h3><ul><li>pnpm + Turborepo monorepo</li><li>Next.js 15 (App Router), React Server Components</li><li>tRPC for the API (end-to-end type safety = Claude&rsquo;s best friend)</li><li>Drizzle ORM + PostgreSQL</li><li>Auth.js (NextAuth v5)</li><li>Tailwind + shadcn/ui</li><li>Pusher Channels for real-time</li><li>Vitest (unit/integration) + Playwright (e2e)</li></ul><p><strong>Why this stack for a Claude-driven build:</strong> every layer is type-safe end-to-end. The TypeScript compiler is your most reliable code reviewer between sessions.</p><hr><h2 id=repo-layout>Repo Layout</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>focusboard</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=err>├──</span> <span class=n>apps</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>   <span class=err>└──</span> <span class=n>web</span><span class=o>/</span>                    <span class=c1># Next.js app (UI + API routes)</span>
+</span></span><span class=line><span class=cl><span class=err>├──</span> <span class=n>packages</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>   <span class=err>├──</span> <span class=n>db</span><span class=o>/</span>                     <span class=c1># Drizzle schema, migrations, queries</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>   <span class=err>├──</span> <span class=n>api</span><span class=o>/</span>                    <span class=c1># tRPC routers (the contract layer)</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>   <span class=err>├──</span> <span class=n>ui</span><span class=o>/</span>                     <span class=c1># shadcn components + custom</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>   <span class=err>└──</span> <span class=n>shared</span><span class=o>/</span>                 <span class=c1># Zod schemas, enums, utility types</span>
+</span></span><span class=line><span class=cl><span class=err>├──</span> <span class=n>docs</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>   <span class=err>├──</span> <span class=n>ARCHITECTURE</span><span class=o>.</span><span class=n>md</span>         <span class=c1># System overview (~1 page)</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>   <span class=err>├──</span> <span class=n>DECISIONS</span><span class=o>.</span><span class=n>md</span>            <span class=c1># ADR log</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>   <span class=err>├──</span> <span class=n>CONVENTIONS</span><span class=o>.</span><span class=n>md</span>          <span class=c1># Naming, error handling, patterns</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>   <span class=err>└──</span> <span class=n>features</span><span class=o>/</span>               <span class=c1># One file per feature</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>       <span class=err>├──</span> <span class=n>auth</span><span class=o>.</span><span class=n>md</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>       <span class=err>├──</span> <span class=n>boards</span><span class=o>.</span><span class=n>md</span>
+</span></span><span class=line><span class=cl><span class=err>│</span>       <span class=err>└──</span> <span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=err>├──</span> <span class=n>CLAUDE</span><span class=o>.</span><span class=n>md</span>                   <span class=c1># Root instructions for Claude</span>
+</span></span><span class=line><span class=cl><span class=err>├──</span> <span class=o>.</span><span class=n>github</span><span class=o>/</span><span class=n>workflows</span><span class=o>/</span><span class=n>ci</span><span class=o>.</span><span class=n>yml</span>
+</span></span><span class=line><span class=cl><span class=err>└──</span> <span class=n>turbo</span><span class=o>.</span><span class=n>json</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=phase-0--foundations-before-any-feature>Phase 0 — Foundations (before any feature)</h2><p><strong>Goal:</strong> Set up infrastructure so every later session starts on solid ground. Do this manually (or with <code>create-turbo</code>); don&rsquo;t burn a Claude session on boilerplate it can&rsquo;t run anyway.</p><h3 id=01-initial-claude-session-bootstrap-claudemd>0.1 Initial Claude session: bootstrap CLAUDE.md</h3><p>After scaffolding the monorepo, run a single session:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>You&#39;re seeing FocusBoard, a brand-new monorepo. Read package.json,
+</span></span><span class=line><span class=cl>turbo.json, the tsconfig files, and the directory structure. Then
+</span></span><span class=line><span class=cl>write CLAUDE.md at the root.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Include:
+</span></span><span class=line><span class=cl>- Stack summary (one paragraph)
+</span></span><span class=line><span class=cl>- Common commands (pnpm dev, pnpm test, pnpm db:migrate)
+</span></span><span class=line><span class=cl>- Where things live (apps/, packages/, docs/)
+</span></span><span class=line><span class=cl>- Hard rules: &#34;always run pnpm typecheck after backend changes&#34;,
+</span></span><span class=line><span class=cl>  &#34;never edit packages/db/migrations — generate via pnpm db:generate&#34;
+</span></span><span class=line><span class=cl>- Pointer: &#34;Before working on a feature, read docs/features/&lt;name&gt;.md
+</span></span><span class=line><span class=cl>  if it exists, plus docs/CONVENTIONS.md.&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Keep it under 80 lines. No fluff.
+</span></span></code></pre></td></tr></table></div></div><p>Then hand-write the strategic docs yourself (Claude can help draft, but the <em>content</em> must come from you):</p><p><strong><code>docs/ARCHITECTURE.md</code></strong> (~1 page):</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># FocusBoard Architecture
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## Data flow
+</span></span><span class=line><span class=cl>Browser → Next.js Server Action / tRPC → Drizzle → Postgres
+</span></span><span class=line><span class=cl>                                       ↘ Pusher → other browsers
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## Auth boundary
+</span></span><span class=line><span class=cl>Auth.js session middleware runs in apps/web/middleware.ts.
+</span></span><span class=line><span class=cl>Every tRPC procedure resolves `ctx.user` or throws UNAUTHORIZED.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## Module dependencies
+</span></span><span class=line><span class=cl>ui      → shared
+</span></span><span class=line><span class=cl>api     → db, shared
+</span></span><span class=line><span class=cl>db      → shared
+</span></span><span class=line><span class=cl>web     → api, ui, db (read-only types)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ESLint enforces: ui MUST NOT import from db or api.
+</span></span></code></pre></td></tr></table></div></div><p><strong><code>docs/DECISIONS.md</code></strong> starts as one entry:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>## ADR-001: tRPC over REST  (2026-01-15)
+</span></span><span class=line><span class=cl>Chose tRPC because end-to-end types make Claude-driven changes safer.
+</span></span><span class=line><span class=cl>Trade-off: harder to consume from non-TS clients. Acceptable — no
+</span></span><span class=line><span class=cl>mobile/3rd-party plans for v1.
+</span></span></code></pre></td></tr></table></div></div><p><strong><code>docs/CONVENTIONS.md</code></strong> captures the patterns that should be uniform across the codebase: error shapes, Zod-first input validation, file naming, &ldquo;every mutation logs to the activity table,&rdquo; etc.</p><h3 id=02-ci-as-a-forcing-function>0.2 CI as a forcing function</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># .github/workflows/ci.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>pnpm typecheck</span><span class=w>
+</span></span></span><span class=line><span class=cl>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>pnpm lint</span><span class=w>
+</span></span></span><span class=line><span class=cl>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>pnpm test</span><span class=w>
+</span></span></span><span class=line><span class=cl>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>pnpm build</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>This is non-negotiable. It&rsquo;s your asynchronous code reviewer that catches Claude&rsquo;s drift between sessions.</p><hr><h2 id=phase-1--auth-session-1-2-hours>Phase 1 — Auth (Session 1, ~2 hours)</h2><p><strong>Why this first:</strong> every other feature depends on <code>ctx.user</code>. Build the smallest thing that works end-to-end.</p><h3 id=session-1-prompt>Session 1 prompt</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>We&#39;re building auth for FocusBoard. Read:
+</span></span><span class=line><span class=cl>- CLAUDE.md
+</span></span><span class=line><span class=cl>- docs/ARCHITECTURE.md
+</span></span><span class=line><span class=cl>- docs/CONVENTIONS.md
+</span></span><span class=line><span class=cl>- packages/db/src/schema.ts (currently empty)
+</span></span><span class=line><span class=cl>- apps/web/src/app/layout.tsx
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Then propose a plan in plan mode. Requirements:
+</span></span><span class=line><span class=cl>- Email + password signup/login
+</span></span><span class=line><span class=cl>- Auth.js v5 with credentials provider
+</span></span><span class=line><span class=cl>- Drizzle adapter
+</span></span><span class=line><span class=cl>- Zod validation on all inputs
+</span></span><span class=line><span class=cl>- Session via JWT (cookie)
+</span></span><span class=line><span class=cl>- A /login page and /signup page using shadcn forms
+</span></span><span class=line><span class=cl>- Tests: at minimum, signup → login → access /app/dashboard
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Stop at the plan. Don&#39;t write code yet.
+</span></span></code></pre></td></tr></table></div></div><p>Review the plan. Push back where needed. Then:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Approved. Implement. After each file, run pnpm typecheck.
+</span></span><span class=line><span class=cl>Update docs/features/auth.md as you go — schema, routes, edge
+</span></span><span class=line><span class=cl>cases, and one paragraph of &#34;what to know if you ever touch this.&#34;
+</span></span></code></pre></td></tr></table></div></div><h3 id=context-budget-for-this-session-200k-window>Context budget for this session (~200K window)</h3><div class=table-wrapper><table><thead><tr><th>What</th><th>Tokens</th></tr></thead><tbody><tr><td>System + tools</td><td>~12K</td></tr><tr><td>CLAUDE.md + docs auto-loaded</td><td>~5K</td></tr><tr><td>Schema, layout, auth.js docs (WebFetch)</td><td>~15K</td></tr><tr><td>Plan + iteration</td><td>~10K</td></tr><tr><td>Generated code + edits</td><td>~30K</td></tr><tr><td><strong>Total used</strong></td><td><strong>~70K</strong></td></tr></tbody></table></div><p>Plenty of headroom. <strong>End the session with a commit and <code>/clear</code></strong> before moving on.</p><h3 id=output-of-this-session>Output of this session</h3><ul><li><code>packages/db/src/schema/users.ts</code> — users, sessions, accounts tables</li><li><code>apps/web/src/lib/auth.ts</code> — NextAuth config</li><li><code>apps/web/src/app/(auth)/{login,signup}/page.tsx</code></li><li><code>apps/web/src/middleware.ts</code></li><li><code>docs/features/auth.md</code> — <strong>the most important artifact for future sessions</strong></li><li>A passing Playwright test</li></ul><hr><h2 id=phase-2--workspaces-session-2>Phase 2 — Workspaces (Session 2)</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Read docs/features/auth.md and packages/db/src/schema/users.ts.
+</span></span><span class=line><span class=cl>We&#39;re adding workspaces. Each user can create a workspace and
+</span></span><span class=line><span class=cl>invite others by email.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Design (read first, don&#39;t code):
+</span></span><span class=line><span class=cl>- packages/db/src/schema/workspaces.ts
+</span></span><span class=line><span class=cl>- packages/api/src/routers/workspaces.ts (tRPC)
+</span></span><span class=line><span class=cl>- packages/shared/src/validators/workspace.ts (Zod)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Constraints from CONVENTIONS.md still apply. Use procedure types
+</span></span><span class=line><span class=cl>already established in api/src/trpc.ts (auth, public).
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Plan first.
+</span></span></code></pre></td></tr></table></div></div><p>Notice: Claude only reads what&rsquo;s relevant. We don&rsquo;t load the entire <code>apps/web/</code> UI tree — workspace creation UI is a separate sub-task.</p><p>After backend lands, a second sub-session for UI:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Read docs/features/auth.md, docs/features/workspaces.md, and
+</span></span><span class=line><span class=cl>apps/web/src/components/forms/ (the existing form patterns).
+</span></span><span class=line><span class=cl>Build the /app/new-workspace page using the same form pattern as
+</span></span><span class=line><span class=cl>signup. Wire to api.workspaces.create.
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=phase-3--boards--cards-the-meaty-feature-3-sessions>Phase 3 — Boards & Cards (the meaty feature, 3 sessions)</h2><p>This is where most large-project pain shows up. Done wrong, you&rsquo;ll have one giant 4000-line session that runs out of context and produces garbage. Done right, three clean sessions of ~1.5 hours each.</p><h3 id=31-contract-session>3.1 Contract session</h3><p><strong>This is the most important session in the whole project.</strong> Get it right and the next two are mechanical.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Read docs/ARCHITECTURE.md, docs/CONVENTIONS.md, and
+</span></span><span class=line><span class=cl>docs/features/workspaces.md.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Design the data model and tRPC contract for boards. Do NOT
+</span></span><span class=line><span class=cl>implement. Produce three files:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>1. packages/db/src/schema/boards.ts (boards, columns, cards tables)
+</span></span><span class=line><span class=cl>2. packages/shared/src/validators/board.ts (Zod input schemas)
+</span></span><span class=line><span class=cl>3. packages/api/src/routers/boards.ts — but ONLY the procedure
+</span></span><span class=line><span class=cl>   signatures with `.query()`/`.mutation()` and `// TODO` bodies.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Then write docs/features/boards.md describing:
+</span></span><span class=line><span class=cl>- The data model
+</span></span><span class=line><span class=cl>- Each procedure&#39;s contract (inputs, outputs, errors, auth rules)
+</span></span><span class=line><span class=cl>- Open questions
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Constraints:
+</span></span><span class=line><span class=cl>- Boards belong to a workspace
+</span></span><span class=line><span class=cl>- Columns are ordered (use fractional indexing — establish a
+</span></span><span class=line><span class=cl>  helper in packages/shared/src/lib/ordering.ts if missing)
+</span></span><span class=line><span class=cl>- Cards belong to a column, also fractionally ordered
+</span></span><span class=line><span class=cl>- Soft delete only (deletedAt column)
+</span></span></code></pre></td></tr></table></div></div><p>The output is a <em>contract</em>. It&rsquo;s small (maybe 300 lines) and readable. The next two sessions implement it without needing to redesign anything.</p><h3 id=32-backend-session>3.2 Backend session</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Read docs/features/boards.md and the three files from the
+</span></span><span class=line><span class=cl>contract session. Implement the tRPC procedures. Write Vitest
+</span></span><span class=line><span class=cl>tests for each — include auth checks and ordering correctness.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Don&#39;t touch the frontend. Don&#39;t change the schema unless the
+</span></span><span class=line><span class=cl>contract is impossible (and if so, stop and explain).
+</span></span></code></pre></td></tr></table></div></div><p>This session has <em>exactly</em> the context it needs: the contract + the implementation files. ~40-60K tokens used.</p><h3 id=33-frontend-session>3.3 Frontend session</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Read:
+</span></span><span class=line><span class=cl>- docs/features/boards.md
+</span></span><span class=line><span class=cl>- packages/api/src/routers/boards.ts (already implemented)
+</span></span><span class=line><span class=cl>- apps/web/src/app/(app)/dashboard/page.tsx (existing pattern)
+</span></span><span class=line><span class=cl>- apps/web/src/components/ui/ (shadcn primitives — list only, don&#39;t expand)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Build the board view at /app/w/[workspaceId]/b/[boardId].
+</span></span><span class=line><span class=cl>Use @dnd-kit for drag/drop. Optimistic updates via tRPC&#39;s
+</span></span><span class=line><span class=cl>useMutation onMutate.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Stop after the happy path works. We&#39;ll add polish in a follow-up.
+</span></span></code></pre></td></tr></table></div></div><p>The frontend session <strong>never touches the database or tRPC implementation</strong> — it only consumes the typed client. If the user drags a card and the API throws, that&rsquo;s a separate bug, fixed in a separate session.</p><hr><h2 id=phase-4--cross-cutting-feature-real-time-session-7>Phase 4 — Cross-cutting Feature: Real-time (Session 7)</h2><p>Real-time touches every previous feature. This is where developers panic-load the entire codebase. Don&rsquo;t.</p><h3 id=strategy-an-integration-ledger>Strategy: an integration ledger</h3><p>Add to <code>docs/features/realtime.md</code> <em>before</em> writing code:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=c1># Real-time integration</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Pusher</span> <span class=n>channel</span> <span class=n>per</span> <span class=n>workspace</span><span class=p>:</span> <span class=err>`</span><span class=n>workspace</span><span class=o>-$</span><span class=p>{</span><span class=n>id</span><span class=p>}</span><span class=err>`</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Mutations</span> <span class=n>that</span> <span class=n>broadcast</span> <span class=p>(</span><span class=n>must</span> <span class=n>call</span> <span class=err>`</span><span class=n>broadcast</span><span class=p>()</span><span class=err>`</span> <span class=n>helper</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>|</span> <span class=n>Procedure</span>                  <span class=o>|</span> <span class=n>Event</span>           <span class=o>|</span> <span class=n>Payload</span>     <span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>|----------------------------|-----------------|-------------|</span>
+</span></span><span class=line><span class=cl><span class=o>|</span> <span class=n>boards</span><span class=o>.</span><span class=n>create</span>              <span class=o>|</span> <span class=n>board</span><span class=p>:</span><span class=n>created</span>   <span class=o>|</span> <span class=n>Board</span>       <span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>|</span> <span class=n>cards</span><span class=o>.</span><span class=n>move</span>                 <span class=o>|</span> <span class=n>card</span><span class=p>:</span><span class=n>moved</span>      <span class=o>|</span> <span class=p>{</span><span class=n>id</span><span class=p>,</span> <span class=n>col</span><span class=p>}</span>   <span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>|</span> <span class=n>cards</span><span class=o>.</span><span class=n>update</span>               <span class=o>|</span> <span class=n>card</span><span class=p>:</span><span class=n>updated</span>    <span class=o>|</span> <span class=n>Card</span>        <span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>|</span> <span class=n>comments</span><span class=o>.</span><span class=n>create</span>            <span class=o>|</span> <span class=n>comment</span><span class=p>:</span><span class=n>added</span>   <span class=o>|</span> <span class=n>Comment</span>     <span class=o>|</span>
+</span></span><span class=line><span class=cl><span class=o>|</span> <span class=n>timer</span><span class=o>.</span><span class=n>start</span> <span class=o>/</span> <span class=n>timer</span><span class=o>.</span><span class=n>stop</span>   <span class=o>|</span> <span class=n>timer</span><span class=p>:</span><span class=n>changed</span>   <span class=o>|</span> <span class=n>TimerEvent</span>  <span class=o>|</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Subscribers</span><span class=p>:</span> <span class=n>useWorkspaceEvents</span><span class=p>()</span> <span class=n>hook</span> <span class=ow>in</span> <span class=n>apps</span><span class=o>/</span><span class=n>web</span><span class=o>/</span><span class=n>src</span><span class=o>/</span><span class=n>lib</span><span class=o>/</span><span class=n>realtime</span><span class=o>.</span>
+</span></span></code></pre></td></tr></table></div></div><p>Now your session is small:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Read docs/features/realtime.md.
+</span></span><span class=line><span class=cl>Step 1: Add the broadcast() helper in packages/api/src/lib/pusher.ts.
+</span></span><span class=line><span class=cl>Step 2: Wire it into the procedures listed in the table above.
+</span></span><span class=line><span class=cl>For each: read the procedure file, add the broadcast call, run tests.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Show me the diff before moving to step 2.
+</span></span></code></pre></td></tr></table></div></div><p>Each procedure-touch is small. The doc is the index Claude uses to find work, not the codebase itself.</p><hr><h2 id=phase-5--drift-maintenance-every-5-10-sessions>Phase 5 — Drift Maintenance (every ~5-10 sessions)</h2><p>After several features, things drift. Run a fresh &ldquo;audit&rdquo; session:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Read CLAUDE.md, docs/CONVENTIONS.md, and docs/features/*.md.
+</span></span><span class=line><span class=cl>Then list 10-20 files at random under packages/api/src/routers/.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>For each, check: does it follow the conventions? Are docs current?
+</span></span><span class=line><span class=cl>Report a punch list. Don&#39;t fix anything yet.
+</span></span></code></pre></td></tr></table></div></div><p>Then fix in a separate session (the audit&rsquo;s findings become the prompt). Keep audit and fix sessions separate so the audit&rsquo;s full output doesn&rsquo;t pollute the fix&rsquo;s context.</p><hr><h2 id=anatomy-of-a-single-session>Anatomy of a Single Session</h2><p>Here&rsquo;s a concrete session for &ldquo;add labels to cards&rdquo; — a small, realistic feature:</p><p><strong>Pre-session checklist (yours):</strong></p><ul><li><input disabled type=checkbox> Last session committed?</li><li><input disabled type=checkbox> <code>/clear</code> if continuing same chat</li><li><input disabled type=checkbox> Know which docs/files are relevant</li><li><input disabled type=checkbox> Have a one-paragraph goal in mind</li></ul><p><strong>Prompt 1 — Orient:</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Read docs/features/cards.md and packages/db/src/schema/boards.ts.
+</span></span><span class=line><span class=cl>We&#39;re adding labels: each card has 0..N labels. Labels belong to
+</span></span><span class=line><span class=cl>a board (not a workspace). Color + name. Only board members can
+</span></span><span class=line><span class=cl>manage labels.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>What&#39;s the smallest schema change? Plan only.
+</span></span></code></pre></td></tr></table></div></div><p>→ Claude proposes a <code>labels</code> table and a <code>card_labels</code> join table.</p><p><strong>Prompt 2 — Confirm and scope:</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Approved. Implement schema + migration first. Stop after
+</span></span><span class=line><span class=cl>pnpm db:generate succeeds.
+</span></span></code></pre></td></tr></table></div></div><p>→ Two files changed, migration generated, tests pass.</p><p><strong>Prompt 3 — Contract:</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Now add tRPC procedures: labels.list, labels.create, labels.update,
+</span></span><span class=line><span class=cl>labels.delete, cards.attachLabel, cards.detachLabel. Update
+</span></span><span class=line><span class=cl>docs/features/cards.md.
+</span></span></code></pre></td></tr></table></div></div><p><strong>Prompt 4 — UI:</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Read the LabelChip pattern in packages/ui/src/badge.tsx if it exists,
+</span></span><span class=line><span class=cl>otherwise design one. Add label management to the card detail
+</span></span><span class=line><span class=cl>modal — apps/web/src/components/card-detail.tsx. Don&#39;t touch
+</span></span><span class=line><span class=cl>anything else in that file.
+</span></span></code></pre></td></tr></table></div></div><p><strong>Prompt 5 — Test:</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Write a Playwright test: create label, attach to card, refresh,
+</span></span><span class=line><span class=cl>label still shown.
+</span></span></code></pre></td></tr></table></div></div><p><strong>Prompt 6 — Commit:</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Run pnpm typecheck, lint, test. If green, draft a commit message
+</span></span><span class=line><span class=cl>in conventional commits style.
+</span></span></code></pre></td></tr></table></div></div><p><strong>Total session:</strong> ~90 minutes, ~80K tokens, one focused PR. Claude never sees the timer code, the reports code, or the realtime code — none of which are relevant.</p><hr><h2 id=context-budget-reference>Context Budget Reference</h2><p>A rule of thumb per session (200K window):</p><div class=table-wrapper><table><thead><tr><th>Bucket</th><th>Budget</th><th>Notes</th></tr></thead><tbody><tr><td>System + auto-loaded CLAUDE.md/docs</td><td>~20K</td><td>Keep CLAUDE.md tight</td></tr><tr><td>Files Claude reads</td><td>~40K</td><td>5-15 files</td></tr><tr><td>Plan + back-and-forth</td><td>~20K</td><td>Plan mode is cheap</td></tr><tr><td>Generated code + edits</td><td>~50K</td><td>The actual work</td></tr><tr><td>Tool outputs (greps, test runs)</td><td>~30K</td><td>Wastes the most</td></tr><tr><td><strong>Headroom buffer</strong></td><td><strong>~40K</strong></td><td>Don&rsquo;t run to the wall</td></tr></tbody></table></div><p>When tool outputs balloon (long test failures, big greps), delegate to a subagent — its 50K of grep output collapses into a 500-token summary in your main context.</p><p>Even with a 1M context window, you should still work this way. Focused context produces better code, faster, cheaper. The 5-minute prompt-cache TTL means scrolling context still has cost; quality also degrades with noise.</p><hr><h2 id=common-pitfalls-and-the-fix>Common Pitfalls (and the fix)</h2><div class=table-wrapper><table><thead><tr><th>Pitfall</th><th>Fix</th></tr></thead><tbody><tr><td>&ldquo;Just one more thing&rdquo; sessions</td><td>Hard stop at one feature. Commit. <code>/clear</code>.</td></tr><tr><td>CLAUDE.md becomes a 500-line wiki</td><td>Cap at ~150 lines; push details into <code>docs/features/*</code> and link</td></tr><tr><td>Claude regenerates files it shouldn&rsquo;t touch</td><td>Be explicit: &ldquo;Only edit X. List others and stop.&rdquo; Use plan mode.</td></tr><tr><td>Tests are flaky / slow → Claude skips them</td><td>Fix the tests, not the rule. A green suite is your only objective signal.</td></tr><tr><td>Two features merged together in one PR</td><td>One feature per branch. Even if it feels slower, debugging is 10× faster.</td></tr><tr><td>Docs go stale</td><td>The audit ritual (Phase 5) every 5-10 sessions</td></tr><tr><td>&ldquo;It worked when Claude said done&rdquo;</td><td>Always run the feature in the browser. Type-check is necessary, not sufficient.</td></tr></tbody></table></div><hr><h2 id=tldr-workflow>TL;DR Workflow</h2><ol><li><strong>Phase 0 once:</strong> scaffold + CLAUDE.md + ARCHITECTURE.md + CI.</li><li><strong>Per feature:</strong><ol><li>Contract session (schema + tRPC signatures + feature doc) — small, careful</li><li>Backend session (implement + tests)</li><li>Frontend session (consume typed client)</li><li>Polish session if needed</li></ol></li><li><strong>Per session:</strong> fresh <code>/clear</code>, point at 3-8 specific files, plan mode for non-trivial work, commit at the end.</li><li><strong>Every ~5-10 sessions:</strong> audit ritual to catch drift.</li><li><strong>Always:</strong> the type system + CI + Playwright are the safety net. Invest in them early; they pay back tenfold.</li></ol><p>The discipline is: <strong>the codebase is the truth, the docs are the index, and every session loads only the slice it needs.</strong></p></section><footer class=article-footer><section class=article-tags><a href=/tags/vibe-coding/>Vibe-Coding</a>
+<a href=/tags/coding-agent/>Coding-Agent</a></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/><div class=article-details><h2 class=article-title>项目开发</h2></div></a></article><article><a href=/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/><div class=article-details><h2 class=article-title>项目学习</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2026 tech-ox</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.33.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
