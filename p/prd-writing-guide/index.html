@@ -1,0 +1,889 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="A practical tutorial for producing Product Requirements Documents for large-scale web projects when AI agents are part of the team"><title>Prd Writing Guide</title><link rel=canonical href=http://tech-ox.com/p/prd-writing-guide/><link rel=stylesheet href=/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css><meta property='og:title' content="Prd Writing Guide"><meta property='og:description' content="A practical tutorial for producing Product Requirements Documents for large-scale web projects when AI agents are part of the team"><meta property='og:url' content='http://tech-ox.com/p/prd-writing-guide/'><meta property='og:site_name' content='tech-ox'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='AI coding'><meta property='article:tag' content='product requirements'><meta property='article:tag' content='documentation'><meta property='article:published_time' content='2026-05-08T04:24:51-07:00'><meta property='article:modified_time' content='2026-05-08T04:24:51-07:00'><meta name=twitter:title content="Prd Writing Guide"><meta name=twitter:description content="A practical tutorial for producing Product Requirements Documents for large-scale web projects when AI agents are part of the team"><link rel="shortcut icon" href=/favicon.svg></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_1e03ac8a4528f217.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>😊</span></figure><div class=site-meta><h1 class=site-name><a href=/>tech-ox</a></h1><h2 class=site-description>记录技术与生活点滴</h2></div></header><ol class=menu-social><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>友情链接</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#table-of-contents>Table of Contents</a></li><li><a href=#1-why-prds-are-different-now>1. Why PRDs Are Different Now</a></li><li><a href=#2-seven-best-practices>2. Seven Best Practices</a><ol><li><a href=#bp1-write-for-two-readers-simultaneously>BP1. Write for two readers simultaneously</a></li><li><a href=#bp2-make-every-requirement-executable>BP2. Make every requirement executable</a></li><li><a href=#bp3-layered-specificity-zoom-levels>BP3. Layered specificity (zoom levels)</a></li><li><a href=#bp4-co-locate-with-code-make-ai-find-it>BP4. Co-locate with code; make AI find it</a></li><li><a href=#bp5-decision-log-over-revision-history>BP5. Decision log over revision history</a></li><li><a href=#bp6-define-non-goals-and-anti-requirements>BP6. Define non-goals AND anti-requirements</a></li><li><a href=#bp7-slice-vertically-not-horizontally>BP7. Slice vertically, not horizontally</a></li></ol></li><li><a href=#3-the-sections-of-a-good-prd>3. The Sections of a Good PRD</a><ol><li><a href=#0-tldr>§0. TL;DR</a></li><li><a href=#1-status--ownership>§1. Status & ownership</a></li><li><a href=#2-context>§2. Context</a></li><li><a href=#3-problem-statement>§3. Problem statement</a></li><li><a href=#4-goals>§4. Goals</a></li><li><a href=#5-non-goals--anti-requirements>§5. Non-goals & anti-requirements</a></li><li><a href=#6-users--scenarios>§6. Users & scenarios</a></li><li><a href=#7-architecture>§7. Architecture</a></li><li><a href=#8-api-contracts>§8. API contracts</a></li><li><a href=#9-data-model>§9. Data model</a></li><li><a href=#10-uiux-specifications>§10. UI/UX specifications</a></li><li><a href=#11-non-functional-requirements>§11. Non-functional requirements</a></li><li><a href=#12-observability>§12. Observability</a></li><li><a href=#13-risks>§13. Risks</a></li><li><a href=#14-test-plan>§14. Test plan</a></li><li><a href=#15-migration--rollout-plan>§15. Migration / rollout plan</a></li><li><a href=#16-open-questions>§16. Open questions</a></li><li><a href=#17-glossary>§17. Glossary</a></li><li><a href=#18-appendix>§18. Appendix</a></li><li><a href=#19-ai-agent-operating-manual>§19. AI agent operating manual</a></li></ol></li><li><a href=#4-ai-specific-patterns>4. AI-Specific Patterns</a><ol><li><a href=#pattern-1-traceability-matrix>Pattern 1: Traceability matrix</a></li><li><a href=#pattern-2-captured-fixture-appendix>Pattern 2: Captured-fixture appendix</a></li><li><a href=#pattern-3-hallucination-guards>Pattern 3: Hallucination guards</a></li><li><a href=#pattern-4-demo-script-as-ai-prompt>Pattern 4: Demo script as AI prompt</a></li><li><a href=#pattern-5-stable-ids-for-everything>Pattern 5: Stable IDs for everything</a></li></ol></li><li><a href=#5-lifecycle-writing-reviewing-maintaining>5. Lifecycle: Writing, Reviewing, Maintaining</a><ol><li><a href=#writing>Writing</a></li><li><a href=#reviewing>Reviewing</a></li><li><a href=#maintaining>Maintaining</a></li><li><a href=#when-to-split-a-prd>When to split a PRD</a></li></ol></li><li><a href=#6-pre-approval-checklist>6. Pre-Approval Checklist</a></li><li><a href=#7-templates>7. Templates</a><ol><li><a href=#minimal-prd-skeleton>Minimal PRD skeleton</a></li><li><a href=#requirement-template>Requirement template</a></li><li><a href=#adr-template>ADR template</a></li><li><a href=#endpoint-contract-template>Endpoint contract template</a></li></ol></li><li><a href=#8-common-mistakes>8. Common Mistakes</a><ol><li><a href=#well-figure-it-out-as-we-go>&ldquo;We&rsquo;ll figure it out as we go&rdquo;</a></li><li><a href=#goals-without-measures>Goals without measures</a></li><li><a href=#hidden-assumptions>Hidden assumptions</a></li><li><a href=#prose-only-specifications>Prose-only specifications</a></li><li><a href=#one-prd-to-rule-them-all>One PRD to rule them all</a></li><li><a href=#stale-prds-left-in-the-repo>Stale PRDs left in the repo</a></li><li><a href=#well-write-the-tests-later>&ldquo;We&rsquo;ll write the tests later&rdquo;</a></li><li><a href=#no-anti-requirements>No anti-requirements</a></li><li><a href=#skipping-the-ai-operating-manual>Skipping the AI operating manual</a></li><li><a href=#no-demo-script>No demo script</a></li></ol></li><li><a href=#further-reading>Further reading</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/vibe-coding/>Vibe-Coding</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/prd-writing-guide/>Prd Writing Guide</a></h2><h3 class=article-subtitle>A practical tutorial for producing Product Requirements Documents for large-scale web projects when AI agents are part of the team</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2026-05-08T04:24:51-07:00>May 08, 2026</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 24 分钟</time></div></footer></div></header><section class=article-content><p>A practical tutorial for producing Product Requirements Documents (PRDs) for large-scale web projects when AI coding agents (Claude Code, Cursor, Copilot, Codex) are part of the team.</p><h2 id=table-of-contents>Table of Contents</h2><ol><li><a class=link href=#1-why-prds-are-different-now>Why PRDs Are Different Now</a></li><li><a class=link href=#2-seven-best-practices>Seven Best Practices</a></li><li><a class=link href=#3-the-sections-of-a-good-prd>The Sections of a Good PRD</a></li><li><a class=link href=#4-ai-specific-patterns>AI-Specific Patterns</a></li><li><a class=link href=#5-lifecycle-writing-reviewing-maintaining>Lifecycle: Writing, Reviewing, Maintaining</a></li><li><a class=link href=#6-pre-approval-checklist>Pre-Approval Checklist</a></li><li><a class=link href=#7-templates>Templates</a></li><li><a class=link href=#8-common-mistakes>Common Mistakes</a></li></ol><hr><h2 id=1-why-prds-are-different-now>1. Why PRDs Are Different Now</h2><p>A traditional PRD is a human-to-human document. It assumes shared context — the reader knows the codebase, the team, the history. Gaps are filled by hallway conversations.</p><p>An AI-era PRD is read by <strong>two audiences simultaneously</strong>:</p><ul><li><strong>Humans</strong> need <em>why</em>: motivation, tradeoffs, business context, history.</li><li><strong>AI agents</strong> need <em>what</em>: precise, unambiguous, machine-parseable specifications they can ground their code generation in.</li></ul><p>The same paragraph that reads as &ldquo;obvious&rdquo; to a senior engineer can produce three subtly wrong implementations from an AI agent. AI tools fabricate when context is missing — they pattern-match from training data instead of project specifics. A vague PRD produces vague code.</p><p>This shifts what &ldquo;good&rdquo; looks like:</p><div class=table-wrapper><table><thead><tr><th>Traditional PRD</th><th>AI-era PRD</th></tr></thead><tbody><tr><td>Prose-heavy</td><td>Mix of prose + structured artifacts</td></tr><tr><td>&ldquo;Should be fast&rdquo;</td><td>&ldquo;p95 ≤ 250ms, verified by <code>pnpm test:perf</code>&rdquo;</td></tr><tr><td>Revision history</td><td>Decision log with rationale</td></tr><tr><td>Stored in Confluence</td><td>Stored in repo alongside code</td></tr><tr><td>Updated when remembered</td><td>Updated as part of every PR</td></tr><tr><td>Goals, non-goals</td><td>Goals, non-goals, <strong>anti-requirements</strong></td></tr><tr><td>Implicit conventions</td><td>Explicit &ldquo;AI operating manual&rdquo;</td></tr></tbody></table></div><hr><h2 id=2-seven-best-practices>2. Seven Best Practices</h2><h3 id=bp1-write-for-two-readers-simultaneously>BP1. Write for two readers simultaneously</h3><p>Humans need narrative; AI needs structure. Mix both.</p><ul><li>Front-load <strong>what</strong> as machine-parseable artifacts (tables, code blocks, type definitions, ID&rsquo;d requirements). Back-load <strong>why</strong> as prose.</li><li>Use <strong>RFC 2119 keywords</strong> consistently: MUST, SHOULD, MAY, MUST NOT. AI tools weight these heavily.</li><li>Distinguish <strong>normative</strong> content (binding) from <strong>informative</strong> content (illustrative). Mark them.</li><li><strong>No pronouns across sections.</strong> &ldquo;It must validate the token&rdquo; is fine inside one bullet but breaks when the AI loads only that section. Repeat the noun.</li></ul><p>Add a legend at the top of every PRD:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=k>&gt; </span><span class=ge>**Normative content** is in tables, REQ-\* statements, and code blocks marked
+</span></span></span><span class=line><span class=cl><span class=k>&gt; </span><span class=ge>`contract`. **Informative content** (prose, examples, motivation) explains
+</span></span></span><span class=line><span class=cl><span class=k>&gt; </span><span class=ge>the why and is non-binding. The keywords MUST, SHOULD, MAY, MUST NOT are
+</span></span></span><span class=line><span class=cl><span class=k>&gt; </span><span class=ge>used per RFC 2119.
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=bp2-make-every-requirement-executable>BP2. Make every requirement executable</h3><p>A non-executable requirement is a wish. An executable requirement has a verification command or test.</p><p><strong>Bad:</strong></p><blockquote><p>The system should be fast.</p></blockquote><p><strong>Better:</strong></p><blockquote><p>P95 latency of <code>/api/orders</code> ≤ 600ms.</p></blockquote><p><strong>Good:</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>### REQ-PERF-001 — Order creation latency
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Statement.**</span> P95 latency of POST /api/orders MUST be ≤ 600ms under normal load.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Verification.**</span> <span class=sb>`pnpm test:load`</span> runs k6 script <span class=sb>`tests/load/orders.js`</span>,
+</span></span><span class=line><span class=cl>asserts p95 ≤ 600ms over 5-min window at 50 RPS sustained.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Rationale.**</span> Matches current Spring gateway baseline (see Grafana board
+</span></span><span class=line><span class=cl>&#34;order-edge-p95&#34;); regression breaks SLO commitment to checkout team.
+</span></span></code></pre></td></tr></table></div></div><p>Three things in one block: what, how to verify, why. AI agents now have a complete grounding triple.</p><h3 id=bp3-layered-specificity-zoom-levels>BP3. Layered specificity (zoom levels)</h3><p>Long PRDs fail because readers lose the thread. Structure so any reader can extract the right layer:</p><div class=table-wrapper><table><thead><tr><th>Layer</th><th>Length</th><th>Purpose</th><th>Audience</th></tr></thead><tbody><tr><td>L0 — TL;DR</td><td>1 paragraph</td><td>What and why, in one breath</td><td>Execs, AI system prompt</td></tr><tr><td>L1 — Goals/non-goals</td><td>1 page</td><td>Scope boundary</td><td>All readers</td></tr><tr><td>L2 — User journeys</td><td>2–5 pages</td><td>Behavior</td><td>PM, QA, designers</td></tr><tr><td>L3 — Contracts</td><td>5–20 pages</td><td>Schemas, endpoints, state machines</td><td>Engineers, AI agents</td></tr><tr><td>L4 — Operations</td><td>2–5 pages</td><td>Rollout, rollback, monitoring</td><td>SRE, on-call</td></tr><tr><td>L5 — Appendix</td><td>unbounded</td><td>Decision log, glossary, references</td><td>Future readers</td></tr></tbody></table></div><p><strong>The L0 TL;DR is the single most valuable section.</strong> AI tools with limited context budgets pin it as the snippet they remember. Write it last, after the rest of the doc has clarified your thinking.</p><h3 id=bp4-co-locate-with-code-make-ai-find-it>BP4. Co-locate with code; make AI find it</h3><p>The PRD is worthless if the AI agent doesn&rsquo;t load it. Three mechanisms:</p><p><strong>Path conventions</strong> AI tools index by default:</p><ul><li><code>/docs/prd/*.md</code></li><li><code>/specs/*.md</code></li><li><code>/.cursor/rules/*.mdc</code> (Cursor)</li><li><code>CLAUDE.md</code> references (Claude Code)</li></ul><p><strong>Bidirectional linking.</strong> PRDs reference <code>CLAUDE.md</code>; <code>CLAUDE.md</code> references active PRDs. Example <code>CLAUDE.md</code> snippet:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## Active PRDs
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> [<span class=nt>Next.js Migration</span>](<span class=na>docs/prd/nextjs-migration.md</span>) — load before any work in
+</span></span><span class=line><span class=cl>  <span class=sb>`frontend/`</span>, <span class=sb>`services/gateway-service/`</span>, or auth-related areas.
+</span></span><span class=line><span class=cl><span class=k>-</span> [<span class=nt>Search Revamp</span>](<span class=na>docs/prd/search-revamp.md</span>) — load before work in
+</span></span><span class=line><span class=cl>  <span class=sb>`services/search-service/`</span> or <span class=sb>`app/(storefront)/search/`</span>.
+</span></span></code></pre></td></tr></table></div></div><p><strong>Stable section anchors.</strong> When the AI says &ldquo;see PRD §7.4&rdquo;, that should still resolve in 6 months. Use ID-stable headings, not narrative ones (<code>## 7.4 Auth & session</code>, not <code>## Auth (after the recent rewrite)</code>).</p><h3 id=bp5-decision-log-over-revision-history>BP5. Decision log over revision history</h3><p>Every &ldquo;we chose X over Y&rdquo; must be capturable, searchable, and dated. Without this, AI agents will happily undo your decisions because the prose framing was lost.</p><p>Replace &ldquo;v1.2 — updated by Alice&rdquo; with <strong>ADRs</strong> (Architecture Decision Records). One file per decision, in <code>docs/adr/</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>id: ADR-0007
+</span></span><span class=line><span class=cl>title: HttpOnly session cookie instead of bearer token in localStorage
+</span></span><span class=line><span class=cl>status: Accepted
+</span></span><span class=line><span class=cl>date: 2026-05-08
+</span></span><span class=line><span class=cl>deciders: Backend lead, Security, Frontend lead
+</span></span><span class=line><span class=cl>supersedes: []
+</span></span><span class=line><span class=cl>superseded-by: []
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Context
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Current SPA stores access token in JS memory + localStorage refresh token.
+</span></span><span class=line><span class=cl>XSS risk and complexity in token rotation.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Decision
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Move to opaque session cookie (HttpOnly, Secure, SameSite=Lax). Server-side
+</span></span><span class=line><span class=cl>session lookup. Bearer token never reaches the browser.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Alternatives considered
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> **JWE on cookie** — stateless edge, but harder to revoke. Rejected for
+</span></span><span class=line><span class=cl>  revocation requirements (admin force-logout).
+</span></span><span class=line><span class=cl><span class=k>-</span> **Auth.js / NextAuth** — second source of truth alongside identity-service.
+</span></span><span class=line><span class=cl>  Rejected.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Consequences
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Eliminates XSS token theft.
+</span></span><span class=line><span class=cl><span class=k>-</span> One refresh path, server-locked.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>*</span> Edge becomes stateful (Redis lookup).
+</span></span><span class=line><span class=cl><span class=k>*</span> Long-lived browser sessions on cutover need forced re-login.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Verification
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> DevTools shows no Bearer token in any storage.
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`Authorization`</span> header absent from all browser→Next.js requests.
+</span></span></code></pre></td></tr></table></div></div><h3 id=bp6-define-non-goals-and-anti-requirements>BP6. Define non-goals AND anti-requirements</h3><p><strong>Non-goal</strong> = &ldquo;we will not do X (for now)&rdquo;. Defers scope.
+<strong>Anti-requirement</strong> = &ldquo;we will not do X, ever, even if it seems obvious to add&rdquo;. Preempts AI over-engineering.</p><p>Anti-requirements are gold for AI agents because they catch the most common over-delivery patterns:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>### Anti-requirements (do not add even if tempted)
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> **AR1**: Do NOT introduce a frontend ORM (Prisma, Drizzle). All data access
+</span></span><span class=line><span class=cl>  goes through Route Handlers calling existing microservices.
+</span></span><span class=line><span class=cl><span class=k>-</span> **AR2**: Do NOT add a Redux/Jotai store alongside Zustand. State libraries
+</span></span><span class=line><span class=cl>  do not multiply.
+</span></span><span class=line><span class=cl><span class=k>-</span> **AR3**: Do NOT add a &#34;compatibility shim&#34; for the old SPA&#39;s API client.
+</span></span><span class=line><span class=cl>  Cutover is clean; no parallel API styles.
+</span></span><span class=line><span class=cl><span class=k>-</span> **AR4**: Do NOT generate TypeScript types from upstream OpenAPI without
+</span></span><span class=line><span class=cl>  explicit ADR; types stay hand-authored to keep contracts visible.
+</span></span></code></pre></td></tr></table></div></div><h3 id=bp7-slice-vertically-not-horizontally>BP7. Slice vertically, not horizontally</h3><p>A horizontal slice (&ldquo;build all the API routes, then all the UI&rdquo;) leaves nothing demonstrable until the end. A vertical slice (&ldquo;login screen + login route handler + middleware decode&rdquo;) works end-to-end immediately.</p><p>Each milestone should:</p><ol><li>Ship a thin, end-to-end working feature</li><li>Be independently demoable in 2 minutes</li><li>Be independently rollback-able</li><li>Be implementable by an AI agent in one or two focused sessions</li></ol><p>Add a <strong>demo script</strong> per milestone — it doubles as an AI verification prompt:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>### M1 demo script
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> Visit staging Next.js
+</span></span><span class=line><span class=cl><span class=k>2.</span> Click &#34;Login with GitHub&#34;
+</span></span><span class=line><span class=cl><span class=k>3.</span> Authorize
+</span></span><span class=line><span class=cl><span class=k>4.</span> Land on <span class=sb>`/`</span>, see header username
+</span></span><span class=line><span class=cl><span class=k>5.</span> DevTools: confirm only <span class=sb>`cf_session`</span>, <span class=sb>`cf_refresh`</span>, <span class=sb>`cf_device`</span> cookies; no
+</span></span><span class=line><span class=cl>   localStorage tokens
+</span></span><span class=line><span class=cl><span class=k>6.</span> Wait 16 minutes (or force expiry)
+</span></span><span class=line><span class=cl><span class=k>7.</span> Click any link → confirm silent refresh, no logout
+</span></span><span class=line><span class=cl><span class=k>8.</span> Click logout → cookies cleared, redirected to <span class=sb>`/`</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=3-the-sections-of-a-good-prd>3. The Sections of a Good PRD</h2><p>Below is a complete table of contents with templates. Not every project needs every section, but the order matters: top-down readability is a feature.</p><h3 id=0-tldr>§0. TL;DR</h3><p>One paragraph. What and why, in one breath. Write this last.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## 0. TL;DR
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Replace the SPA + Spring Cloud Gateway with a single Next.js (App Router) app
+</span></span><span class=line><span class=cl>as the only public-facing edge. Microservices are unchanged. Access tokens
+</span></span><span class=line><span class=cl>move out of the browser into HttpOnly cookies; rate limiting, CORS, JWT
+</span></span><span class=line><span class=cl>validation, and tracing move from gateway-service into Next.js middleware
+</span></span><span class=line><span class=cl>and Route Handlers. Phased over six milestones; each independently rollback-
+</span></span><span class=line><span class=cl>able. Success = one public deployable, parity SLOs, no Bearer token in
+</span></span><span class=line><span class=cl>browser memory.
+</span></span></code></pre></td></tr></table></div></div><h3 id=1-status--ownership>§1. Status & ownership</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>| Field             | Value                                                           |
+</span></span><span class=line><span class=cl>| ----------------- | --------------------------------------------------------------- |
+</span></span><span class=line><span class=cl>| Status            | Draft / In-Review / Approved / In-Flight / Shipped / Superseded |
+</span></span><span class=line><span class=cl>| Author            | name                                                            |
+</span></span><span class=line><span class=cl>| Engineering owner | name (single point of contact)                                  |
+</span></span><span class=line><span class=cl>| Reviewers         | [name + role] (each must approve before status → Approved)      |
+</span></span><span class=line><span class=cl>| Stakeholders      | [name + interest] (informed, not blocking)                      |
+</span></span><span class=line><span class=cl>| Target start      | YYYY-MM-DD                                                      |
+</span></span><span class=line><span class=cl>| Target completion | YYYY-MM-DD                                                      |
+</span></span><span class=line><span class=cl>| Tracking issue    | link                                                            |
+</span></span><span class=line><span class=cl>| Related PRDs      | links                                                           |
+</span></span><span class=line><span class=cl>| Supersedes        | links                                                           |
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-context>§2. Context</h3><p>Three paragraphs, no more:</p><ol><li><strong>Current state</strong> — factual, present tense.</li><li><strong>What changed externally</strong> — why now? (regulation, customer ask, scale event, technical debt cliff)</li><li><strong>What we&rsquo;ve already tried or considered</strong> — sets up the decision log.</li></ol><h3 id=3-problem-statement>§3. Problem statement</h3><p>One sentence problem + one sentence solution direction. Test: if you remove this section, do readers still know what the project <em>is</em>?</p><h3 id=4-goals>§4. Goals</h3><p>Goals get an ID, a sentence, and a <em>measure</em> — never a goal without a measure.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>| ID  | Goal                                     | Measure                                                                                       |
+</span></span><span class=line><span class=cl>| --- | ---------------------------------------- | --------------------------------------------------------------------------------------------- |
+</span></span><span class=line><span class=cl>| G1  | Replace SPA with Next.js, feature-parity | All routes (§6.1) reachable, all journeys pass E2E                                            |
+</span></span><span class=line><span class=cl>| G3  | Move access tokens off the browser       | DevTools audit shows zero Bearer tokens in storage; zero <span class=sb>`Authorization`</span> headers from browser |
+</span></span></code></pre></td></tr></table></div></div><p><strong>Anti-pattern:</strong> &ldquo;G3: Improve security.&rdquo; Unmeasurable, unverifiable, useless.</p><h3 id=5-non-goals--anti-requirements>§5. Non-goals & anti-requirements</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## 5. Non-goals
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> **NG1**: Microservice rewrites. Java/Spring stack stays as-is.
+</span></span><span class=line><span class=cl><span class=k>-</span> **NG2**: Database schema changes.
+</span></span><span class=line><span class=cl><span class=k>-</span> **NG3**: Server Actions for write paths in first cut.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 5.1 Anti-requirements
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> **AR1**: Do NOT add a frontend ORM.
+</span></span><span class=line><span class=cl><span class=k>-</span> **AR2**: Do NOT introduce a second state library.
+</span></span></code></pre></td></tr></table></div></div><h3 id=6-users--scenarios>§6. Users & scenarios</h3><p>Three sub-sections:</p><p><strong>6.1 Personas</strong> — who, with permission scopes:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>| Persona           | Roles      | Primary jobs                           |
+</span></span><span class=line><span class=cl>| ----------------- | ---------- | -------------------------------------- |
+</span></span><span class=line><span class=cl>| Anonymous visitor | none       | Browse catalog, register               |
+</span></span><span class=line><span class=cl>| Customer          | ROLE_USER  | Browse, cart, checkout, manage orders  |
+</span></span><span class=line><span class=cl>| Admin             | ROLE_ADMIN | Manage products, tickets, redeem codes |
+</span></span></code></pre></td></tr></table></div></div><p><strong>6.2 Routes / surfaces</strong> — exhaustive table of public surfaces:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>| Route               | Auth         | Render mode               | Notes                  |
+</span></span><span class=line><span class=cl>| ------------------- | ------------ | ------------------------- | ---------------------- |
+</span></span><span class=line><span class=cl>| <span class=sb>`/`</span>                 | Anonymous OK | RSC + client islands      | Storefront home        |
+</span></span><span class=line><span class=cl>| <span class=sb>`/checkout/payment`</span> | Required     | RSC + client              | Renders payment intent |
+</span></span><span class=line><span class=cl>| <span class=sb>`/admin/*`</span>          | ROLE_ADMIN   | RSC layout, client tables | Admin shell            |
+</span></span></code></pre></td></tr></table></div></div><p><strong>6.3 User journeys with risk</strong> — capture happy path AND unhappy paths:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>### J3 — Logged-in checkout via Alipay
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Happy path:**</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> User on <span class=sb>`/checkout/payment`</span> clicks &#34;Pay with Alipay&#34;
+</span></span><span class=line><span class=cl><span class=k>2.</span> POST <span class=sb>`/api/trade/orders`</span> → returns <span class=sb>`orderId`</span>
+</span></span><span class=line><span class=cl><span class=k>3.</span> POST <span class=sb>`/api/finance/payments/alipay/intent`</span> → returns redirect URL
+</span></span><span class=line><span class=cl><span class=k>4.</span> Browser redirects to Alipay, user pays
+</span></span><span class=line><span class=cl><span class=k>5.</span> Alipay async-notify hits <span class=sb>`/api/payments/alipay/notify`</span>
+</span></span><span class=line><span class=cl><span class=k>6.</span> Browser returns to <span class=sb>`/orders/payment-return?orderId=...`</span>
+</span></span><span class=line><span class=cl><span class=k>7.</span> UI polls <span class=sb>`/api/trade/orders/:id`</span> until <span class=sb>`paid: true`</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Unhappy paths:**</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> 3a. Stock depleted between 2 and 3 → 409, redirect to <span class=sb>`/cart`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> 5a. Async-notify fails signature → 400, finance-service does not mark paid
+</span></span><span class=line><span class=cl><span class=k>-</span> 5b. Async-notify arrives before browser return → UI shows &#34;paid&#34; on first poll
+</span></span><span class=line><span class=cl><span class=k>-</span> 6a. User closes browser before return → next visit to <span class=sb>`/orders`</span> shows correct state
+</span></span></code></pre></td></tr></table></div></div><h3 id=7-architecture>§7. Architecture</h3><ul><li><strong>Topology diagrams before/after</strong> (ASCII art is fine and AI-readable)</li><li><strong>What&rsquo;s inherited / what isn&rsquo;t</strong> for migrations</li><li><strong>Component-level deep dives</strong> for load-bearing pieces</li></ul><p>For each load-bearing component, include:</p><ol><li>Inputs / outputs (interface)</li><li>State (what does it own?)</li><li>Failure modes (what breaks, and how do we know?)</li><li>Concurrency model (single-flight? lock? lease?)</li></ol><h3 id=8-api-contracts>§8. API contracts</h3><p>For each endpoint, the contract block:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>#### POST /api/auth/login
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Auth:**</span> none required (this <span class=ge>_establishes_</span> the session)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Request**</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>```ts
+</span></span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>LoginRequest</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>identifier</span>: <span class=kt>string</span><span class=p>;</span> <span class=c1>// email or username
+</span></span></span><span class=line><span class=cl>  <span class=nx>password</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>deviceId?</span>: <span class=kt>string</span><span class=p>;</span> <span class=c1>// optional override; defaults to cf_device cookie
+</span></span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=s>```</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Response 200**</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>```ts
+</span></span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>LoginResponse</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>user</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>string</span><span class=p>;</span> <span class=nx>username</span>: <span class=kt>string</span><span class=p>;</span> <span class=nx>roles</span>: <span class=kt>string</span><span class=p>[]</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// no token in body — set via Set-Cookie: cf_session, cf_refresh
+</span></span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=s>```</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Errors**</span>
+</span></span><span class=line><span class=cl>| Status | Code | When |
+</span></span><span class=line><span class=cl>|---|---|---|
+</span></span><span class=line><span class=cl>| 400 | INVALID_INPUT | identifier/password missing or malformed |
+</span></span><span class=line><span class=cl>| 401 | INVALID_CREDENTIALS | wrong password (generic — do not leak which) |
+</span></span><span class=line><span class=cl>| 423 | ACCOUNT_LOCKED | too many failures |
+</span></span><span class=line><span class=cl>| 429 | RATE_LIMITED | per IP, 5 attempts / 5 min |
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Side effects**</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Sets cookies <span class=sb>`cf_session`</span>, <span class=sb>`cf_refresh`</span>, <span class=sb>`cf_device`</span> (if absent)
+</span></span><span class=line><span class=cl><span class=k>-</span> Emits log event <span class=sb>`auth.login`</span> with <span class=sb>`userId`</span>, <span class=sb>`result`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Increments metric <span class=sb>`auth_login_total{result}`</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Upstream call**</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> POST identity-service <span class=sb>`/auth/login`</span> with <span class=sb>`{ identifier, password, deviceId }`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Internal token: none (login is unauthenticated upstream too)
+</span></span></code></pre></td></tr></table></div></div><p>A handler with this contract is implementable by an AI agent in one shot.</p><h3 id=9-data-model>§9. Data model</h3><ul><li>ER diagram or table</li><li><strong>Schema definitions as code</strong> (TypeScript / Prisma / SQL) — not prose</li><li>Data lifecycle: creation, update, soft-delete, retention</li><li>PII classification & compliance fields</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=c1>// contract: Order
+</span></span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>Order</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>id</span>: <span class=kt>string</span><span class=p>;</span> <span class=c1>// UUID v4
+</span></span></span><span class=line><span class=cl>  <span class=nx>userId</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>status</span><span class=o>:</span> <span class=s2>&#34;PENDING&#34;</span> <span class=o>|</span> <span class=s2>&#34;PAID&#34;</span> <span class=o>|</span> <span class=s2>&#34;FULFILLED&#34;</span> <span class=o>|</span> <span class=s2>&#34;CANCELLED&#34;</span> <span class=o>|</span> <span class=s2>&#34;REFUNDED&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>items</span>: <span class=kt>OrderItem</span><span class=p>[];</span>
+</span></span><span class=line><span class=cl>  <span class=nx>totalCents</span>: <span class=kt>number</span><span class=p>;</span> <span class=c1>// never floating point for money
+</span></span></span><span class=line><span class=cl>  <span class=nx>currency</span><span class=o>:</span> <span class=s2>&#34;CNY&#34;</span> <span class=o>|</span> <span class=s2>&#34;USD&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>createdAt</span>: <span class=kt>string</span><span class=p>;</span> <span class=c1>// ISO 8601
+</span></span></span><span class=line><span class=cl>  <span class=nx>paidAt</span>: <span class=kt>string</span> <span class=o>|</span> <span class=kc>null</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fulfilledAt</span>: <span class=kt>string</span> <span class=o>|</span> <span class=kc>null</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=10-uiux-specifications>§10. UI/UX specifications</h3><ul><li>Design system reference (tokens, components used)</li><li>Wireframes or Figma links per screen</li><li>Responsive breakpoints</li><li>Accessibility (WCAG level, keyboard, ARIA)</li><li>i18n / l10n scope</li></ul><p>For each screen, document <strong>all states</strong>: empty, loading, partial, error, success.</p><h3 id=11-non-functional-requirements>§11. Non-functional requirements</h3><p>Categories to always cover:</p><ul><li><strong>Latency</strong> — P50, P95, P99 (never just &ldquo;fast&rdquo;)</li><li><strong>Throughput</strong> — RPS sustained, peak, duration</li><li><strong>Availability</strong> — SLO % + tolerance for AZ/region failure</li><li><strong>Capacity</strong> — concurrent users, DB connections, memory ceiling</li><li><strong>Security</strong> — auth, secrets, threat model coverage</li><li><strong>Privacy</strong> — PII handling, retention, redaction</li><li><strong>Compatibility</strong> — browsers, OS, screen sizes</li><li><strong>Accessibility</strong> — WCAG level, keyboard, screen reader, contrast</li><li><strong>i18n / l10n</strong></li><li><strong>Build / CI</strong> — build time, bundle budgets</li><li><strong>Cost</strong> — per-RPS infra cost ceiling (often forgotten)</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>| ID     | Category   | Requirement                                                   |
+</span></span><span class=line><span class=cl>| ------ | ---------- | ------------------------------------------------------------- |
+</span></span><span class=line><span class=cl>| NFR-1  | Latency    | P50 of <span class=sb>`/api/auth/me`</span> ≤ 80ms, P95 ≤ 250ms                     |
+</span></span><span class=line><span class=cl>| NFR-3  | Throughput | 200 RPS sustained, 500 RPS peak for 30s                       |
+</span></span><span class=line><span class=cl>| NFR-10 | Build      | <span class=sb>`next build`</span> ≤ 5 min on CI; initial JS ≤ 250KB gzipped on <span class=sb>`/`</span> |
+</span></span></code></pre></td></tr></table></div></div><h3 id=12-observability>§12. Observability</h3><p>The pattern: every requirement says <strong>what to log/measure</strong>, <strong>what threshold triggers an alert</strong>, <strong>who gets paged</strong>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=k>&gt; </span><span class=ge>**REQ-OBS-005**: SLO burn-rate alert. P95 latency on `/api/trade/orders`
+</span></span></span><span class=line><span class=cl><span class=k>&gt; </span><span class=ge>exceeding 600ms (NFR-2) for 5 minutes triggers a warning page to
+</span></span></span><span class=line><span class=cl><span class=k>&gt; </span><span class=ge>`#oncall-trade`; for 30 minutes triggers a critical page to PagerDuty
+</span></span></span><span class=line><span class=cl><span class=k>&gt; </span><span class=ge>rotation `trade-edge`.
+</span></span></span></code></pre></td></tr></table></div></div><p>Cover:</p><ul><li>Structured log fields (with redaction rules)</li><li>Metric names and labels</li><li>Dashboards (which boards exist, what panels)</li><li>Alerts (threshold, window, severity, recipient)</li></ul><h3 id=13-risks>§13. Risks</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>| ID  | Risk                     | Likelihood | Impact   | Mitigation                      | Owner     | Status |
+</span></span><span class=line><span class=cl>| --- | ------------------------ | ---------- | -------- | ------------------------------- | --------- | ------ |
+</span></span><span class=line><span class=cl>| R1  | SSE proxy buffers        | Med        | High     | Prototype + load test before M3 | <span class=ni>@ai</span>-team  | Open   |
+</span></span><span class=line><span class=cl>| R2  | Alipay signature regress | Med        | Critical | Replay 100 captured payloads    | <span class=ni>@payments</span> | Open   |
+</span></span></code></pre></td></tr></table></div></div><p>Run a <strong>pre-mortem</strong> before approval: a 30-minute &ldquo;imagine it failed — why?&rdquo; session. Add the top 3 unspoken risks.</p><h3 id=14-test-plan>§14. Test plan</h3><p><strong>Pyramid + per-milestone gates.</strong> A milestone is not &ldquo;done&rdquo; until its gate is green.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>### Per-milestone gates
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> M1: J5 E2E green; auth integration suite green; cookie audit clean
+</span></span><span class=line><span class=cl><span class=k>-</span> M2: J1 E2E green; bundle budget green
+</span></span><span class=line><span class=cl><span class=k>-</span> M3: J2/J3/J4 E2E green; Alipay replay 100/100; load test 200 RPS green
+</span></span><span class=line><span class=cl><span class=k>-</span> M4: J6/J7/J8 E2E green; SSE 30s drop test green
+</span></span><span class=line><span class=cl><span class=k>-</span> M5: rate limit acceptance green; security scan clean; full E2E green
+</span></span><span class=line><span class=cl><span class=k>-</span> M6: cutover smoke green; 72h monitoring green
+</span></span></code></pre></td></tr></table></div></div><p>Cover: unit, integration, E2E, load, security, cutover smoke.</p><h3 id=15-migration--rollout-plan>§15. Migration / rollout plan</h3><p>Each milestone: <strong>scope, acceptance, rollback, demo script.</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>### M3 — Checkout, payment, fulfillment (3 weeks)
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Scope.**</span> Migrate <span class=sb>`/checkout/*`</span>, <span class=sb>`/orders/*`</span>, <span class=sb>`/wallet/recharge*`</span>. Implement
+</span></span><span class=line><span class=cl>proxies for <span class=sb>`/api/trade/**`</span>, <span class=sb>`/api/finance/**`</span>, <span class=sb>`/api/fulfillment/**`</span>.
+</span></span><span class=line><span class=cl>Implement <span class=sb>`/api/payments/alipay/notify`</span>.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Acceptance.**</span> J2, J3, J4 pass in staging. Async-notify replay 100/100.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Rollback.**</span> Toggle <span class=sb>`EDGE=spa`</span> at load balancer; SPA + gateway resume serving.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Demo script.**</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> Add item to cart, checkout via balance → order paid + fulfilled
+</span></span><span class=line><span class=cl><span class=k>2.</span> Add item to cart, checkout via Alipay → redirect, pay, return → order paid
+</span></span><span class=line><span class=cl><span class=k>3.</span> Wallet recharge via Alipay → balance increased
+</span></span><span class=line><span class=cl><span class=k>4.</span> Verify all three orders visible at <span class=sb>`/orders`</span> with correct state
+</span></span></code></pre></td></tr></table></div></div><h3 id=16-open-questions>§16. Open questions</h3><p>Every open question <strong>owned</strong> and <strong>timed</strong>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>| ID  | Question                                     | Owner     | Decide by  | Decision |
+</span></span><span class=line><span class=cl>| --- | -------------------------------------------- | --------- | ---------- | -------- |
+</span></span><span class=line><span class=cl>| Q1  | Hosting target — self-host, Vercel, other?   | <span class=ni>@platform</span> | 2026-05-22 | TBD      |
+</span></span><span class=line><span class=cl>| Q2  | Rate-limit library — Upstash vs custom Redis | <span class=ni>@backend</span>  | 2026-06-15 | TBD      |
+</span></span></code></pre></td></tr></table></div></div><p>When decided, update the row with the answer and link to the ADR.</p><h3 id=17-glossary>§17. Glossary</h3><p>For domain terms, define <strong>what it is, what it isn&rsquo;t, what it&rsquo;s often confused with</strong>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=k>-</span> **Order paid**: trade-service has marked <span class=sb>`payment_status = PAID`</span>.
+</span></span><span class=line><span class=cl>  <span class=k>-</span> Not the same as: order fulfilled (fulfillment-service has issued codes).
+</span></span><span class=line><span class=cl>  <span class=k>-</span> Not the same as: order delivered (user notified).
+</span></span><span class=line><span class=cl>  <span class=k>-</span> Source of truth: trade-service <span class=sb>`orders.payment_status`</span> column.
+</span></span></code></pre></td></tr></table></div></div><h3 id=18-appendix>§18. Appendix</h3><ul><li><strong>18.1 File-level pointers</strong> — paths to authoritative files in the current codebase. Critical for AI grounding.</li><li><strong>18.2 Decision log seed</strong> — list of decisions to promote to ADRs.</li><li><strong>18.3 Out-of-band assets</strong> — DNS names, certs, third-party config required before kickoff.</li><li><strong>18.4 Fixtures</strong> — captured payloads (OAuth callbacks, payment notifies, SSE chunks) for replay tests.</li></ul><h3 id=19-ai-agent-operating-manual>§19. AI agent operating manual</h3><p>Dedicated section telling AI agents <em>how</em> to do the work, not just what:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## 19. AI agent operating manual
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### Context loading
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>When working on this migration, AI agents MUST load:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> This PRD
+</span></span><span class=line><span class=cl><span class=k>2.</span> CLAUDE.md (root)
+</span></span><span class=line><span class=cl><span class=k>3.</span> Relevant §18.1 file pointers for the area being changed
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### Code conventions
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Route Handlers live under <span class=sb>`app/api/&lt;service&gt;/[...path]/route.ts`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Each handler exports named HTTP methods (<span class=sb>`GET`</span>, <span class=sb>`POST`</span>, …)
+</span></span><span class=line><span class=cl><span class=k>-</span> Upstream calls go through <span class=sb>`lib/upstream.ts`</span> — never <span class=sb>`fetch()`</span> directly
+</span></span><span class=line><span class=cl><span class=k>-</span> Errors map to <span class=sb>`lib/errors.ts`</span> taxonomy — no ad-hoc <span class=sb>`Response.json({error:...})`</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### Forbidden
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Do not import from <span class=sb>`frontend/src/**`</span> — that tree is being deleted
+</span></span><span class=line><span class=cl><span class=k>-</span> Do not add <span class=sb>`next-auth`</span>, <span class=sb>`iron-session`</span>, or other session libraries
+</span></span><span class=line><span class=cl><span class=k>-</span> Do not call <span class=sb>`localStorage`</span> or <span class=sb>`sessionStorage`</span> for auth-related data
+</span></span><span class=line><span class=cl><span class=k>-</span> Do not use <span class=sb>`&#39;use server&#39;`</span> server actions for write paths
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### Verification commands
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Type check: <span class=sb>`pnpm typecheck`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Unit: <span class=sb>`pnpm test`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Integration: <span class=sb>`pnpm test:integration`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> E2E: <span class=sb>`pnpm test:e2e`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Cookie audit: <span class=sb>`pnpm audit:cookies`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Bundle budget: <span class=sb>`pnpm build &amp;&amp; pnpm size-limit`</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### Done definition for any change
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> All verification commands green
+</span></span><span class=line><span class=cl><span class=k>2.</span> Affected REQ-\* IDs listed in the PR description
+</span></span><span class=line><span class=cl><span class=k>3.</span> New REQ-\* added to PRD if behavior was specified that wasn&#39;t there
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### Common AI mistakes — read this
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Next.js App Router does NOT need <span class=sb>`next/router`</span> — use <span class=sb>`next/navigation`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Route Handlers run on Node by default; Edge runtime is FORBIDDEN for SSE
+</span></span><span class=line><span class=cl><span class=k>-</span> Cookies are set via <span class=sb>`NextResponse.cookies.set()`</span>, not raw <span class=sb>`Set-Cookie`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`cf_session`</span> is HttpOnly — <span class=sb>`document.cookie`</span> cannot read it
+</span></span><span class=line><span class=cl><span class=k>-</span> The project does NOT use Auth.js / NextAuth — do not import it
+</span></span><span class=line><span class=cl><span class=k>-</span> The project uses pnpm — do not run <span class=sb>`npm install`</span> or <span class=sb>`yarn`</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=4-ai-specific-patterns>4. AI-Specific Patterns</h2><h3 id=pattern-1-traceability-matrix>Pattern 1: Traceability matrix</h3><p>A table linking REQ → test → code:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>| REQ          | Test                              | Implementation   | Status      |
+</span></span><span class=line><span class=cl>| ------------ | --------------------------------- | ---------------- | ----------- |
+</span></span><span class=line><span class=cl>| REQ-AUTH-001 | tests/audit/cookies.spec.ts       | lib/session.ts   | Implemented |
+</span></span><span class=line><span class=cl>| REQ-AUTH-003 | tests/integration/refresh.spec.ts | middleware.ts:42 | In progress |
+</span></span><span class=line><span class=cl>| REQ-EDGE-001 | tests/load/trade-orders.js        | lib/rateLimit.ts | Pending     |
+</span></span></code></pre></td></tr></table></div></div><p>The #1 thing AI agents lack is knowing <em>which test verifies which requirement</em>. Hand-maintain this matrix; it pays back tenfold.</p><h3 id=pattern-2-captured-fixture-appendix>Pattern 2: Captured-fixture appendix</h3><p>For payment notifies, OAuth callbacks, SSE chunks — capture real payloads:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>### 18.4 Fixtures
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`tests/fixtures/alipay-notify-paid.json`</span> — successful payment notify
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`tests/fixtures/alipay-notify-refund.json`</span> — refund notify
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`tests/fixtures/oauth-github-success.json`</span> — GitHub OAuth callback
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`tests/fixtures/sse-chat-stream.txt`</span> — 30s captured AI chat stream
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Refresh via: <span class=sb>`pnpm capture:fixtures --env staging`</span>
+</span></span></code></pre></td></tr></table></div></div><p>These fixtures are the input to integration tests. AI agents can implement against fixtures without needing live services.</p><h3 id=pattern-3-hallucination-guards>Pattern 3: Hallucination guards</h3><p>A short list of facts the AI tends to get wrong about your project, restated explicitly. See §19 above. This catches AI agents who pattern-match from training-data prevalence rather than your specifics.</p><h3 id=pattern-4-demo-script-as-ai-prompt>Pattern 4: Demo script as AI prompt</h3><p>A demo script doubles as a verification prompt: &ldquo;run the M1 demo script using Playwright; report any step that fails.&rdquo; If the script is precise enough for a human QA, it&rsquo;s precise enough for an AI agent.</p><h3 id=pattern-5-stable-ids-for-everything>Pattern 5: Stable IDs for everything</h3><p>Every requirement, goal, risk, journey, route, and milestone gets a stable ID:</p><ul><li>Goals: <code>G1</code>, <code>G2</code>, …</li><li>Non-goals: <code>NG1</code>, <code>NG2</code>, …</li><li>Anti-requirements: <code>AR1</code>, <code>AR2</code>, …</li><li>Requirements: <code>REQ-AUTH-001</code>, <code>REQ-EDGE-001</code>, …</li><li>Journeys: <code>J1</code>, <code>J2</code>, …</li><li>Risks: <code>R1</code>, <code>R2</code>, …</li><li>Open questions: <code>Q1</code>, <code>Q2</code>, …</li><li>Non-functional: <code>NFR-1</code>, <code>NFR-2</code>, …</li><li>Milestones: <code>M1</code>, <code>M2</code>, …</li></ul><p>Stable IDs survive rewrites and let AI agents reference exactly. PR descriptions can say &ldquo;implements REQ-AUTH-003 and REQ-AUTH-005, mitigates R5&rdquo; — instantly searchable, instantly verifiable.</p><hr><h2 id=5-lifecycle-writing-reviewing-maintaining>5. Lifecycle: Writing, Reviewing, Maintaining</h2><h3 id=writing>Writing</h3><ol><li><strong>Outline first, in 30 minutes.</strong> Just headings, no content. Get sign-off on shape before drafting.</li><li><strong>Draft top-down.</strong> TL;DR → goals → architecture → contracts → ops. Don&rsquo;t start with the API table.</li><li><strong>Draft with the AI in the loop.</strong> Ask the AI to identify ambiguities — it&rsquo;s an excellent ambiguity detector. Paste a section and ask &ldquo;what could be interpreted multiple ways here?&rdquo;</li><li><strong>Examples first, prose second.</strong> When stuck, write the example payload, then the prose explaining it.</li><li><strong>TL;DR last.</strong> You don&rsquo;t know what the doc says until you&rsquo;ve finished it.</li></ol><h3 id=reviewing>Reviewing</h3><p>Use the <a class=link href=#6-pre-approval-checklist>Pre-Approval Checklist</a> below. Reject PRDs that don&rsquo;t meet it; reviewing a half-baked PRD wastes everyone&rsquo;s time.</p><p>Specific reviewer assignments:</p><ul><li><strong>Frontend lead</strong> — UI/UX, journeys, routes</li><li><strong>Backend lead</strong> — API contracts, data model, architecture</li><li><strong>Platform/SRE</strong> — observability, NFRs, rollout, rollback</li><li><strong>Security</strong> — auth, threat model, NFRs related to security</li><li><strong>Product</strong> — goals, non-goals, success metrics</li></ul><h3 id=maintaining>Maintaining</h3><p>A PRD that doesn&rsquo;t get updated becomes a lying document — the worst kind. Worse than no PRD, because AI agents will trust the lies.</p><p><strong>Rules:</strong></p><ol><li><strong>PR template includes</strong> &ldquo;PRD updated? Y/N + REQ-* IDs touched&rdquo;</li><li><strong>Status field ratchets</strong> Draft → Approved → In-Flight → Shipped → Superseded; never goes backward without a comment</li><li><strong>After Shipped, freeze and archive.</strong> Link to its successor.</li><li><strong>Open questions resolved within milestone</strong> get promoted to ADRs and removed from §16</li><li><strong><code>last_updated</code> is real</strong>, updated on every meaningful edit</li><li><strong>Quarterly audit.</strong> Walk every PRD; archive shipped ones; flag stale ones.</li></ol><h3 id=when-to-split-a-prd>When to split a PRD</h3><p>A PRD over ~500 lines is a smell. Split when:</p><ul><li>Two sections could ship independently → two PRDs with shared context doc</li><li>Ownership splits across teams → each team owns its PRD</li><li>A section is reused across PRDs → extract to a standalone doc, reference from multiple PRDs</li></ul><p>Common extraction candidates:</p><ul><li>Auth/session design → <code>docs/auth/session-design.md</code></li><li>Streaming architecture → <code>docs/architecture/sse-streaming.md</code></li><li>Glossary → <code>docs/glossary.md</code></li><li>ADRs → <code>docs/adr/ADR-XXXX.md</code></li></ul><hr><h2 id=6-pre-approval-checklist>6. Pre-Approval Checklist</h2><p>Use this before moving status from Draft to Approved:</p><ul><li><input disabled type=checkbox> §0 TL;DR is exactly one paragraph</li><li><input disabled type=checkbox> Every goal has a measure</li><li><input disabled type=checkbox> Every non-goal is concrete and non-aspirational</li><li><input disabled type=checkbox> §5.1 anti-requirements section exists</li><li><input disabled type=checkbox> Every REQ-* is atomic, ID&rsquo;d, and testable</li><li><input disabled type=checkbox> Every endpoint in §8 has request/response/error schemas</li><li><input disabled type=checkbox> Every NFR has a number, not an adjective</li><li><input disabled type=checkbox> Every risk has owner + mitigation + status</li><li><input disabled type=checkbox> Every open question has owner + decide-by date</li><li><input disabled type=checkbox> §19 AI operating manual section exists</li><li><input disabled type=checkbox> Glossary distinguishes commonly-confused terms</li><li><input disabled type=checkbox> §18.1 file-level pointers list authoritative current-state files</li><li><input disabled type=checkbox> Demo script per milestone in §15</li><li><input disabled type=checkbox> Verification command per REQ (or batched in §14)</li><li><input disabled type=checkbox> Pre-mortem held; top risks captured</li><li><input disabled type=checkbox> All required reviewers listed in §1 and have approved</li><li><input disabled type=checkbox> PRD is committed in repo at a stable path</li><li><input disabled type=checkbox> <code>CLAUDE.md</code> (or equivalent) references the PRD</li></ul><hr><h2 id=7-templates>7. Templates</h2><h3 id=minimal-prd-skeleton>Minimal PRD skeleton</h3><p>Copy this when starting a new PRD:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>title: &lt;Project name&gt;
+</span></span><span class=line><span class=cl>status: Draft
+</span></span><span class=line><span class=cl>owner: TBD
+</span></span><span class=line><span class=cl>last_updated: YYYY-MM-DD
+</span></span><span class=line><span class=cl>related: []
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gh># &lt;Project name&gt; — PRD
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 0. TL;DR
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;One paragraph. Write last.&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 1. Status &amp; ownership
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>| Field             | Value |
+</span></span><span class=line><span class=cl>| ----------------- | ----- |
+</span></span><span class=line><span class=cl>| Status            | Draft |
+</span></span><span class=line><span class=cl>| Author            |       |
+</span></span><span class=line><span class=cl>| Engineering owner |       |
+</span></span><span class=line><span class=cl>| Reviewers         |       |
+</span></span><span class=line><span class=cl>| Target start      |       |
+</span></span><span class=line><span class=cl>| Target completion |       |
+</span></span><span class=line><span class=cl>| Tracking issue    |       |
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 2. Context
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 3. Problem statement
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 4. Goals
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 5. Non-goals
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 5.1 Anti-requirements
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 6. Users &amp; scenarios
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 6.1 Personas
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 6.2 Routes / surfaces
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 6.3 User journeys
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 7. Architecture
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 8. API contracts
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 9. Data model
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 10. UI/UX
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 11. Non-functional requirements
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 12. Observability
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 13. Risks
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 14. Test plan
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 15. Migration / rollout plan
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 16. Open questions
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 17. Glossary
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 18. Appendix
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 18.1 File-level pointers
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 18.2 Decision log seed
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 18.3 Out-of-band assets
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### 18.4 Fixtures
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## 19. AI agent operating manual
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=requirement-template>Requirement template</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>### REQ-&lt;AREA&gt;-&lt;NNN&gt; — &lt;One-line title&gt;
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Statement.**</span> &lt;Single sentence with MUST / SHOULD / MAY.&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Verification.**</span> &lt;Command to run, file path of test, or audit procedure.&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Rationale.**</span> &lt;Why this requirement exists; what breaks if it&#39;s wrong.&gt;
+</span></span></code></pre></td></tr></table></div></div><h3 id=adr-template>ADR template</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>id: ADR-NNNN
+</span></span><span class=line><span class=cl>title: &lt;Decision in one line&gt;
+</span></span><span class=line><span class=cl>status: Proposed | Accepted | Deprecated | Superseded
+</span></span><span class=line><span class=cl>date: YYYY-MM-DD
+</span></span><span class=line><span class=cl>deciders: [names]
+</span></span><span class=line><span class=cl>supersedes: []
+</span></span><span class=line><span class=cl>superseded-by: []
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Context
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Decision
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Alternatives considered
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Consequences
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Verification
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=endpoint-contract-template>Endpoint contract template</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>#### &lt;METHOD&gt; &lt;path&gt;
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Auth:**</span> &lt;none | session | role:ADMIN | …&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Request**</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>```ts
+</span></span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>RequestT</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/* … */</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=s>```</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Response 200**</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s>```ts
+</span></span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>ResponseT</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/* … */</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=s>```</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Errors**</span>
+</span></span><span class=line><span class=cl>| Status | Code | When |
+</span></span><span class=line><span class=cl>|---|---|---|
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Side effects**</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> &lt;cookies, logs, metrics, queue events…&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**Upstream call**</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> &lt;method + path + auth&gt;
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=8-common-mistakes>8. Common Mistakes</h2><h3 id=well-figure-it-out-as-we-go>&ldquo;We&rsquo;ll figure it out as we go&rdquo;</h3><p>PRDs without contracts force every implementer (human or AI) to invent. AI agents will invent confidently and inconsistently. <strong>Specify the contract before writing the code, not after.</strong></p><h3 id=goals-without-measures>Goals without measures</h3><p>&ldquo;Improve performance.&rdquo; Improve from what to what, measured how? An AI agent reading this writes plausibly-fast code that doesn&rsquo;t necessarily move the metric. Always: number, threshold, verification command.</p><h3 id=hidden-assumptions>Hidden assumptions</h3><p>If a senior engineer would &ldquo;just know&rdquo; something, write it down. AI agents don&rsquo;t have hallway conversations. The phrase &ldquo;obviously we&rsquo;d …&rdquo; is a signal you have a hidden assumption — surface it.</p><h3 id=prose-only-specifications>Prose-only specifications</h3><p>A paragraph describing a JSON shape is harder to ground than the JSON shape itself. When in doubt, show the artifact.</p><h3 id=one-prd-to-rule-them-all>One PRD to rule them all</h3><p>A 2000-line PRD is unreviewable, unmaintained, and lies within months. Split aggressively. Reuse shared design docs. PRDs are scoped to <em>projects</em>, not products.</p><h3 id=stale-prds-left-in-the-repo>Stale PRDs left in the repo</h3><p>If a PRD is shipped or abandoned, archive it. Move to <code>docs/prd/archive/</code> with status updated. Otherwise AI agents will keep loading it as if it&rsquo;s current.</p><h3 id=well-write-the-tests-later>&ldquo;We&rsquo;ll write the tests later&rdquo;</h3><p>If the test isn&rsquo;t specified, the requirement isn&rsquo;t real. AI agents will write code that compiles and looks plausible — but without tests as anchors, you can&rsquo;t know if it actually meets the requirement. Specify verification <em>with</em> the requirement.</p><h3 id=no-anti-requirements>No anti-requirements</h3><p>You forgot to say &ldquo;do NOT add an ORM&rdquo; — so the AI added an ORM. The default behavior of AI agents is over-delivery. Anti-requirements are the brakes.</p><h3 id=skipping-the-ai-operating-manual>Skipping the AI operating manual</h3><p>You assumed the AI would &ldquo;just figure out&rdquo; your conventions. Three different agents make three different choices, and your codebase fragments. The AI operating manual is cheap insurance.</p><h3 id=no-demo-script>No demo script</h3><p>You said &ldquo;M3 done when checkout works&rdquo; — but works <em>how</em>? Nobody can verify. A demo script is a 2-minute scripted walkthrough; if you can&rsquo;t write one, the milestone isn&rsquo;t well-defined.</p><hr><h2 id=further-reading>Further reading</h2><ul><li><a class=link href=https://www.rfc-editor.org/rfc/rfc2119 target=_blank rel=noopener>RFC 2119 — Key words for use in RFCs to Indicate Requirement Levels</a></li><li><a class=link href=https://adr.github.io/ target=_blank rel=noopener>ADR GitHub organization — examples and tooling</a></li><li><a class=link href=https://www.industrialempathy.com/posts/design-docs-at-google/ target=_blank rel=noopener>Google&rsquo;s &ldquo;Design Docs at Google&rdquo; essay</a></li><li><a class=link href=https://docs.claude.com/en/docs/claude-code/memory target=_blank rel=noopener>Anthropic&rsquo;s Claude Code documentation on <code>CLAUDE.md</code></a></li></ul><hr><p><em>This is a living document. Improvements welcome — open a PR.</em></p></section><footer class=article-footer><section class=article-tags><a href=/tags/ai-coding/>AI Coding</a>
+<a href=/tags/product-requirements/>Product Requirements</a>
+<a href=/tags/documentation/>Documentation</a></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/agent-driven-development/><div class=article-details><h2 class=article-title>Agent Driven Development</h2></div></a></article><article><a href=/p/on-the-refinement-of-prompts-a-tutorial-composed-in-the-manner-of-victor-hugo/><div class=article-details><h2 class=article-title>On the Refinement of Prompts: A Tutorial Composed in the Manner of Victor Hugo</h2></div></a></article><article><a href=/p/git-workflow-with-code-agents/><div class=article-details><h2 class=article-title>Git Workflow with Code Agents</h2></div></a></article><article><a href=/p/tutorial-building-a-full-stack-web-project-with-claude-code/><div class=article-details><h2 class=article-title>Tutorial: Building a Full-Stack Web Project with Claude Code</h2></div></a></article><article><a href=/p/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/><div class=article-details><h2 class=article-title>项目开发</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2026 tech-ox</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.33.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
