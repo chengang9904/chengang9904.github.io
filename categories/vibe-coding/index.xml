@@ -1,4 +1,204 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vibe-Coding on tech-ox</title><link>http://tech-ox.com/categories/vibe-coding/</link><description>Recent content in Vibe-Coding on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Wed, 06 May 2026 10:50:55 +0800</lastBuildDate><atom:link href="http://tech-ox.com/categories/vibe-coding/index.xml" rel="self" type="application/rss+xml"/><item><title>Tutorial: Building a Full-Stack Web Project with Claude Code</title><link>http://tech-ox.com/p/tutorial-building-a-full-stack-web-project-with-claude-code/</link><pubDate>Wed, 06 May 2026 10:50:55 +0800</pubDate><guid>http://tech-ox.com/p/tutorial-building-a-full-stack-web-project-with-claude-code/</guid><description>&lt;h1 id="building-a-full-stack-web-project-with-claude-code"&gt;Building a Full-Stack Web Project with Claude Code
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vibe-Coding on tech-ox</title><link>http://tech-ox.com/categories/vibe-coding/</link><description>Recent content in Vibe-Coding on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Fri, 08 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://tech-ox.com/categories/vibe-coding/index.xml" rel="self" type="application/rss+xml"/><item><title>Git Workflow with Code Agents</title><link>http://tech-ox.com/p/git-workflow-with-code-agents/</link><pubDate>Fri, 08 May 2026 00:00:00 +0000</pubDate><guid>http://tech-ox.com/p/git-workflow-with-code-agents/</guid><description>&lt;h2 id="why-this-guide-exists"&gt;Why this guide exists
+&lt;/h2&gt;&lt;p&gt;Code agents change the economics of writing code: they produce diffs fast, sometimes faster than you can read them. That makes the &lt;em&gt;Git workflow around the agent&lt;/em&gt; — how you isolate its work, review it, and integrate it — more important than the workflow you&amp;rsquo;d use working solo.&lt;/p&gt;
+&lt;p&gt;This tutorial walks through a practical setup: how to use branches, when worktrees help, whether you need a &lt;code&gt;dev&lt;/code&gt; branch, and how to land agent-authored work on &lt;code&gt;main&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="core-principles"&gt;Core principles
+&lt;/h2&gt;&lt;p&gt;Four rules that pay for themselves on every agent session:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Protect &lt;code&gt;main&lt;/code&gt;.&lt;/strong&gt; Agents never commit or push directly. All work lands via a PR you review. Configure branch protection: required PR review, required CI, no force-push.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;One task = one branch.&lt;/strong&gt; Each agent session gets its own short-lived branch. If the agent goes off the rails, you throw the branch away with no blast radius.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Commit checkpoints frequently.&lt;/strong&gt; Small, atomic commits during development let you &lt;code&gt;git bisect&lt;/code&gt;, revert, or cherry-pick when an agent makes a bad turn three steps in. Don&amp;rsquo;t let the agent pile 2,000 LOC into one commit.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Review the diff, not the agent&amp;rsquo;s summary.&lt;/strong&gt; Agents reliably overstate what they did. &lt;code&gt;git diff main...HEAD&lt;/code&gt; is ground truth.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="branch-layout"&gt;Branch layout
+&lt;/h2&gt;&lt;p&gt;A simple, flat layout works for almost every project:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Branch&lt;/th&gt;
+&lt;th&gt;Purpose&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;main&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Always green, deployable. Protected.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;feat/&amp;lt;short-desc&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;New feature work.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fix/&amp;lt;bug&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Bug fixes.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;refactor/&amp;lt;area&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Refactors with no behavior change.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;agent/&amp;lt;task&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Optional prefix for branches an agent originated, if you want it tagged.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Naming with a prefix makes it obvious at a glance which branches are real work and which are agent-driven experiments.&lt;/p&gt;
+&lt;h3 id="throwaway--spike-branches"&gt;Throwaway / spike branches
+&lt;/h3&gt;&lt;p&gt;When you let an agent explore an approach you may not keep, branch off &lt;code&gt;main&lt;/code&gt;, expect to discard the branch, and don&amp;rsquo;t bother polishing history. The whole point is that the branch is cheap.&lt;/p&gt;
+&lt;h2 id="do-you-need-a-dev-branch"&gt;Do you need a &lt;code&gt;dev&lt;/code&gt; branch?
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;For most projects, no.&lt;/strong&gt; A &lt;code&gt;dev&lt;/code&gt; branch is a holdover from Git Flow that adds overhead modern workflows rarely need.&lt;/p&gt;
+&lt;h3 id="skip-it-when"&gt;Skip it when
+&lt;/h3&gt;&lt;p&gt;You do trunk-based development: short-lived feature branches → PR → &lt;code&gt;main&lt;/code&gt;. Your safety comes from CI, PR review, and feature flags — not from a second integration branch. This is the default for SaaS, web apps, internal tooling, and most agent-driven workflows.&lt;/p&gt;
+&lt;h3 id="keep-it-when"&gt;Keep it when
+&lt;/h3&gt;&lt;p&gt;A staging branch earns its keep in a few specific cases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Versioned releases with a QA gate.&lt;/strong&gt; Tagged releases for desktop apps, libraries, mobile, or embedded — features integrate and get tested together before being cut.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Strict separation between &amp;ldquo;merged&amp;rdquo; and &amp;ldquo;deployed.&amp;rdquo;&lt;/strong&gt; When &lt;code&gt;main&lt;/code&gt; must reflect exactly what&amp;rsquo;s live in production and you can&amp;rsquo;t use tags or environment branches.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Many contributors with slow review cycles.&lt;/strong&gt; Though feature flags usually solve this better than an extra branch.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Rule of thumb:&lt;/strong&gt; if you can&amp;rsquo;t name a concrete thing &lt;code&gt;dev&lt;/code&gt; would protect against that CI + PR review + feature flags don&amp;rsquo;t already handle, you don&amp;rsquo;t need it.&lt;/p&gt;
+&lt;h2 id="worktrees-for-parallel-agents"&gt;Worktrees for parallel agents
+&lt;/h2&gt;&lt;p&gt;When you run multiple agents simultaneously, a single working directory becomes a contention point: agents fight over the working tree, lockfiles, &lt;code&gt;node_modules&lt;/code&gt;, and build output.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git worktree&lt;/code&gt; solves this — it lets you check out multiple branches into separate directories from the same repository:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# from your main repo directory&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git worktree add ../card-flow-feat-auth feat/auth
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git worktree add ../card-flow-fix-cache fix/cache-bug
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# each agent works in its own directory, on its own branch&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# shared .git, independent working trees&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;When the branch is merged or abandoned, remove the worktree:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git worktree remove ../card-flow-feat-auth
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Claude Code&amp;rsquo;s &lt;code&gt;Agent&lt;/code&gt; tool supports &lt;code&gt;isolation: &amp;quot;worktree&amp;quot;&lt;/code&gt; for exactly this reason — it spins up an isolated worktree per agent automatically.&lt;/p&gt;
+&lt;h2 id="merging-worktree-branches-merge-or-rebase"&gt;Merging worktree branches: merge or rebase?
+&lt;/h2&gt;&lt;p&gt;Worktrees don&amp;rsquo;t change the integration question — they&amp;rsquo;re just a way to have multiple branches checked out at once. The merge/rebase decision is the same as for any feature branch. You have three options:&lt;/p&gt;
+&lt;h3 id="1-squash-merge--recommended-default-for-agent-work"&gt;1. Squash-merge — recommended default for agent work
+&lt;/h3&gt;&lt;p&gt;Collapse the whole feature branch into one commit on &lt;code&gt;main&lt;/code&gt;. The granular checkpoint commits the agent produced were useful for &lt;em&gt;your&lt;/em&gt; bisect/revert safety during development; they&amp;rsquo;re noise in &lt;code&gt;main&lt;/code&gt;&amp;rsquo;s history.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout main
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git merge --squash feat/auth
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &lt;span class="s2"&gt;&amp;#34;feat(auth): add OAuth login flow&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Or via GitHub: use &lt;strong&gt;Squash and merge&lt;/strong&gt; as the default merge strategy.&lt;/p&gt;
+&lt;h3 id="2-rebase--fast-forward"&gt;2. Rebase + fast-forward
+&lt;/h3&gt;&lt;p&gt;Replay each commit onto the tip of &lt;code&gt;main&lt;/code&gt;, then fast-forward. Linear history with every commit preserved. Only worth it if the individual commits are themselves meaningful — which agent-authored commits usually aren&amp;rsquo;t.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout feat/auth
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git rebase main
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout main
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git merge --ff-only feat/auth
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="3-merge-commit---no-ff"&gt;3. Merge commit (&lt;code&gt;--no-ff&lt;/code&gt;)
+&lt;/h3&gt;&lt;p&gt;Preserves the branch topology with an explicit merge commit. Useful when you want to see &amp;ldquo;this group of commits landed together,&amp;rdquo; but creates a busier history. Most teams have moved away from this for feature work.&lt;/p&gt;
+&lt;h3 id="what-id-actually-do"&gt;What I&amp;rsquo;d actually do
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Rebase your branch onto &lt;code&gt;main&lt;/code&gt; &lt;em&gt;before&lt;/em&gt; merging&lt;/strong&gt; to resolve conflicts on your branch (not in a merge commit) and ensure CI runs against the version that will actually land.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Then squash-merge&lt;/strong&gt; for features and bug fixes. One commit per PR on &lt;code&gt;main&lt;/code&gt;, with a clean message.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Exception:&lt;/strong&gt; if a PR genuinely contains multiple independent logical changes you want preserved, either split it into multiple PRs (preferred) or rebase-merge to keep the individual commits.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So the combo: &lt;strong&gt;rebase onto &lt;code&gt;main&lt;/code&gt; to update, squash-merge to land.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="donts"&gt;Don&amp;rsquo;ts
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Don&amp;rsquo;t rebase a branch someone else is working on&lt;/strong&gt; — including another agent in another worktree. Rebasing rewrites history; anyone with the old commits will have a bad time. Rebase is safe only on branches you own.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Don&amp;rsquo;t merge &lt;code&gt;main&lt;/code&gt; &lt;em&gt;into&lt;/em&gt; your feature branch&lt;/strong&gt; to &amp;ldquo;catch up.&amp;rdquo; It pollutes the branch with merge commits and makes the eventual diff harder to read. Rebase onto &lt;code&gt;main&lt;/code&gt; instead.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Don&amp;rsquo;t let agents bypass pre-commit hooks&lt;/strong&gt; with &lt;code&gt;--no-verify&lt;/code&gt;. Hooks (lint, typecheck, tests) catch a large fraction of agent slop before it commits.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Don&amp;rsquo;t trust the agent&amp;rsquo;s PR summary over the diff.&lt;/strong&gt; Read the diff. Always.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Don&amp;rsquo;t let agents force-push shared branches.&lt;/strong&gt; Force-push on a private feature branch is fine; on anything anyone else touches, it&amp;rsquo;s not.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="putting-it-together"&gt;Putting it together
+&lt;/h2&gt;&lt;p&gt;A complete agent-driven feature flow:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 1. create an isolated worktree for the agent&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git worktree add ../proj-feat-search feat/search
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 2. agent works in ../proj-feat-search, making checkpoint commits&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 3. before opening a PR: rebase onto main&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ../proj-feat-search
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git fetch origin
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git rebase origin/main
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 4. push and open a PR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push -u origin feat/search
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;gh pr create
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 5. review the diff (not the summary), let CI run&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 6. squash-merge via the PR UI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 7. clean up&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ../proj
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git worktree remove ../proj-feat-search
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git branch -d feat/search
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;That&amp;rsquo;s the whole loop. Short-lived isolated branches, checkpoint commits during development, rebase to update, squash to land.&lt;/p&gt;
+&lt;h2 id="further-reading"&gt;Further reading
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://git-scm.com/docs/git-worktree" target="_blank" rel="noopener"
+&gt;Pro Git — Git Worktree&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://trunkbaseddevelopment.com/" target="_blank" rel="noopener"
+&gt;Trunk-Based Development&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://docs.github.com/en/get-started/using-github/github-flow" target="_blank" rel="noopener"
+&gt;GitHub Flow&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Tutorial: Building a Full-Stack Web Project with Claude Code</title><link>http://tech-ox.com/p/tutorial-building-a-full-stack-web-project-with-claude-code/</link><pubDate>Wed, 06 May 2026 10:50:55 +0800</pubDate><guid>http://tech-ox.com/p/tutorial-building-a-full-stack-web-project-with-claude-code/</guid><description>&lt;h1 id="building-a-full-stack-web-project-with-claude-code"&gt;Building a Full-Stack Web Project with Claude Code
 &lt;/h1&gt;&lt;p&gt;A concrete, session-by-session walk-through of using Claude Code as a co-developer on a real, multi-module web application — designed around context-window constraints rather than against them.&lt;/p&gt;
 &lt;p&gt;The example project is &lt;strong&gt;FocusBoard&lt;/strong&gt;, a team kanban with time tracking and reports. It&amp;rsquo;s big enough to demonstrate the workflow but small enough to be specific.&lt;/p&gt;
 &lt;hr&gt;
