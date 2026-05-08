@@ -1,0 +1,1559 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="A practical tutorial for building large-scale web projects with code agents (Claude Code and similar)."><title>Agent Driven Development</title><link rel=canonical href=http://tech-ox.com/p/agent-driven-development/><link rel=stylesheet href=/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css><meta property='og:title' content="Agent Driven Development"><meta property='og:description' content="A practical tutorial for building large-scale web projects with code agents (Claude Code and similar)."><meta property='og:url' content='http://tech-ox.com/p/agent-driven-development/'><meta property='og:site_name' content='tech-ox'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='agents'><meta property='article:tag' content='claude-code'><meta property='article:tag' content='development'><meta property='article:tag' content='best-practices'><meta property='article:published_time' content='2026-05-08T04:12:12-07:00'><meta property='article:modified_time' content='2026-05-08T04:12:12-07:00'><meta name=twitter:title content="Agent Driven Development"><meta name=twitter:description content="A practical tutorial for building large-scale web projects with code agents (Claude Code and similar)."><link rel="shortcut icon" href=/favicon.svg></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_1e03ac8a4528f217.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>😊</span></figure><div class=site-meta><h1 class=site-name><a href=/>tech-ox</a></h1><h2 class=site-description>记录技术与生活点滴</h2></div></header><ol class=menu-social><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>友情链接</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#introduction>Introduction</a><ol><li><a href=#what-this-is>What this is</a></li><li><a href=#who-its-for>Who it&rsquo;s for</a></li><li><a href=#the-thesis>The thesis</a></li></ol></li><li><a href=#part-1-the-mental-model>Part 1: The Mental Model</a><ol><li><a href=#the-development-loop>The development loop</a></li><li><a href=#the-three-meta-rules>The three meta-rules</a></li><li><a href=#the-fix-upstream-principle>The fix-upstream principle</a></li></ol></li><li><a href=#part-2-setting-up-the-system>Part 2: Setting Up the System</a><ol><li><a href=#claudemd-hierarchy>CLAUDE.md hierarchy</a><ol><li><a href=#root-claudemd--the-always-loaded-file>Root <code>CLAUDE.md</code> — the always-loaded file</a></li><li><a href=#subdirectory-claudemd--loaded-only-when-working-there>Subdirectory <code>CLAUDE.md</code> — loaded only when working there</a></li></ol></li><li><a href=#the-specs-system>The <code>specs/</code> system</a><ol><li><a href=#directory-structure>Directory structure</a></li><li><a href=#the-spec-template>The spec template</a></li><li><a href=#spec-quality-bar>Spec quality bar</a></li></ol></li><li><a href=#plans-vs-specs>Plans vs specs</a></li><li><a href=#architecture-decision-records-adrs>Architecture Decision Records (ADRs)</a></li><li><a href=#claude-configuration><code>.claude/</code> configuration</a><ol><li><a href=#permissions-claudesettingsjson>Permissions (<code>.claude/settings.json</code>)</a></li><li><a href=#hooks>Hooks</a></li><li><a href=#slash-commands-claudecommands>Slash commands (<code>.claude/commands/</code>)</a></li></ol></li></ol></li><li><a href=#part-3-the-daily-workflow>Part 3: The Daily Workflow</a><ol><li><a href=#step-1--from-idea-to-spec>Step 1 — From idea to spec</a></li><li><a href=#step-2--from-spec-to-plan>Step 2 — From spec to plan</a></li><li><a href=#step-3--implementation>Step 3 — Implementation</a></li><li><a href=#step-4--verification>Step 4 — Verification</a></li><li><a href=#step-5--review-and-ship>Step 5 — Review and ship</a></li><li><a href=#the-notesmd-artifact>The <code>notes.md</code> artifact</a></li></ol></li><li><a href=#part-4-working-effectively-with-agents>Part 4: Working Effectively with Agents</a><ol><li><a href=#prompt-engineering-basics>Prompt engineering basics</a><ol><li><a href=#the-implementation-prompt-shape>The implementation prompt shape</a></li><li><a href=#the-investigation-prompt-shape>The investigation prompt shape</a></li><li><a href=#anti-patterns-in-prompts>Anti-patterns in prompts</a></li></ol></li><li><a href=#context-management>Context management</a><ol><li><a href=#detecting-bloat>Detecting bloat</a></li><li><a href=#strategies>Strategies</a></li></ol></li><li><a href=#communication-patterns>Communication patterns</a><ol><li><a href=#calibrated-uncertainty>Calibrated uncertainty</a></li><li><a href=#the-explain-it-back-pattern>The &ldquo;explain it back&rdquo; pattern</a></li><li><a href=#productive-disagreement>Productive disagreement</a></li><li><a href=#when-to-interrupt>When to interrupt</a></li></ol></li><li><a href=#multi-agent-coordination>Multi-agent coordination</a><ol><li><a href=#collision-modes>Collision modes</a></li><li><a href=#coordination-protocol>Coordination protocol</a></li><li><a href=#when-parallel-makes-sense>When parallel makes sense</a></li></ol></li></ol></li><li><a href=#part-5-code-structure-that-helps-agents>Part 5: Code Structure That Helps Agents</a><ol><li><a href=#co-located-tests>Co-located tests</a></li><li><a href=#explicit-module-boundaries>Explicit module boundaries</a></li><li><a href=#shallow-trees-over-deep-ones>Shallow trees over deep ones</a></li><li><a href=#predictable-file-shapes>Predictable file shapes</a></li><li><a href=#type-first-interfaces>Type-first interfaces</a></li><li><a href=#avoid-magic>Avoid magic</a></li><li><a href=#index-files-for-large-modules>Index files for large modules</a></li></ol></li><li><a href=#part-6-conventions-worth-standardizing>Part 6: Conventions Worth Standardizing</a><ol><li><a href=#performance-and-accessibility-budgets>Performance and accessibility budgets</a></li><li><a href=#security-and-authentication>Security and authentication</a><ol><li><a href=#security-checklist-for-auth-touching-prs>Security checklist for auth-touching PRs</a></li></ol></li><li><a href=#database-and-migrations>Database and migrations</a></li><li><a href=#state-management>State management</a></li><li><a href=#forms>Forms</a></li><li><a href=#observability>Observability</a></li></ol></li><li><a href=#part-7-the-refactor-playbook>Part 7: The Refactor Playbook</a><ol><li><a href=#strangler-fig-not-big-bang>Strangler fig, not big bang</a></li><li><a href=#make-the-new-path-opt-in-via-flag>Make the new path opt-in via flag</a></li><li><a href=#tests-as-the-contract>Tests as the contract</a></li><li><a href=#type-driven-extraction>Type-driven extraction</a></li><li><a href=#one-pattern-at-a-time>One pattern at a time</a></li><li><a href=#codemod-for-mechanical-agent-for-judgment>Codemod for mechanical, agent for judgment</a></li><li><a href=#boundary-first-for-legacy-code>Boundary first for legacy code</a></li><li><a href=#refactor-ledger>Refactor ledger</a></li></ol></li><li><a href=#part-8-anti-patterns>Part 8: Anti-Patterns</a><ol><li><a href=#failure-recovery>Failure recovery</a><ol><li><a href=#triage-first>Triage first</a></li><li><a href=#when-to-revert>When to revert</a></li><li><a href=#how-to-revert-without-losing-learning>How to revert without losing learning</a></li><li><a href=#when-the-agent-gets-stuck-in-a-loop>When the agent gets stuck in a loop</a></li></ol></li></ol></li><li><a href=#part-9-maintaining-the-system>Part 9: Maintaining the System</a><ol><li><a href=#daily-rhythm>Daily rhythm</a></li><li><a href=#friday-hygiene>Friday hygiene</a></li><li><a href=#quarterly-pruning>Quarterly pruning</a></li><li><a href=#annual-audit>Annual audit</a></li><li><a href=#continuous-evolution>Continuous evolution</a></li></ol></li><li><a href=#appendix-a-templates>Appendix A: Templates</a><ol><li><a href=#spec-template>Spec template</a></li><li><a href=#plan-template>Plan template</a></li><li><a href=#bug-spec-template>Bug spec template</a></li><li><a href=#adr-template>ADR template</a></li><li><a href=#postmortem-template>Postmortem template</a></li></ol></li><li><a href=#appendix-b-scripts>Appendix B: Scripts</a><ol><li><a href=#scriptsvalidate-specjs><code>scripts/validate-spec.js</code></a></li><li><a href=#scriptscheck-test-disciplinesh><code>scripts/check-test-discipline.sh</code></a></li><li><a href=#scriptscheck-not-mainsh><code>scripts/check-not-main.sh</code></a></li></ol></li><li><a href=#appendix-c-definition-of-ready--done>Appendix C: Definition of Ready / Done</a><ol><li><a href=#definition-of-ready>Definition of Ready</a></li><li><a href=#definition-of-done>Definition of Done</a></li></ol></li><li><a href=#appendix-d-onboarding-checklist>Appendix D: Onboarding Checklist</a><ol><li><a href=#day-1-reading-list>Day 1 reading list</a></li><li><a href=#day-1-doing>Day 1 doing</a></li><li><a href=#first-week-milestones>First-week milestones</a></li><li><a href=#what-new-people-get-wrong>What new people get wrong</a></li></ol></li><li><a href=#appendix-e-where-to-start>Appendix E: Where to Start</a></li><li><a href=#closing-thought>Closing thought</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/vibe-coding/>Vibe-Coding</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/agent-driven-development/>Agent Driven Development</a></h2><h3 class=article-subtitle>A practical tutorial for building large-scale web projects with code agents (Claude Code and similar).</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2026-05-08T04:12:12-07:00>May 08, 2026</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 35 分钟</time></div></footer></div></header><section class=article-content><p>A complete guide to building large-scale web projects with code agents (Claude Code and similar). Read top to bottom; each section builds on the last.</p><hr><h2 id=introduction>Introduction</h2><h3 id=what-this-is>What this is</h3><p>A practical handbook for engineering teams using code agents seriously — not as autocomplete, but as the primary interface for writing and reviewing code. It assumes you have an agent and a non-trivial codebase. It covers what to build <em>around</em> the agent so the agent produces consistently good work.</p><h3 id=who-its-for>Who it&rsquo;s for</h3><ul><li>Tech leads setting up agent workflows for a team</li><li>Senior engineers on agent-driven projects who want fewer surprises</li><li>Anyone running a long-running refactor or migration with an agent</li></ul><h3 id=the-thesis>The thesis</h3><blockquote><p>Most agent-driven productivity comes from infrastructure, not prompting. Better prompts produce slightly better output. Better infrastructure — clear specs, layered conventions, hooks, ADRs, validation scripts — produces dramatically better output, consistently, across every session.</p></blockquote><p>A team that invests one week in infrastructure typically produces 2-3x more shippable code per agent-hour over the next quarter than a team with the same agent and no infrastructure. The infrastructure compounds. The prompting doesn&rsquo;t.</p><hr><h2 id=part-1-the-mental-model>Part 1: The Mental Model</h2><h3 id=the-development-loop>The development loop</h3><p>Every agent-driven feature follows this loop:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>intent → spec → plan → implementation → verification → review → merge
+</span></span><span class=line><span class=cl>       ↑                                                            │
+</span></span><span class=line><span class=cl>       └────────────────── learnings (memory, conventions) ─────────┘
+</span></span></code></pre></td></tr></table></div></div><p>Each arrow is a place errors compound. The mistake most teams make is collapsing <code>spec → plan → implementation</code> into a single prompt — the agent designs while it codes, and you can&rsquo;t tell where it went wrong. Keep these as separate artifacts in separate turns.</p><p>For trivial work (rename, bug fix, docs), skip to implementation. For anything touching > 3 files or > 1 module, run the full loop.</p><h3 id=the-three-meta-rules>The three meta-rules</h3><p>These compound across every section that follows:</p><p><strong>1. Optimize for legibility, not cleverness.</strong> Every choice — naming, structure, abstraction level — should privilege &ldquo;easy for the next reader to understand&rdquo; over &ldquo;elegant by some other metric.&rdquo; Agents are readers too, and clear code makes them better.</p><p><strong>2. Make the right thing easy and the wrong thing hard.</strong> If a convention requires constant vigilance, it will fail. Encode it in linters, hooks, types, or directory structure. The agent should fall into the right pattern by default.</p><p><strong>3. Treat your agent setup as a first-class part of the codebase.</strong> <code>CLAUDE.md</code>, <code>specs/</code>, <code>.claude/</code>, <code>docs/adr/</code> — these are not &ldquo;documentation,&rdquo; they are <em>infrastructure</em>. They get reviewed, refactored, and improved like any other code. Bad infrastructure produces bad output, even with great agents.</p><h3 id=the-fix-upstream-principle>The fix-upstream principle</h3><p>If something feels broken, the fix is almost always upstream of where the symptom appears:</p><ul><li>Bad code? Look at the prompt.</li><li>Bad prompt? Look at the plan.</li><li>Bad plan? Look at the spec.</li><li>Bad spec? Look at the conventions and <code>CLAUDE.md</code>.</li><li>Wrong conventions? Look at the project&rsquo;s actual goals.</li></ul><hr><h2 id=part-2-setting-up-the-system>Part 2: Setting Up the System</h2><h3 id=claudemd-hierarchy>CLAUDE.md hierarchy</h3><p>Claude Code auto-loads <code>CLAUDE.md</code> from the working directory and every parent up to the repo root. Use this to put context where it&rsquo;s needed, not all at the root.</p><h4 id=root-claudemd--the-always-loaded-file>Root <code>CLAUDE.md</code> — the always-loaded file</h4><p>Keep it under ~150 lines. Answer &ldquo;what is this and what are the global rules&rdquo;:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gh># project-name
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Stack: Next.js 14 (App Router) + TypeScript + Tailwind.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Commands
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`pnpm dev`</span> — local dev (port 3000)
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`pnpm test`</span> — Vitest
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`pnpm typecheck`</span> — <span class=sb>`tsc --noEmit`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`pnpm lint`</span> — ESLint, must pass before commit
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Conventions
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Server Components by default; mark client only when needed
+</span></span><span class=line><span class=cl><span class=k>-</span> API routes in <span class=sb>`app/api/**/route.ts`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Shared types in <span class=sb>`types/`</span>, never duplicate
+</span></span><span class=line><span class=cl><span class=k>-</span> Tailwind only — no CSS modules
+</span></span><span class=line><span class=cl><span class=k>-</span> No default exports except Next.js page/layout/route files
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Hard rules
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Never edit <span class=sb>`app/legacy/**`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Never run migrations without <span class=sb>`--dry-run`</span> first
+</span></span><span class=line><span class=cl><span class=k>-</span> Never commit without <span class=sb>`pnpm typecheck &amp;&amp; pnpm lint`</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Where to look
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Architecture decisions: <span class=sb>`docs/adr/`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Active specs: <span class=sb>`specs/active/`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Module-specific rules: each module has its own CLAUDE.md
+</span></span></code></pre></td></tr></table></div></div><p>What does <strong>not</strong> belong in root <code>CLAUDE.md</code>:</p><ul><li>File listings or directory trees (the agent can list)</li><li>Code style minutiae (the linter enforces this)</li><li>Git history (use <code>git log</code>)</li><li>Module-specific rules (push them down to subdirectory <code>CLAUDE.md</code>)</li></ul><h4 id=subdirectory-claudemd--loaded-only-when-working-there>Subdirectory <code>CLAUDE.md</code> — loaded only when working there</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>app/api/CLAUDE.md          # API route conventions, error shape, auth
+</span></span><span class=line><span class=cl>components/CLAUDE.md       # component patterns, prop typing rules
+</span></span><span class=line><span class=cl>lib/db/CLAUDE.md           # query patterns, transaction rules
+</span></span><span class=line><span class=cl>specs/CLAUDE.md            # how specs work, where the template is
+</span></span></code></pre></td></tr></table></div></div><p>A line like &ldquo;all queries in this directory must go through <code>withTransaction()</code>&rdquo; in <code>lib/db/CLAUDE.md</code> prevents an entire class of agent mistakes — without bloating the root file every other agent invocation reads.</p><h3 id=the-specs-system>The <code>specs/</code> system</h3><p>A spec is your one chance to disambiguate before the agent makes irreversible-feeling choices. Without a spec, the agent will confidently produce 800 lines of code that solve the wrong problem.</p><h4 id=directory-structure>Directory structure</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>specs/
+</span></span><span class=line><span class=cl>  README.md                       # legend, lifecycle, ownership
+</span></span><span class=line><span class=cl>  CLAUDE.md                       # tells the agent how specs work here
+</span></span><span class=line><span class=cl>  _template/
+</span></span><span class=line><span class=cl>    spec.md                       # canonical spec template
+</span></span><span class=line><span class=cl>    plan.md                       # canonical plan template
+</span></span><span class=line><span class=cl>    notes.md                      # canonical notes template
+</span></span><span class=line><span class=cl>  conventions/                    # cross-cutting rules
+</span></span><span class=line><span class=cl>    coding-style.md
+</span></span><span class=line><span class=cl>    api-contracts.md
+</span></span><span class=line><span class=cl>    testing.md
+</span></span><span class=line><span class=cl>    accessibility.md
+</span></span><span class=line><span class=cl>    security.md
+</span></span><span class=line><span class=cl>  draft/                          # being written, NOT for implementation
+</span></span><span class=line><span class=cl>  active/                         # approved, currently being built
+</span></span><span class=line><span class=cl>    2026-05-08-card-detail-redesign/
+</span></span><span class=line><span class=cl>      spec.md
+</span></span><span class=line><span class=cl>      plan.md
+</span></span><span class=line><span class=cl>      notes.md
+</span></span><span class=line><span class=cl>      assets/
+</span></span><span class=line><span class=cl>  blocked/                        # approved but waiting on something
+</span></span><span class=line><span class=cl>  done/                           # completed, kept for reference
+</span></span><span class=line><span class=cl>  archive/                        # rejected or deferred
+</span></span></code></pre></td></tr></table></div></div><p>Why this shape:</p><ul><li><strong>Lifecycle folders</strong> are a cheap state machine. The agent can tell from the path whether a spec is authoritative.</li><li><strong>Folder-per-active-spec</strong> keeps plans, notes, and assets scoped.</li><li><strong>Date-prefixed slugs</strong> sort chronologically and read well in <code>git log</code>.</li><li><strong><code>_template/</code></strong> ensures specs don&rsquo;t drift in shape.</li><li><strong><code>conventions/</code></strong> is referenced by specs, not copied into them.</li><li><strong><code>archive/</code> keeps rejections</strong> — when the same idea comes up again, the reasoning is one grep away.</li></ul><h4 id=the-spec-template>The spec template</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>title: &lt;Short Title&gt;
+</span></span><span class=line><span class=cl>slug: &lt;YYYY-MM-DD&gt;-&lt;kebab-slug&gt;
+</span></span><span class=line><span class=cl>status: draft | active | done | archived
+</span></span><span class=line><span class=cl>owner: &lt;person&gt;
+</span></span><span class=line><span class=cl>created: &lt;YYYY-MM-DD&gt;
+</span></span><span class=line><span class=cl>target: &lt;YYYY-MM-DD&gt;
+</span></span><span class=line><span class=cl>related:
+</span></span><span class=line><span class=cl>  <span class=k>-</span> specs/done/...
+</span></span><span class=line><span class=cl>conventions:
+</span></span><span class=line><span class=cl>  <span class=k>-</span> specs/conventions/...
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Problem
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>One paragraph. What is broken or missing today, and for whom. Include
+</span></span><span class=line><span class=cl>metrics or quotes if you have them. No solutions yet.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Goals
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Bulleted, measurable. Each goal should be verifiable after the fact.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Non-Goals
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gs>**The most important section.**</span> List things a reasonable reader might
+</span></span><span class=line><span class=cl>assume are in scope, and rule them out.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Approach
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>2–5 paragraphs. Shape of the solution, not the implementation. Name the
+</span></span><span class=line><span class=cl>modules that will change. Call out the risky parts.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Acceptance Criteria
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Numbered, testable. These become the test plan.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> &lt;criterion&gt;
+</span></span><span class=line><span class=cl><span class=k>2.</span> &lt;criterion&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Open Questions
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Things you don&#39;t know yet. Better to ship a spec with open questions
+</span></span><span class=line><span class=cl>than to bake in the wrong assumption.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Rollout
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>How this ships. Flag? Staged? What&#39;s the kill switch?
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Out of scope but worth noting
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Adjacent ideas that came up. Not committed; recorded so they don&#39;t
+</span></span><span class=line><span class=cl>get lost.
+</span></span></code></pre></td></tr></table></div></div><h4 id=spec-quality-bar>Spec quality bar</h4><p>A good spec lets you predict what code the agent will produce before it produces it. That&rsquo;s the bar.</p><p>Rules of thumb:</p><ul><li>Short. A two-page spec gets read; a ten-page spec gets skimmed.</li><li>Concrete acceptance criteria. &ldquo;User can archive a card&rdquo; is bad. &ldquo;Clicking archive sets <code>archived_at</code>, removes the card from the list within 200ms, and shows an undo toast for 5s&rdquo; is good.</li><li>Honest non-goals. If you&rsquo;re tempted to write &ldquo;we may also redesign X,&rdquo; either commit or rule it out. Maybe-scope is poison.</li><li>Linked, not embedded, conventions. Reference <code>specs/conventions/testing.md</code>; don&rsquo;t copy it.</li></ul><h3 id=plans-vs-specs>Plans vs specs</h3><p>The <strong>spec</strong> answers &ldquo;what and why.&rdquo; The <strong>plan</strong> answers &ldquo;how, in what order.&rdquo; A plan is generated <em>after</em> the spec is approved.</p><p>Plan template:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>spec: spec.md
+</span></span><span class=line><span class=cl>created: &lt;YYYY-MM-DD&gt;
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Files to change
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> &lt;path&gt; — &lt;change summary&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Order (each step independently reviewable)
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> &lt;step&gt;
+</span></span><span class=line><span class=cl><span class=k>2.</span> &lt;step&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Risks
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> &lt;risk and mitigation&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## What this plan does NOT do
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> &lt;out of scope from spec&gt;
+</span></span></code></pre></td></tr></table></div></div><p>The plan is what you hand the agent for implementation. It&rsquo;s specific enough that you can sanity-check the diff against it.</p><h3 id=architecture-decision-records-adrs>Architecture Decision Records (ADRs)</h3><p>Specs say <em>what</em> to build. ADRs say <em>why</em> we build that way.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>docs/adr/
+</span></span><span class=line><span class=cl>  README.md
+</span></span><span class=line><span class=cl>  _template.md
+</span></span><span class=line><span class=cl>  0001-use-app-router.md
+</span></span><span class=line><span class=cl>  0002-zustand-for-client-state.md
+</span></span><span class=line><span class=cl>  0003-react-query-for-server-state.md
+</span></span><span class=line><span class=cl>  0004-server-actions-over-trpc.md
+</span></span><span class=line><span class=cl>  0005-tailwind-only.md
+</span></span></code></pre></td></tr></table></div></div><p>ADR template:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>id: &lt;id&gt;
+</span></span><span class=line><span class=cl>title: &lt;title&gt;
+</span></span><span class=line><span class=cl>status: accepted | superseded | deprecated
+</span></span><span class=line><span class=cl>date: &lt;YYYY-MM-DD&gt;
+</span></span><span class=line><span class=cl>supersedes: &lt;id, if applicable&gt;
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Context
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>What forces are at play. What we considered. Why this needs deciding now.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Decision
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>What we chose. One paragraph, declarative.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Consequences
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Positive, negative, neutral. The &#34;negative&#34; section is the most
+</span></span><span class=line><span class=cl>important — that&#39;s what the next person needs to know.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Alternatives considered
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> &lt;option&gt;: why rejected
+</span></span></code></pre></td></tr></table></div></div><p>When to write an ADR:</p><ul><li>Any choice that took > 1 hour of discussion</li><li>Any choice that locks out alternatives</li><li>Any choice that contradicts an industry default</li><li>Any choice future agents will second-guess</li></ul><p>When the agent proposes &ldquo;let&rsquo;s use Recoil for this state,&rdquo; you don&rsquo;t argue from memory — you point to ADR-0002 (&ldquo;Zustand for client state&rdquo;) and say &ldquo;doesn&rsquo;t fit our convention; if you think we should change, write a superseding ADR first.&rdquo;</p><h3 id=claude-configuration><code>.claude/</code> configuration</h3><h4 id=permissions-claudesettingsjson>Permissions (<code>.claude/settings.json</code>)</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;permissions&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;allow&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;Bash(pnpm test:*)&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;Bash(pnpm typecheck)&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;Bash(pnpm lint)&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;Bash(pnpm build)&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;Bash(git status)&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;Bash(git diff:*)&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;Bash(git log:*)&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;Bash(gh pr view:*)&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;Bash(gh pr list:*)&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;ask&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;Bash(git push:*)&#34;</span><span class=p>,</span> <span class=s2>&#34;Bash(gh pr create:*)&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;deny&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;Bash(git push --force*)&#34;</span><span class=p>,</span> <span class=s2>&#34;Bash(rm -rf*)&#34;</span><span class=p>,</span> <span class=s2>&#34;Bash(pnpm publish*)&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Read-only and idempotent commands shouldn&rsquo;t prompt. The <code>fewer-permission-prompts</code> skill scans your transcripts and suggests these — run it monthly.</p><h4 id=hooks>Hooks</h4><p>Hooks run on harness events and are the only way to <em>enforce</em> automated behavior — not memory, not preferences.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;hooks&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;PostToolUse&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;matcher&#34;</span><span class=p>:</span> <span class=p>{</span> <span class=nt>&#34;tool&#34;</span><span class=p>:</span> <span class=s2>&#34;Edit&#34;</span><span class=p>,</span> <span class=nt>&#34;pathGlob&#34;</span><span class=p>:</span> <span class=s2>&#34;**/*.{ts,tsx}&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;command&#34;</span><span class=p>:</span> <span class=s2>&#34;pnpm typecheck --pretty 2&gt;&amp;1 | tail -50&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;outputBehavior&#34;</span><span class=p>:</span> <span class=s2>&#34;feed-to-claude-on-failure&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;matcher&#34;</span><span class=p>:</span> <span class=p>{</span> <span class=nt>&#34;tool&#34;</span><span class=p>:</span> <span class=s2>&#34;Write&#34;</span><span class=p>,</span> <span class=nt>&#34;pathGlob&#34;</span><span class=p>:</span> <span class=s2>&#34;specs/active/**/spec.md&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;command&#34;</span><span class=p>:</span> <span class=s2>&#34;node scripts/validate-spec.js \&#34;$CLAUDE_FILE_PATH\&#34;&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;outputBehavior&#34;</span><span class=p>:</span> <span class=s2>&#34;block-on-failure&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;PreToolUse&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;matcher&#34;</span><span class=p>:</span> <span class=p>{</span> <span class=nt>&#34;tool&#34;</span><span class=p>:</span> <span class=s2>&#34;Bash&#34;</span><span class=p>,</span> <span class=nt>&#34;commandPattern&#34;</span><span class=p>:</span> <span class=s2>&#34;git push&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;command&#34;</span><span class=p>:</span> <span class=s2>&#34;scripts/check-not-main.sh&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;outputBehavior&#34;</span><span class=p>:</span> <span class=s2>&#34;block-on-failure&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Use the <code>update-config</code> skill to wire these — it knows the schema details.</p><h4 id=slash-commands-claudecommands>Slash commands (<code>.claude/commands/</code>)</h4><p>Slash commands are workflow accelerators. Keep them in <code>.claude/commands/</code>.</p><p><code>spec.md</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>description: Create a new spec from the template
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Create a new spec under <span class=sb>`specs/draft/`</span> using <span class=sb>`specs/_template/spec.md`</span>.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> Ask the user for the title (slug = today&#39;s date + kebab-case title)
+</span></span><span class=line><span class=cl><span class=k>2.</span> Create <span class=sb>`specs/draft/&lt;slug&gt;.md`</span> with the template, fill frontmatter
+</span></span><span class=line><span class=cl><span class=k>3.</span> Open the file at the &#34;Problem&#34; section
+</span></span><span class=line><span class=cl><span class=k>4.</span> Don&#39;t fill in the body — that&#39;s the user&#39;s job
+</span></span></code></pre></td></tr></table></div></div><p><code>promote-spec.md</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>description: Promote a draft spec to active
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> Verify the spec has all required sections filled. If any missing,
+</span></span><span class=line><span class=cl>   refuse and tell the user which.
+</span></span><span class=line><span class=cl><span class=k>2.</span> Create <span class=sb>`specs/active/&lt;slug&gt;/`</span> directory
+</span></span><span class=line><span class=cl><span class=k>3.</span> Move <span class=sb>`specs/draft/&lt;slug&gt;.md`</span> → <span class=sb>`specs/active/&lt;slug&gt;/spec.md`</span>
+</span></span><span class=line><span class=cl><span class=k>4.</span> Update frontmatter: status: active
+</span></span><span class=line><span class=cl><span class=k>5.</span> Generate <span class=sb>`plan.md`</span> and empty <span class=sb>`notes.md`</span>
+</span></span><span class=line><span class=cl><span class=k>6.</span> Report paths created
+</span></span></code></pre></td></tr></table></div></div><p><code>ship-spec.md</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>description: Move a spec from active to done
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> Verify all acceptance criteria boxes are checked
+</span></span><span class=line><span class=cl><span class=k>2.</span> Verify notes.md has at least one entry
+</span></span><span class=line><span class=cl><span class=k>3.</span> Move <span class=sb>`specs/active/&lt;slug&gt;/`</span> → <span class=sb>`specs/done/&lt;slug&gt;/`</span>
+</span></span><span class=line><span class=cl><span class=k>4.</span> Update frontmatter: status: done, shipped: &lt;today&gt;
+</span></span><span class=line><span class=cl><span class=k>5.</span> Update refactor ledger if applicable
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=part-3-the-daily-workflow>Part 3: The Daily Workflow</h2><p>A worked example, end to end. Imagine you&rsquo;re adding a &ldquo;duplicate card&rdquo; feature.</p><h3 id=step-1--from-idea-to-spec>Step 1 — From idea to spec</h3><p>15-minute draft in <code>specs/draft/duplicate-card.md</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>title: Duplicate Card Action
+</span></span><span class=line><span class=cl>slug: 2026-05-08-duplicate-card
+</span></span><span class=line><span class=cl>status: draft
+</span></span><span class=line><span class=cl>owner: hassan
+</span></span><span class=line><span class=cl>created: 2026-05-08
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Problem
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Users frequently rebuild similar cards from scratch. Support data shows
+</span></span><span class=line><span class=cl>~12% of new cards are near-copies of existing ones.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Goals
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> One-click duplicate from the card detail page
+</span></span><span class=line><span class=cl><span class=k>-</span> Duplicated card opens immediately in edit mode with focus on title
+</span></span><span class=line><span class=cl><span class=k>-</span> Title prefilled with &#34;Copy of {original}&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Non-Goals
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> NOT bulk duplicate (separate spec if needed)
+</span></span><span class=line><span class=cl><span class=k>-</span> NOT a &#34;template&#34; feature — duplicates are independent
+</span></span><span class=line><span class=cl><span class=k>-</span> NOT duplicating attached files — only metadata
+</span></span><span class=line><span class=cl><span class=k>-</span> NOT duplicating comments or activity history
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Approach
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Add <span class=sb>`POST /api/cards/:id/duplicate`</span> that copies the row, prefixes the
+</span></span><span class=line><span class=cl>title, returns the new id. Add a Duplicate button on <span class=sb>`CardActions`</span> that
+</span></span><span class=line><span class=cl>calls it and navigates to <span class=sb>`/cards/:newId?edit=1`</span>.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Acceptance Criteria
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> POST returns 201 with <span class=sb>`{ id, title }`</span> of the new card
+</span></span><span class=line><span class=cl><span class=k>2.</span> New card has all metadata except <span class=sb>`id`</span>, <span class=sb>`created_at`</span>, <span class=sb>`updated_at`</span>
+</span></span><span class=line><span class=cl><span class=k>3.</span> Title is <span class=sb>`&#34;Copy of &#34; + original.title`</span>, truncated to schema limit
+</span></span><span class=line><span class=cl><span class=k>4.</span> Clicking Duplicate navigates to new card in edit mode
+</span></span><span class=line><span class=cl><span class=k>5.</span> Title input is focused and selected on edit-mode load
+</span></span><span class=line><span class=cl><span class=k>6.</span> Unauthorized user gets 403, missing card gets 404
+</span></span><span class=line><span class=cl><span class=k>7.</span> New E2E test covers the happy path
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Open Questions
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>- [ ]</span> Rate limit? Probably yes but maybe later — defer if not trivial
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Rollout
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Behind <span class=sb>`card_duplicate`</span> flag. Internal at 100% on merge, public 50%
+</span></span><span class=line><span class=cl>next day, full the day after if no errors. Kill switch: flip flag off.
+</span></span></code></pre></td></tr></table></div></div><p>Promote: move to <code>specs/active/2026-05-08-duplicate-card/spec.md</code>.</p><h3 id=step-2--from-spec-to-plan>Step 2 — From spec to plan</h3><p><code>specs/active/2026-05-08-duplicate-card/plan.md</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>spec: spec.md
+</span></span><span class=line><span class=cl>created: 2026-05-08
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Files to change
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`app/api/cards/[id]/duplicate/route.ts`</span> — new POST handler
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`lib/cards/queries.ts`</span> — add <span class=sb>`duplicateCard(id, userId)`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`lib/cards/queries.test.ts`</span> — unit tests
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`components/cards/CardActions.tsx`</span> — add Duplicate button
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`components/cards/CardActions.test.tsx`</span> — test button click
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`tests/e2e/duplicate-card.spec.ts`</span> — new E2E
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`lib/featureFlags.ts`</span> — register <span class=sb>`card_duplicate`</span> flag
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Order (each step is independently reviewable)
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> <span class=sb>`duplicateCard()`</span> query + unit tests. PR-1.
+</span></span><span class=line><span class=cl><span class=k>2.</span> Route handler + integration test. PR-2.
+</span></span><span class=line><span class=cl><span class=k>3.</span> Flag registration. PR-3 (tiny).
+</span></span><span class=line><span class=cl><span class=k>4.</span> UI button + component test, gated on flag. PR-4.
+</span></span><span class=line><span class=cl><span class=k>5.</span> E2E test, gated on flag. PR-5.
+</span></span><span class=line><span class=cl><span class=k>6.</span> Remove flag check after rollout. PR-6 (cleanup, separate).
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Risks
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Title truncation: schema is varchar(255), &#34;Copy of &#34; is 8 chars,
+</span></span><span class=line><span class=cl>  so truncate original to 247.
+</span></span><span class=line><span class=cl><span class=k>-</span> File attachments: must NOT copy. Verify in test that
+</span></span><span class=line><span class=cl>  <span class=sb>`card_attachments`</span> has no rows for new card.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## What this plan does NOT do
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Bulk duplicate
+</span></span><span class=line><span class=cl><span class=k>-</span> Template/link relationship
+</span></span><span class=line><span class=cl><span class=k>-</span> File/comment duplication
+</span></span><span class=line><span class=cl><span class=k>-</span> Rate limiting (deferred)
+</span></span></code></pre></td></tr></table></div></div><h3 id=step-3--implementation>Step 3 — Implementation</h3><p>The prompt should reference the artifacts, not re-explain them:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Implement step 1 of the plan in
+</span></span><span class=line><span class=cl>specs/active/2026-05-08-duplicate-card/plan.md.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Scope: only the duplicateCard() query and its unit tests. Do not touch
+</span></span><span class=line><span class=cl>the route handler, UI, or flag registration — those are later steps.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Read the spec for context, especially the acceptance criteria around
+</span></span><span class=line><span class=cl>title prefix, truncation, and which fields to copy.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Write the unit test first, then the implementation. Tests must cover:
+</span></span><span class=line><span class=cl>- Happy path: all metadata copied, attachments not copied
+</span></span><span class=line><span class=cl>- Title truncation when original is long
+</span></span><span class=line><span class=cl>- Authorization: user can only duplicate their own cards
+</span></span><span class=line><span class=cl>- Original card not found returns null
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Use the existing query patterns in lib/cards/queries.ts. Don&#39;t introduce
+</span></span><span class=line><span class=cl>new abstractions.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Report:
+</span></span><span class=line><span class=cl>1. The new function signature
+</span></span><span class=line><span class=cl>2. The list of test cases written
+</span></span><span class=line><span class=cl>3. Any deviations from the plan and why
+</span></span></code></pre></td></tr></table></div></div><h3 id=step-4--verification>Step 4 — Verification</h3><p>The agent&rsquo;s end-of-turn summary is <strong>intent</strong>, not result. Verify.</p><p>Cheap verifications (do every time):</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># What did the agent actually change?</span>
+</span></span><span class=line><span class=cl>git diff --stat
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Any new &#39;as any&#39;, &#39;@ts-ignore&#39;, or &#39;.skip&#39;?</span>
+</span></span><span class=line><span class=cl>git diff <span class=p>|</span> grep -E <span class=s2>&#34;as any|@ts-ignore|\.skip&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Did test count go up?</span>
+</span></span><span class=line><span class=cl>pnpm <span class=nb>test</span> --reporter<span class=o>=</span>json <span class=p>|</span> jq <span class=s1>&#39;.numTotalTests&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Run the new tests</span>
+</span></span><span class=line><span class=cl>pnpm <span class=nb>test</span> lib/cards/queries.test.ts
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Type check</span>
+</span></span><span class=line><span class=cl>pnpm typecheck
+</span></span></code></pre></td></tr></table></div></div><p>Worth-it verifications for non-trivial changes:</p><ul><li><strong>UI changes:</strong> start the dev server, click through the feature. Type-check passing ≠ feature working — there is no automated substitute for this.</li><li><strong>API changes:</strong> hit the endpoint with <code>curl</code>. Confirm response shape.</li><li><strong>Data changes:</strong> run migration on a copy of prod data, not just dev fixtures.</li></ul><h3 id=step-5--review-and-ship>Step 5 — Review and ship</h3><p>Review checklist:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[ ] Does the diff implement every acceptance criterion?
+</span></span><span class=line><span class=cl>[ ] Are there changes outside the planned files? Justified?
+</span></span><span class=line><span class=cl>[ ] Any new `as any`, `@ts-ignore`, `.skip`, `.only`?
+</span></span><span class=line><span class=cl>[ ] Test count: did it go up by at least the number of new behaviors?
+</span></span><span class=line><span class=cl>[ ] Did any existing tests change? Read each change.
+</span></span><span class=line><span class=cl>[ ] Comments: any restate the code? Delete.
+</span></span><span class=line><span class=cl>[ ] Error handling: any catch-and-default that hides real errors?
+</span></span><span class=line><span class=cl>[ ] Does the new code match patterns from existing files in the same dir?
+</span></span><span class=line><span class=cl>[ ] Run the feature in a browser / hit the endpoint.
+</span></span></code></pre></td></tr></table></div></div><p>Use <code>/review</code> for fast self-review before pushing. Reserve <code>/ultrareview</code> for high-stakes PRs (auth, data, shared infra).</p><p>After merge:</p><ul><li>Update <code>notes.md</code> with anything unexpected during implementation</li><li>Move spec to <code>done/</code></li><li>Update memory if anything was non-obvious</li><li>Update refactor ledger if applicable</li></ul><h3 id=the-notesmd-artifact>The <code>notes.md</code> artifact</h3><p>The most undervalued artifact in this whole system. Where future-you (and future agents) learn from this implementation. Three months later when someone duplicates this pattern, they read this and skip the same mistake.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## 2026-05-08 — step 1
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Agent introduced <span class=sb>`truncateTitle()`</span> helper instead of inlining.
+</span></span><span class=line><span class=cl>  Reasonable, kept it.
+</span></span><span class=line><span class=cl><span class=k>-</span> Agent&#39;s first attempt copied <span class=sb>`created_at`</span>. Spec was clear this should
+</span></span><span class=line><span class=cl>  be regenerated. Caught in review, fixed.
+</span></span><span class=line><span class=cl><span class=k>-</span> Authorization: implemented as <span class=sb>`where userId = ctx.userId`</span> in the
+</span></span><span class=line><span class=cl>  query rather than a separate auth check. Matches pattern in
+</span></span><span class=line><span class=cl>  <span class=sb>`getCard()`</span>.
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=part-4-working-effectively-with-agents>Part 4: Working Effectively with Agents</h2><h3 id=prompt-engineering-basics>Prompt engineering basics</h3><h4 id=the-implementation-prompt-shape>The implementation prompt shape</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Goal: &lt;one sentence&gt;
+</span></span><span class=line><span class=cl>Read: &lt;files/docs the agent needs&gt;
+</span></span><span class=line><span class=cl>Scope: &lt;what&#39;s in&gt;
+</span></span><span class=line><span class=cl>Out of scope: &lt;what&#39;s tempting but excluded&gt;
+</span></span><span class=line><span class=cl>Constraints: &lt;hard rules&gt;
+</span></span><span class=line><span class=cl>Verify: &lt;what the agent should run before reporting&gt;
+</span></span><span class=line><span class=cl>Report: &lt;what the agent should tell you&gt;
+</span></span></code></pre></td></tr></table></div></div><p>The &ldquo;Report&rdquo; section matters more than people think. Without it, the agent gives you marketing copy (&ldquo;successfully implemented the feature&rdquo;). With it, you get information you can act on.</p><h4 id=the-investigation-prompt-shape>The investigation prompt shape</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Question: &lt;one sentence&gt;
+</span></span><span class=line><span class=cl>Why I&#39;m asking: &lt;so the agent can judge edge cases&gt;
+</span></span><span class=line><span class=cl>Already ruled out: &lt;so it doesn&#39;t repeat work&gt;
+</span></span><span class=line><span class=cl>Depth: quick | medium | thorough
+</span></span><span class=line><span class=cl>Output: &lt;length cap, format&gt;
+</span></span></code></pre></td></tr></table></div></div><p>&ldquo;Why I&rsquo;m asking&rdquo; is the single most valuable line. It turns a narrow lookup into an answer that addresses the actual question.</p><h4 id=anti-patterns-in-prompts>Anti-patterns in prompts</h4><ul><li><strong>&ldquo;Implement the feature.&rdquo;</strong> Too vague. Agent invents scope.</li><li><strong>&ldquo;Make it production ready.&rdquo;</strong> Means nothing measurable.</li><li><strong>&ldquo;Be careful.&rdquo;</strong> Agents can&rsquo;t be more careful on demand. Be specific about what to verify.</li><li><strong>&ldquo;Use best practices.&rdquo;</strong> Whose? Specify the rule, not the vibe.</li><li><strong>&ldquo;Make it match the existing style.&rdquo;</strong> Better: &ldquo;match the patterns in <code>lib/cards/queries.ts</code>.&rdquo;</li></ul><h3 id=context-management>Context management</h3><p>The 1M context window is a budget, not free. Once you hit ~60% utilization, agent quality drops noticeably — it forgets earlier instructions, repeats searches, gets confused about file state.</p><h4 id=detecting-bloat>Detecting bloat</h4><ul><li>Agent re-reads files it already read this session</li><li>Agent asks for information you already gave it</li><li>Responses get more generic and hedged</li><li>You find yourself repeating constraints</li></ul><h4 id=strategies>Strategies</h4><ul><li><strong>Push context to files.</strong> A 500-line <code>CLAUDE.md</code> costs ~2K tokens once. Repeating those 500 lines across 20 prompts costs 40K tokens.</li><li><strong>Fork for research.</strong> Tool output stays in the fork, not your main thread.</li><li><strong><code>/compact</code> strategically.</strong> Before starting a new task in the same session.</li><li><strong><code>/clear</code> between tasks.</strong> If task A is done and task B is unrelated, just clear.</li><li><strong>Avoid pasting large files.</strong> Reference them by path.</li><li><strong>Avoid screenshot-heavy sessions for code work.</strong> Images are expensive.</li></ul><h3 id=communication-patterns>Communication patterns</h3><h4 id=calibrated-uncertainty>Calibrated uncertainty</h4><p>Agents will confidently propose answers. You should respond with calibrated confidence too:</p><ul><li><strong>&ldquo;I think X but I&rsquo;m not sure — verify before acting.&rdquo;</strong></li><li><strong>&ldquo;This is wrong because Y, but I might be wrong about Y.&rdquo;</strong></li><li><strong>&ldquo;I want X, but if you see a reason it&rsquo;s bad, push back.&rdquo;</strong></li><li><strong>&ldquo;Don&rsquo;t change anything yet — explain what you&rsquo;d do.&rdquo;</strong></li></ul><h4 id=the-explain-it-back-pattern>The &ldquo;explain it back&rdquo; pattern</h4><p>Before letting the agent implement something non-trivial:</p><blockquote><p>&ldquo;Before you start, summarize what you understand the task to be. List the files you expect to change and any acceptance criteria you think apply. Don&rsquo;t write any code.&rdquo;</p></blockquote><p>If the summary matches your intent, proceed. If it doesn&rsquo;t, the spec/prompt was unclear — fix it before any code is written. You catch 80% of misunderstandings here, at zero cost.</p><h4 id=productive-disagreement>Productive disagreement</h4><p>When the agent pushes back, take it seriously. Sometimes it&rsquo;s right. Useful prompts:</p><ul><li><strong>&ldquo;You said X. I think Y. Here&rsquo;s why: [reason]. What am I missing, or do you want to change your view?&rdquo;</strong></li><li><strong>&ldquo;Walk me through your reasoning step by step.&rdquo;</strong></li><li><strong>&ldquo;What evidence would change your mind?&rdquo;</strong></li></ul><p>When the agent says &ldquo;you&rsquo;re right, I&rsquo;ll do Y&rdquo; — be skeptical. Sometimes that&rsquo;s the right answer; sometimes it&rsquo;s the agent capitulating because you sound certain. Push: &ldquo;Are you actually convinced, or just deferring?&rdquo;</p><h4 id=when-to-interrupt>When to interrupt</h4><p>Stop the agent immediately if:</p><ul><li>It&rsquo;s about to run a destructive command you didn&rsquo;t authorize</li><li>It&rsquo;s modifying files outside the planned scope</li><li>It&rsquo;s three iterations into a fix-test-fail loop with no progress</li><li>Its summary diverges from what the diff actually shows</li></ul><p>Don&rsquo;t wait politely for it to finish a wrong direction.</p><h3 id=multi-agent-coordination>Multi-agent coordination</h3><h4 id=collision-modes>Collision modes</h4><ol><li>Same branch, different agents → merge conflicts</li><li>Same database, different agents → fixture poisoning</li><li>Same context, different agents → rate limits</li><li>Same spec, different agents → diverging implementations</li></ol><h4 id=coordination-protocol>Coordination protocol</h4><p><strong>One spec, one branch, one agent at a time.</strong> Worktrees enforce this:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git worktree add ../proj-duplicate-card feat/2026-05-08-duplicate-card
+</span></span></code></pre></td></tr></table></div></div><p><strong>Database isolation per agent:</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>const</span> <span class=nx>schemaName</span> <span class=o>=</span> <span class=sb>`test_</span><span class=si>${</span><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>JEST_WORKER_ID</span> <span class=o>||</span> <span class=s2>&#34;main&#34;</span><span class=si>}</span><span class=sb>_</span><span class=si>${</span><span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>()</span><span class=si>}</span><span class=sb>`</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>DATABASE_URL</span> <span class=o>=</span> <span class=sb>`</span><span class=si>${</span><span class=nx>BASE_URL</span><span class=si>}</span><span class=sb>?schema=</span><span class=si>${</span><span class=nx>schemaName</span><span class=si>}</span><span class=sb>`</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>Parallel forks for research, not implementation.</strong> Forks are great for &ldquo;audit X, audit Y, audit Z&rdquo; run in parallel. They are bad for &ldquo;implement X, implement Y, implement Z&rdquo; because the diffs need to interleave.</p><h4 id=when-parallel-makes-sense>When parallel makes sense</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Single message, three forks:
+</span></span><span class=line><span class=cl>  Fork A: &#34;audit specs/active/, report which are ready to merge&#34;
+</span></span><span class=line><span class=cl>  Fork B: &#34;audit tests/, report any committed .skip or .only&#34;
+</span></span><span class=line><span class=cl>  Fork C: &#34;audit dependencies, report any with security advisories&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Coordinator (you) reads three notifications, synthesizes, decides.
+</span></span></code></pre></td></tr></table></div></div><p>When in doubt: serial is safe; parallel is for I/O-bound research.</p><hr><h2 id=part-5-code-structure-that-helps-agents>Part 5: Code Structure That Helps Agents</h2><p>This is the most underrated lever. Agents perform dramatically better in well-structured codebases.</p><h3 id=co-located-tests>Co-located tests</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>components/cards/
+</span></span><span class=line><span class=cl>  CardActions.tsx
+</span></span><span class=line><span class=cl>  CardActions.test.tsx
+</span></span><span class=line><span class=cl>  CardActions.stories.tsx
+</span></span></code></pre></td></tr></table></div></div><p>Agents find tests reliably when they live next to code. A separate <code>tests/</code> mirror requires the agent to track two trees and they often miss tests when refactoring.</p><h3 id=explicit-module-boundaries>Explicit module boundaries</h3><p>Each top-level directory should have an <code>index.ts</code> that re-exports its public surface. This signals to the agent (and humans) what&rsquo;s API and what&rsquo;s internal.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// lib/cards/index.ts
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=p>{</span> <span class=nx>getCard</span><span class=p>,</span> <span class=nx>duplicateCard</span><span class=p>,</span> <span class=nx>listCards</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;./queries&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>type</span> <span class=p>{</span> <span class=nx>Card</span><span class=p>,</span> <span class=nx>CardInput</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;./types&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>// Note: `lib/cards/internal/*` is NOT re-exported — internal use only
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=shallow-trees-over-deep-ones>Shallow trees over deep ones</h3><p><code>components/cards/CardDetail.tsx</code> is easier for an agent to navigate than <code>src/features/cards/components/detail/CardDetail/CardDetail.tsx</code>. Each extra level is friction.</p><h3 id=predictable-file-shapes>Predictable file shapes</h3><p>If every API route looks like this:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>POST</span> <span class=o>=</span> <span class=nx>withAuth</span><span class=p>(</span><span class=kr>async</span> <span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=p>{</span> <span class=nx>params</span><span class=p>,</span> <span class=nx>user</span> <span class=p>})</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>{</span> <span class=nx>id</span> <span class=p>}</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>params</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>result</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>duplicateCard</span><span class=p>(</span><span class=nx>id</span><span class=p>,</span> <span class=nx>user</span><span class=p>.</span><span class=nx>id</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>result</span><span class=p>)</span> <span class=k>return</span> <span class=nx>notFound</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>NextResponse</span><span class=p>.</span><span class=nx>json</span><span class=p>(</span><span class=nx>result</span><span class=p>,</span> <span class=p>{</span> <span class=nx>status</span>: <span class=kt>201</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>…the agent generates new ones correctly the first time. Inconsistent route shapes mean the agent has to guess.</p><h3 id=type-first-interfaces>Type-first interfaces</h3><p>Define types before implementation. The agent can write code against types it can see; it can&rsquo;t write code against types you mean.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// lib/cards/types.ts
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>type</span> <span class=nx>Card</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/* ... */</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>type</span> <span class=nx>CardInput</span> <span class=o>=</span> <span class=nx>Omit</span><span class=p>&lt;</span><span class=nt>Card</span><span class=p>,</span> <span class=s2>&#34;id&#34;</span> <span class=err>|</span> <span class=s2>&#34;createdAt&#34;</span> <span class=err>|</span> <span class=s2>&#34;updatedAt&#34;</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>type</span> <span class=nx>DuplicateCardResult</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>string</span><span class=p>;</span> <span class=nx>title</span>: <span class=kt>string</span> <span class=p>}</span> <span class=o>|</span> <span class=kc>null</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=avoid-magic>Avoid magic</h3><p>Decorators, dynamic imports, runtime metaprogramming, monkey-patching — all cost agent reasoning quality. Boring, explicit code is agent-friendly code. (It&rsquo;s also human-friendly. The two correlate.)</p><h3 id=index-files-for-large-modules>Index files for large modules</h3><p>For modules with many files, add an <code>INDEX.md</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gh># lib/cards/INDEX.md
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Files
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> queries.ts — DB queries: getCard, listCards, duplicateCard, archiveCard
+</span></span><span class=line><span class=cl><span class=k>-</span> mutations.ts — write paths with side effects
+</span></span><span class=line><span class=cl><span class=k>-</span> types.ts — Card, CardInput, CardEvent
+</span></span><span class=line><span class=cl><span class=k>-</span> permissions.ts — canRead/canWrite/canShare for cards
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Patterns
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>All queries take userId as second arg, return null if not authorized.
+</span></span><span class=line><span class=cl>Mutations emit <span class=sb>`card:*`</span> events via the event bus.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Where to look first
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> New query? queries.ts, follow getCard pattern
+</span></span><span class=line><span class=cl><span class=k>-</span> New mutation? mutations.ts, follow archiveCard pattern
+</span></span></code></pre></td></tr></table></div></div><p>A 30-second investment that pays off every session.</p><hr><h2 id=part-6-conventions-worth-standardizing>Part 6: Conventions Worth Standardizing</h2><h3 id=performance-and-accessibility-budgets>Performance and accessibility budgets</h3><p><code>specs/conventions/performance.md</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## Performance budgets
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Build fails if any of these exceed:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Initial JS bundle: 180KB gzipped
+</span></span><span class=line><span class=cl><span class=k>-</span> Per-route JS: 60KB gzipped
+</span></span><span class=line><span class=cl><span class=k>-</span> LCP on /cards/[id]: 2.0s p75
+</span></span><span class=line><span class=cl><span class=k>-</span> TTI on /cards: 2.5s p75
+</span></span><span class=line><span class=cl><span class=k>-</span> API p95: 300ms (excluding cold starts)
+</span></span></code></pre></td></tr></table></div></div><p><code>specs/conventions/accessibility.md</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## A11y budgets
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Lighthouse a11y score: minimum 95 on every page
+</span></span><span class=line><span class=cl><span class=k>-</span> axe-core: zero violations of severity &#34;serious&#34; or &#34;critical&#34;
+</span></span><span class=line><span class=cl><span class=k>-</span> Keyboard: every interactive element reachable via keyboard
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Common agent mistakes (will fail review):
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> <span class=sb>`&lt;div onClick&gt;`</span> instead of <span class=sb>`&lt;button&gt;`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Missing <span class=sb>`alt`</span> on images
+</span></span><span class=line><span class=cl><span class=k>-</span> Color contrast below 4.5:1
+</span></span><span class=line><span class=cl><span class=k>-</span> Form inputs without associated <span class=sb>`&lt;label&gt;`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Modals that don&#39;t trap focus
+</span></span></code></pre></td></tr></table></div></div><p>A pre-commit hook running <code>axe-core</code> on changed routes catches most of these.</p><h3 id=security-and-authentication>Security and authentication</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## Auth conventions
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>All authenticated routes go through <span class=sb>`requireUser()`</span>.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=sb>`requireUser()`</span> is the ONLY place that reads session cookies.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Authorization is per-resource, checked in the data layer:
+</span></span><span class=line><span class=cl>❌ const card = await db.cards.findById(id)
+</span></span><span class=line><span class=cl>if (card.userId !== user.id) throw new Forbidden()
+</span></span><span class=line><span class=cl>✅ const card = await db.cards.findFirst({
+</span></span><span class=line><span class=cl>where: { id, userId: user.id }
+</span></span><span class=line><span class=cl>})
+</span></span></code></pre></td></tr></table></div></div><h4 id=security-checklist-for-auth-touching-prs>Security checklist for auth-touching PRs</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=p>[</span><span class=w> </span><span class=p>]</span><span class=w> </span><span class=n>No</span><span class=w> </span><span class=n>new</span><span class=w> </span><span class=n>endpoint</span><span class=w> </span><span class=n>mutating</span><span class=w> </span><span class=n>data</span><span class=w> </span><span class=n>via</span><span class=w> </span><span class=n>GET</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>[</span><span class=w> </span><span class=p>]</span><span class=w> </span><span class=n>No</span><span class=w> </span><span class=o>`</span><span class=n>eval</span><span class=o>`</span><span class=p>,</span><span class=w> </span><span class=o>`</span><span class=n>new</span><span class=w> </span><span class=n>Function</span><span class=o>`</span><span class=p>,</span><span class=w> </span><span class=n>dynamic</span><span class=w> </span><span class=o>`</span><span class=k>require</span><span class=p>()</span><span class=o>`</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>[</span><span class=w> </span><span class=p>]</span><span class=w> </span><span class=n>No</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=n>input</span><span class=w> </span><span class=n>reaches</span><span class=w> </span><span class=o>`</span><span class=n>dangerouslySetInnerHTML</span><span class=o>`</span><span class=w> </span><span class=n>without</span><span class=w> </span><span class=n>sanitization</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>[</span><span class=w> </span><span class=p>]</span><span class=w> </span><span class=n>No</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=n>input</span><span class=w> </span><span class=n>reaches</span><span class=w> </span><span class=n>a</span><span class=w> </span><span class=n>shell</span><span class=p>,</span><span class=w> </span><span class=n>file</span><span class=w> </span><span class=n>path</span><span class=p>,</span><span class=w> </span><span class=k>or</span><span class=w> </span><span class=k>SQL</span><span class=w> </span><span class=n>string</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>[</span><span class=w> </span><span class=p>]</span><span class=w> </span><span class=k>All</span><span class=w> </span><span class=n>redirects</span><span class=w> </span><span class=n>validated</span><span class=w> </span><span class=n>against</span><span class=w> </span><span class=n>allowlist</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>[</span><span class=w> </span><span class=p>]</span><span class=w> </span><span class=n>Cookies</span><span class=w> </span><span class=n>have</span><span class=w> </span><span class=o>`</span><span class=n>Secure</span><span class=o>`</span><span class=p>,</span><span class=w> </span><span class=o>`</span><span class=n>HttpOnly</span><span class=o>`</span><span class=p>,</span><span class=w> </span><span class=o>`</span><span class=n>SameSite</span><span class=o>`</span><span class=w> </span><span class=kt>set</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>[</span><span class=w> </span><span class=p>]</span><span class=w> </span><span class=n>Auth</span><span class=w> </span><span class=n>checks</span><span class=w> </span><span class=n>at</span><span class=w> </span><span class=n>data</span><span class=w> </span><span class=n>layer</span><span class=p>,</span><span class=w> </span><span class=k>not</span><span class=w> </span><span class=n>just</span><span class=w> </span><span class=n>route</span><span class=w> </span><span class=n>layer</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>[</span><span class=w> </span><span class=p>]</span><span class=w> </span><span class=n>No</span><span class=w> </span><span class=n>secrets</span><span class=w> </span><span class=k>in</span><span class=w> </span><span class=n>code</span><span class=p>,</span><span class=w> </span><span class=n>env</span><span class=w> </span><span class=n>files</span><span class=p>,</span><span class=w> </span><span class=k>or</span><span class=w> </span><span class=n>test</span><span class=w> </span><span class=n>fixtures</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>[</span><span class=w> </span><span class=p>]</span><span class=w> </span><span class=n>Rate</span><span class=w> </span><span class=n>limiting</span><span class=w> </span><span class=k>on</span><span class=w> </span><span class=n>auth</span><span class=w> </span><span class=n>endpoints</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>[</span><span class=w> </span><span class=p>]</span><span class=w> </span><span class=n>Password</span><span class=w> </span><span class=n>reset</span><span class=w> </span><span class=n>tokens</span><span class=w> </span><span class=n>single</span><span class=o>-</span><span class=k>use</span><span class=w> </span><span class=k>and</span><span class=w> </span><span class=kt>time</span><span class=o>-</span><span class=n>limited</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>Run <code>/security-review</code> on auth-touching PRs.</p><h3 id=database-and-migrations>Database and migrations</h3><p>The highest-blast-radius area. Hard rules in <code>lib/db/CLAUDE.md</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>NEVER:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Run a migration without <span class=sb>`--dry-run`</span> first
+</span></span><span class=line><span class=cl><span class=k>-</span> Use raw SQL for user-facing queries
+</span></span><span class=line><span class=cl><span class=k>-</span> Disable RLS, FK constraints, or NOT NULL &#34;temporarily&#34;
+</span></span><span class=line><span class=cl><span class=k>-</span> Drop columns/tables in the same migration that adds the replacement
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ALWAYS:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Migrations are forward-only. To revert, add a new migration.
+</span></span><span class=line><span class=cl><span class=k>-</span> Schema changes follow expand → migrate → contract:
+</span></span><span class=line><span class=cl>  <span class=k>1.</span> Add new column/table (nullable/default), deploy
+</span></span><span class=line><span class=cl>  <span class=k>2.</span> Backfill data, verify
+</span></span><span class=line><span class=cl>  <span class=k>3.</span> Switch reads/writes, deploy
+</span></span><span class=line><span class=cl>  <span class=k>4.</span> Remove old column/table in a later release
+</span></span><span class=line><span class=cl><span class=k>-</span> Indexes added with <span class=sb>`CREATE INDEX CONCURRENTLY`</span> on tables &gt; 10k rows
+</span></span></code></pre></td></tr></table></div></div><p>Five PRs for &ldquo;rename a column&rdquo; is not overkill. It&rsquo;s the difference between &ldquo;deploy on a Wednesday&rdquo; and &ldquo;production outage at 3am.&rdquo;</p><h3 id=state-management>State management</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## State management
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Server state (data from the API):
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> React Query for client-side reads
+</span></span><span class=line><span class=cl><span class=k>-</span> Server Components for server-side reads
+</span></span><span class=line><span class=cl><span class=k>-</span> Never store server state in Zustand/useState — it goes stale
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Client state (UI-only, ephemeral):
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> useState for component-local
+</span></span><span class=line><span class=cl><span class=k>-</span> Zustand for cross-component
+</span></span><span class=line><span class=cl><span class=k>-</span> URL state for anything user might bookmark/share
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Form state:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> react-hook-form + Zod
+</span></span><span class=line><span class=cl><span class=k>-</span> Never useState for forms with &gt; 2 fields
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>URL is state too:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Filters, sort, pagination, tab selection → URL params
+</span></span></code></pre></td></tr></table></div></div><p>The &ldquo;URL is state too&rdquo; rule is the most undervalued. Agents will reach for <code>useState</code> to track which tab is selected, breaking deep links and back button.</p><h3 id=forms>Forms</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>Stack: react-hook-form + Zod + Server Actions.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Pattern (every form follows):
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> Schema in <span class=sb>`&lt;Form&gt;.schema.ts`</span>, co-located
+</span></span><span class=line><span class=cl><span class=k>2.</span> Form uses <span class=sb>`useForm({ resolver: zodResolver(schema) })`</span>
+</span></span><span class=line><span class=cl><span class=k>3.</span> Submit calls a Server Action that re-validates with the SAME schema
+</span></span><span class=line><span class=cl><span class=k>4.</span> Display errors:
+</span></span><span class=line><span class=cl>   <span class=k>-</span> Field-level: from react-hook-form
+</span></span><span class=line><span class=cl>   <span class=k>-</span> Form-level: from Server Action&#39;s <span class=sb>`{ ok: false, error }`</span> response
+</span></span><span class=line><span class=cl>   <span class=k>-</span> Never <span class=sb>`alert()`</span> for user-visible errors
+</span></span><span class=line><span class=cl><span class=k>5.</span> Loading state via <span class=sb>`useFormStatus()`</span> inside <span class=sb>`&lt;SubmitButton&gt;`</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>NOT allowed:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Validation only on the client
+</span></span><span class=line><span class=cl><span class=k>-</span> Different schemas client vs server
+</span></span></code></pre></td></tr></table></div></div><h3 id=observability>Observability</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gu>## Observability
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Three pillars:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### Logging
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Logger: <span class=sb>`logger`</span> from <span class=sb>`lib/logger.ts`</span> (pino)
+</span></span><span class=line><span class=cl><span class=k>-</span> Levels: <span class=sb>`debug`</span> | <span class=sb>`info`</span> | <span class=sb>`warn`</span> | <span class=sb>`error`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Context: every log includes <span class=sb>`userId`</span> and <span class=sb>`requestId`</span> if available
+</span></span><span class=line><span class=cl><span class=k>-</span> PII: never log <span class=sb>`email`</span>, <span class=sb>`name`</span>, raw request bodies
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### Errors
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Sentry for capture
+</span></span><span class=line><span class=cl><span class=k>-</span> Every Server Action wraps with <span class=sb>`withErrorReporting`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Never swallow errors silently. If you catch, you log.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>### Metrics
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> StatsD/OpenTelemetry counter for: each Server Action, each Route Handler
+</span></span><span class=line><span class=cl><span class=k>-</span> Naming: <span class=sb>`&lt;domain&gt;.&lt;verb&gt;.&lt;status&gt;`</span> e.g., <span class=sb>`cards.duplicate.success`</span>
+</span></span><span class=line><span class=cl><span class=k>-</span> Cardinality: never include user ID or card ID as a tag
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>For every new user-facing action:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> Log entry at start
+</span></span><span class=line><span class=cl><span class=k>2.</span> Counter on success
+</span></span><span class=line><span class=cl><span class=k>3.</span> Counter on each known error path
+</span></span><span class=line><span class=cl><span class=k>4.</span> Histogram of duration
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=part-7-the-refactor-playbook>Part 7: The Refactor Playbook</h2><p>A &ldquo;refactor&rdquo; project is mostly about <em>not breaking things while changing them</em>. Agents can be unusually good or unusually bad depending on setup.</p><h3 id=strangler-fig-not-big-bang>Strangler fig, not big bang</h3><p>Keep old code working while new code is added next to it. Agents handle &ldquo;add new code&rdquo; much better than &ldquo;edit old code in place.&rdquo; The Next.js Pages → App Router migration naturally fits this.</p><h3 id=make-the-new-path-opt-in-via-flag>Make the new path opt-in via flag</h3><p>Not just a feature flag for users — a routing flag for <em>you</em>. New page handles <code>?v=2</code>, old handles default. Compare side-by-side. Once new is ready, swap defaults. Agents thrive when they can build the new without breaking the old.</p><h3 id=tests-as-the-contract>Tests as the contract</h3><p>Before refactoring a module, write characterization tests against its current behavior. Then the agent can refactor freely — if tests pass, behavior is preserved. Without tests, you&rsquo;re trusting the agent to preserve invariants it can&rsquo;t see.</p><h3 id=type-driven-extraction>Type-driven extraction</h3><p>Extract types first, in their own PR. Once <code>Card</code>, <code>CardInput</code>, <code>CardEvent</code> are well-typed, refactoring code that uses them is much safer because the type system catches drift.</p><h3 id=one-pattern-at-a-time>One pattern at a time</h3><p>&ldquo;Migrate all data fetching to Server Components&rdquo; — fine.</p><p>&ldquo;Migrate data fetching AND restructure components AND swap the styling system&rdquo; — chaos.</p><p>Agents need a single transformation rule per pass.</p><h3 id=codemod-for-mechanical-agent-for-judgment>Codemod for mechanical, agent for judgment</h3><p>If the refactor is mechanical (rename, move, change import), use jscodeshift or ts-morph — deterministic and reviewable as a single diff. Reserve the agent for the parts that need judgment.</p><h3 id=boundary-first-for-legacy-code>Boundary first for legacy code</h3><p>Before touching legacy code, draw a boundary around it. <code>app/legacy/**</code> is its own region with its own <code>CLAUDE.md</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gh># Legacy code
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>This directory is being phased out.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Do NOT add new features here. New features go in <span class=sb>`app/`</span>.
+</span></span><span class=line><span class=cl><span class=k>-</span> Do NOT refactor for style. Edits should be minimal.
+</span></span><span class=line><span class=cl><span class=k>-</span> DO fix bugs that affect users today.
+</span></span><span class=line><span class=cl><span class=k>-</span> DO add deprecation comments when something is replaced.
+</span></span></code></pre></td></tr></table></div></div><h3 id=refactor-ledger>Refactor ledger</h3><p>Keep <code>docs/refactor-ledger.md</code> as a running record:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gh># Pages → App Router Migration
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Done
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>- [x]</span> /login (2026-04-02)
+</span></span><span class=line><span class=cl><span class=k>- [x]</span> /signup (2026-04-04)
+</span></span><span class=line><span class=cl><span class=k>- [x]</span> /cards (list view) (2026-04-15)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## In progress
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>- [ ]</span> /cards/[id] (detail) — spec: 2026-05-08-card-detail-redesign
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Not started
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>- [ ]</span> /settings/\*
+</span></span><span class=line><span class=cl><span class=k>- [ ]</span> /admin/\* (deferred)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Conventions established so far
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Server Component by default
+</span></span><span class=line><span class=cl><span class=k>-</span> Data fetching via co-located server actions
+</span></span><span class=line><span class=cl><span class=k>-</span> Loading states via <span class=sb>`loading.tsx`</span>
+</span></span></code></pre></td></tr></table></div></div><p>The agent reads this and knows what&rsquo;s done, what patterns are established, what to follow.</p><hr><h2 id=part-8-anti-patterns>Part 8: Anti-Patterns</h2><p>The recurring failure modes:</p><ol><li><p><strong>The mega-prompt.</strong> &ldquo;Build the whole feature&rdquo; with no spec. You get 1500 lines of plausible-looking code that solves a different problem than you wanted. <strong>Fix:</strong> spec → plan → implement.</p></li><li><p><strong>Trusting the summary.</strong> Agent says &ldquo;all tests pass.&rdquo; Tests pass because the agent skipped the failing one. <strong>Fix:</strong> verify diff, not summary.</p></li><li><p><strong>Letting context bloat.</strong> 200K tokens of tool output later, the agent has forgotten the original goal. <strong>Fix:</strong> fork research, use <code>/clear</code> aggressively, push context to <code>CLAUDE.md</code>.</p></li><li><p><strong>No non-goals.</strong> Every spec gets implemented plus &ldquo;while I&rsquo;m here&rdquo; cleanups. <strong>Fix:</strong> explicit non-goals, enforced at review.</p></li><li><p><strong>Permission prompt fatigue.</strong> You start clicking &ldquo;yes&rdquo; without reading. <strong>Fix:</strong> allowlist read-only commands, reserve prompts for actions that matter.</p></li><li><p><strong>Memory as scratchpad.</strong> Saving &ldquo;currently working on X&rdquo; — that&rsquo;s task state, goes stale instantly. <strong>Fix:</strong> memory is for <em>durable</em> facts.</p></li><li><p><strong>One giant CLAUDE.md.</strong> 800 lines at the root, loaded on every turn, ignored by humans. <strong>Fix:</strong> layer CLAUDE.md by directory.</p></li><li><p><strong>Specs as wishlist.</strong> Specs that say &ldquo;we should also consider…&rdquo; without committing. <strong>Fix:</strong> cut everything that isn&rsquo;t acceptance criteria or non-goals.</p></li><li><p><strong>Skipping the human gate.</strong> Agent produces spec, plan, and code in one chain. No one ever approved the spec. <strong>Fix:</strong> human approval between artifacts.</p></li><li><p><strong>Agent-generated commit messages with no review.</strong> Often wrong about <em>why</em>. <strong>Fix:</strong> edit the message, or write it yourself.</p></li></ol><h3 id=failure-recovery>Failure recovery</h3><p>Sometimes the agent produces broken code or makes changes you didn&rsquo;t want.</p><h4 id=triage-first>Triage first</h4><p>Before reverting:</p><ol><li>Is the diff <em>partially</em> correct? Salvage the good parts.</li><li>Is the bug obvious? Just fix it forward.</li><li>Is the approach wrong? Revert and re-prompt.</li></ol><p>Most teams over-revert. A 200-line diff with one bad function doesn&rsquo;t need to start over.</p><h4 id=when-to-revert>When to revert</h4><ul><li>Agent fundamentally misunderstood the spec</li><li>Diff touches files outside scope and you can&rsquo;t easily separate them</li><li>Multiple changes interact in ways that are hard to debug</li></ul><h4 id=how-to-revert-without-losing-learning>How to revert without losing learning</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git diff &gt; /tmp/agent-attempt-1.patch
+</span></span><span class=line><span class=cl>git reset --hard HEAD
+</span></span></code></pre></td></tr></table></div></div><p>When re-prompting, <em>include what went wrong</em>: &ldquo;Previous attempt did X, which violated constraint Y. Don&rsquo;t repeat that.&rdquo;</p><h4 id=when-the-agent-gets-stuck-in-a-loop>When the agent gets stuck in a loop</h4><p>Agent makes a change, runs tests, sees a failure, makes another change, runs tests, sees a different failure…</p><p>Stop the loop. Take over manually for 5 minutes. The agent is missing context that would unlock progress. Once you understand the missing context, <em>write it down</em> (in <code>CLAUDE.md</code> or <code>notes.md</code>) so future agent sessions don&rsquo;t re-discover it.</p><hr><h2 id=part-9-maintaining-the-system>Part 9: Maintaining the System</h2><h3 id=daily-rhythm>Daily rhythm</h3><p><strong>Morning (planning)</strong></p><ul><li>Read <code>git log</code> from yesterday</li><li>Skim <code>specs/active/</code></li><li>Pick the next thing</li><li>If no spec exists, write the draft (15-30 min)</li></ul><p><strong>Midday (deep work)</strong></p><ul><li>One spec → one branch → one focused agent session</li><li>Verify diff before committing</li><li>Commit, push, open PR</li><li>While CI runs: start next spec or review someone else&rsquo;s PR</li></ul><p><strong>Late afternoon (cleanup)</strong></p><ul><li>Update <code>notes.md</code></li><li>Move shipped specs to <code>done/</code></li><li>Update memory if anything was non-obvious</li></ul><h3 id=friday-hygiene>Friday hygiene</h3><ul><li>Read your week&rsquo;s specs and PRs as a batch</li><li>Look for patterns: what failed? what didn&rsquo;t?</li><li>Update <code>CLAUDE.md</code> or ADRs based on what you learned</li><li>Archive anything stale</li></ul><h3 id=quarterly-pruning>Quarterly pruning</h3><ul><li>Memory: delete entries that haven&rsquo;t been useful</li><li><code>CLAUDE.md</code> files: anything obsolete?</li><li>ADRs: any superseded but not marked?</li><li>Specs in <code>archive/</code>: still informative? if not, delete</li><li>Slash commands: any unused?</li><li>Permissions: still right? run <code>fewer-permission-prompts</code> again</li></ul><h3 id=annual-audit>Annual audit</h3><ul><li>Read your last 12 months of <code>done/</code> specs as a batch. What patterns emerge?</li><li>Read your last 12 months of postmortems. What recurring categories?</li><li>Read your ADRs. Which need superseding?</li><li>Read your <code>CLAUDE.md</code>s. Are they still the rules you actually follow?</li></ul><h3 id=continuous-evolution>Continuous evolution</h3><p>The system is not finished. It&rsquo;s a living thing. Every spec teaches the system. Every postmortem teaches the system. Every &ldquo;I had to repeat that to the agent again&rdquo; teaches the system.</p><p>Teams that make this work treat the agent infrastructure as a product they&rsquo;re building alongside their actual product. The ones that don&rsquo;t end up with a stale <code>CLAUDE.md</code> from project init and a confused agent six months later.</p><hr><h2 id=appendix-a-templates>Appendix A: Templates</h2><h3 id=spec-template>Spec template</h3><p>See Part 2 / Spec Template above.</p><h3 id=plan-template>Plan template</h3><p>See Part 2 / Plans vs specs above.</p><h3 id=bug-spec-template>Bug spec template</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>title: &lt;short description&gt;
+</span></span><span class=line><span class=cl>slug: &lt;date&gt;-bugfix-&lt;short&gt;
+</span></span><span class=line><span class=cl>status: active
+</span></span><span class=line><span class=cl>owner: &lt;you&gt;
+</span></span><span class=line><span class=cl>created: &lt;date&gt;
+</span></span><span class=line><span class=cl>severity: P0 | P1 | P2 | P3
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Symptom
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>What the user sees / what&#39;s broken.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Reproduction
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>1.</span> Step
+</span></span><span class=line><span class=cl><span class=k>2.</span> Step
+</span></span><span class=line><span class=cl><span class=k>3.</span> Bug
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Root cause
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Specific. NOT &#34;the code is broken.&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Fix
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>What you&#39;ll change.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Why this fix and not another
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Document alternatives considered.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Blast radius
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> What else uses this code?
+</span></span><span class=line><span class=cl><span class=k>-</span> What else might be affected by this fix?
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Tests
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> Regression test that fails before fix, passes after
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Rollout
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Usually &#34;ship in next release,&#34; but P0 may require hotfix.
+</span></span></code></pre></td></tr></table></div></div><h3 id=adr-template>ADR template</h3><p>See Part 2 / Architecture Decision Records above.</p><h3 id=postmortem-template>Postmortem template</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>date: &lt;YYYY-MM-DD&gt;
+</span></span><span class=line><span class=cl>duration: &lt;minutes&gt;
+</span></span><span class=line><span class=cl>severity: SEV-1 | SEV-2 | SEV-3
+</span></span><span class=line><span class=cl>authors: &lt;people&gt;
+</span></span><span class=line><span class=cl>status: complete
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Summary
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>One paragraph.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Timeline (UTC)
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> &lt;time&gt; — first alert
+</span></span><span class=line><span class=cl><span class=k>-</span> &lt;time&gt; — engineer ack
+</span></span><span class=line><span class=cl><span class=k>-</span> ...
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Root cause
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Specific. Not &#34;deployment issue.&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Why our safeguards didn&#39;t catch it
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> &lt;gap&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## What went well
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> &lt;thing&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## What went badly
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>-</span> &lt;thing&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>## Action items
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Each becomes a spec or ADR:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>- [ ]</span> Spec: &lt;link&gt;
+</span></span><span class=line><span class=cl><span class=k>- [ ]</span> ADR: &lt;link&gt;
+</span></span><span class=line><span class=cl><span class=k>- [ ]</span> Runbook: &lt;link&gt;
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=appendix-b-scripts>Appendix B: Scripts</h2><h3 id=scriptsvalidate-specjs><code>scripts/validate-spec.js</code></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=ch>#!/usr/bin/env node
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>fs</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s2>&#34;fs&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>REQUIRED_FRONTMATTER</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;title&#34;</span><span class=p>,</span> <span class=s2>&#34;slug&#34;</span><span class=p>,</span> <span class=s2>&#34;status&#34;</span><span class=p>,</span> <span class=s2>&#34;owner&#34;</span><span class=p>,</span> <span class=s2>&#34;created&#34;</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>REQUIRED_SECTIONS</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;## Problem&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;## Goals&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;## Non-Goals&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;## Approach&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;## Acceptance Criteria&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;## Rollout&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>FORBIDDEN_PHRASES</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;TBD&#34;</span><span class=p>,</span> <span class=s2>&#34;TODO&#34;</span><span class=p>,</span> <span class=s2>&#34;fill this in&#34;</span><span class=p>,</span> <span class=s2>&#34;lorem ipsum&#34;</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>file</span> <span class=o>=</span> <span class=nx>process</span><span class=p>.</span><span class=nx>argv</span><span class=p>[</span><span class=mi>2</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>file</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=s2>&#34;Usage: validate-spec.js &lt;path-to-spec.md&gt;&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nx>process</span><span class=p>.</span><span class=nx>exit</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>content</span> <span class=o>=</span> <span class=nx>fs</span><span class=p>.</span><span class=nx>readFileSync</span><span class=p>(</span><span class=nx>file</span><span class=p>,</span> <span class=s2>&#34;utf8&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>errors</span> <span class=o>=</span> <span class=p>[];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>fmMatch</span> <span class=o>=</span> <span class=nx>content</span><span class=p>.</span><span class=nx>match</span><span class=p>(</span><span class=sr>/^---\n([\s\S]*?)\n---/</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>fmMatch</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>errors</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=s2>&#34;Missing frontmatter&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>fm</span> <span class=o>=</span> <span class=nx>fmMatch</span><span class=p>[</span><span class=mi>1</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span> <span class=p>(</span><span class=kr>const</span> <span class=nx>key</span> <span class=k>of</span> <span class=nx>REQUIRED_FRONTMATTER</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=k>new</span> <span class=nb>RegExp</span><span class=p>(</span><span class=sb>`^</span><span class=si>${</span><span class=nx>key</span><span class=si>}</span><span class=sb>:`</span><span class=p>,</span> <span class=s2>&#34;m&#34;</span><span class=p>).</span><span class=nx>test</span><span class=p>(</span><span class=nx>fm</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>errors</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=sb>`Missing frontmatter field: </span><span class=si>${</span><span class=nx>key</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=kr>const</span> <span class=nx>section</span> <span class=k>of</span> <span class=nx>REQUIRED_SECTIONS</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>content</span><span class=p>.</span><span class=nx>includes</span><span class=p>(</span><span class=nx>section</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>errors</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=sb>`Missing section: </span><span class=si>${</span><span class=nx>section</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=kr>const</span> <span class=nx>phrase</span> <span class=k>of</span> <span class=nx>FORBIDDEN_PHRASES</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>content</span><span class=p>.</span><span class=nx>toLowerCase</span><span class=p>().</span><span class=nx>includes</span><span class=p>(</span><span class=nx>phrase</span><span class=p>.</span><span class=nx>toLowerCase</span><span class=p>()))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>errors</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=sb>`Forbidden placeholder phrase: &#34;</span><span class=si>${</span><span class=nx>phrase</span><span class=si>}</span><span class=sb>&#34;`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=nx>errors</span><span class=p>.</span><span class=nx>length</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=sb>`Spec validation failed for </span><span class=si>${</span><span class=nx>file</span><span class=si>}</span><span class=sb>:`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nx>errors</span><span class=p>.</span><span class=nx>forEach</span><span class=p>((</span><span class=nx>e</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=sb>`  - </span><span class=si>${</span><span class=nx>e</span><span class=si>}</span><span class=sb>`</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>  <span class=nx>process</span><span class=p>.</span><span class=nx>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=sb>`OK: </span><span class=si>${</span><span class=nx>file</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=scriptscheck-test-disciplinesh><code>scripts/check-test-discipline.sh</code></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/usr/bin/env bash
+</span></span></span><span class=line><span class=cl><span class=nb>set</span> -euo pipefail
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>base</span><span class=o>=</span><span class=si>${</span><span class=nv>1</span><span class=k>:-</span><span class=nv>origin</span><span class=p>/main</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>new_anys</span><span class=o>=</span><span class=k>$(</span>git diff <span class=s2>&#34;</span><span class=nv>$base</span><span class=s2>&#34;</span>..HEAD -- <span class=s1>&#39;*.ts&#39;</span> <span class=s1>&#39;*.tsx&#39;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>  <span class=p>|</span> grep -c <span class=s1>&#39;^+.*as any&#39;</span> <span class=o>||</span> <span class=nb>true</span><span class=k>)</span>
+</span></span><span class=line><span class=cl><span class=nv>new_ignores</span><span class=o>=</span><span class=k>$(</span>git diff <span class=s2>&#34;</span><span class=nv>$base</span><span class=s2>&#34;</span>..HEAD -- <span class=s1>&#39;*.ts&#39;</span> <span class=s1>&#39;*.tsx&#39;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>  <span class=p>|</span> grep -cE <span class=s1>&#39;^\+.*(@ts-ignore|@ts-expect-error)&#39;</span> <span class=o>||</span> <span class=nb>true</span><span class=k>)</span>
+</span></span><span class=line><span class=cl><span class=nv>new_skips</span><span class=o>=</span><span class=k>$(</span>git diff <span class=s2>&#34;</span><span class=nv>$base</span><span class=s2>&#34;</span>..HEAD -- <span class=s1>&#39;*.test.ts&#39;</span> <span class=s1>&#39;*.test.tsx&#39;</span> <span class=s1>&#39;*.spec.ts&#39;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>  <span class=p>|</span> grep -cE <span class=s1>&#39;^\+.*(\.skip|\.only|xit|xdescribe)&#39;</span> <span class=o>||</span> <span class=nb>true</span><span class=k>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>fail</span><span class=o>=</span><span class=m>0</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[[</span> <span class=s2>&#34;</span><span class=nv>$new_anys</span><span class=s2>&#34;</span> -gt <span class=m>0</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;FAIL: </span><span class=nv>$new_anys</span><span class=s2> new &#39;as any&#39; introduced&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nv>fail</span><span class=o>=</span><span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[[</span> <span class=s2>&#34;</span><span class=nv>$new_ignores</span><span class=s2>&#34;</span> -gt <span class=m>0</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;FAIL: </span><span class=nv>$new_ignores</span><span class=s2> new @ts-ignore introduced&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nv>fail</span><span class=o>=</span><span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[[</span> <span class=s2>&#34;</span><span class=nv>$new_skips</span><span class=s2>&#34;</span> -gt <span class=m>0</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;FAIL: </span><span class=nv>$new_skips</span><span class=s2> new .skip / .only introduced&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nv>fail</span><span class=o>=</span><span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>exit</span> <span class=s2>&#34;</span><span class=nv>$fail</span><span class=s2>&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=scriptscheck-not-mainsh><code>scripts/check-not-main.sh</code></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/usr/bin/env bash
+</span></span></span><span class=line><span class=cl><span class=nb>set</span> -euo pipefail
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>branch</span><span class=o>=</span><span class=k>$(</span>git rev-parse --abbrev-ref HEAD<span class=k>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[[</span> <span class=s2>&#34;</span><span class=nv>$branch</span><span class=s2>&#34;</span> <span class=o>==</span> <span class=s2>&#34;main&#34;</span> <span class=o>||</span> <span class=s2>&#34;</span><span class=nv>$branch</span><span class=s2>&#34;</span> <span class=o>==</span> <span class=s2>&#34;master&#34;</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;Refusing to push directly to </span><span class=nv>$branch</span><span class=s2>.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>exit</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=appendix-c-definition-of-ready--done>Appendix C: Definition of Ready / Done</h2><h3 id=definition-of-ready>Definition of Ready</h3><p>A spec is &ldquo;ready&rdquo; for implementation when ALL of the following are true:</p><ul><li><input disabled type=checkbox> Frontmatter complete (status, owner, target date, related links)</li><li><input disabled type=checkbox> Problem stated in business terms (not &ldquo;the code is bad&rdquo;)</li><li><input disabled type=checkbox> Goals are measurable</li><li><input disabled type=checkbox> Non-Goals explicitly list what&rsquo;s NOT in scope</li><li><input disabled type=checkbox> Approach names the modules/components that will change</li><li><input disabled type=checkbox> Acceptance Criteria are testable</li><li><input disabled type=checkbox> Open Questions are answered or explicitly deferred</li><li><input disabled type=checkbox> Rollout plan exists, including kill switch</li><li><input disabled type=checkbox> Plan generated and reviewed</li><li><input disabled type=checkbox> Spec linked from any related ADR or convention</li></ul><p>Specs that don&rsquo;t meet this bar stay in <code>draft/</code>.</p><h3 id=definition-of-done>Definition of Done</h3><p>A spec is &ldquo;done&rdquo; when ALL of the following are true:</p><ul><li><input disabled type=checkbox> All acceptance criteria pass in production</li><li><input disabled type=checkbox> Tests cover each acceptance criterion</li><li><input disabled type=checkbox> Type-check, lint, and tests pass on main</li><li><input disabled type=checkbox> No new <code>@ts-ignore</code>, <code>as any</code>, or <code>.skip</code> introduced</li><li><input disabled type=checkbox> Telemetry/logging in place to detect regressions</li><li><input disabled type=checkbox> Feature flag (if any) is at intended rollout state</li><li><input disabled type=checkbox> Spec moved to <code>specs/done/</code></li><li><input disabled type=checkbox> <code>notes.md</code> captures any non-obvious decisions</li><li><input disabled type=checkbox> Memory updated if anything was non-obvious or surprising</li><li><input disabled type=checkbox> Refactor ledger updated (if applicable)</li><li><input disabled type=checkbox> Old code marked for deletion (with date) if this replaced something</li></ul><hr><h2 id=appendix-d-onboarding-checklist>Appendix D: Onboarding Checklist</h2><h3 id=day-1-reading-list>Day 1 reading list</h3><ol><li><code>README.md</code></li><li><code>CLAUDE.md</code></li><li><code>specs/README.md</code></li><li><code>specs/conventions/*</code> (skim)</li><li><code>docs/adr/README.md</code> + 2-3 load-bearing ADRs</li><li>3 specs in <code>specs/done/</code> chosen by your buddy</li></ol><h3 id=day-1-doing>Day 1 doing</h3><ul><li>Pair on one trivial fix end-to-end with a buddy</li><li>Open your first PR (anything — fix a typo)</li></ul><h3 id=first-week-milestones>First-week milestones</h3><ul><li><input disabled type=checkbox> Ship one bug fix</li><li><input disabled type=checkbox> Ship one small feature with a spec</li><li><input disabled type=checkbox> Review one PR using <code>/review</code></li><li><input disabled type=checkbox> Save one memory entry about yourself</li></ul><h3 id=what-new-people-get-wrong>What new people get wrong</h3><ul><li><strong>Skipping specs for &ldquo;small&rdquo; things.</strong> Then &ldquo;small&rdquo; turns out to be a 6-file change. Default to writing a spec.</li><li><strong>Trusting the agent&rsquo;s summary.</strong> Cure: pair on the first 5 agent PRs.</li><li><strong>Letting context bloat.</strong> Cure: teach <code>/clear</code> and <code>/compact</code> early.</li><li><strong>Memory hoarding.</strong> Cure: show what NOT to save.</li></ul><hr><h2 id=appendix-e-where-to-start>Appendix E: Where to Start</h2><p>If you want to do exactly one thing this week to improve your agent-driven workflow, in order of leverage:</p><ol><li>Write a sharp <code>CLAUDE.md</code> at the root and one in each major module (1 day)</li><li>Build the <code>specs/</code> system with templates and one filled-in example (1 day)</li><li>Add <code>.claude/settings.json</code> permissions + 3-5 hooks (half day)</li><li>Write 3-5 ADRs for decisions you&rsquo;ve already made implicitly (half day)</li><li>Add <code>validate-spec.js</code> and <code>check-test-discipline.sh</code> scripts (1 hour)</li><li>Write 3-5 reusable prompts in <code>prompts/</code> (1 hour)</li></ol><p>Six items, one week, finished. Everything else is gardening on top of this.</p><hr><h2 id=closing-thought>Closing thought</h2><p>Agents are amplifiers. They amplify what you give them — clear specs become great code, vague specs become confident garbage. The infrastructure described in this tutorial is not overhead; it&rsquo;s the leverage point.</p><p>Build the system, then let the system do the work.</p></section><footer class=article-footer><section class=article-tags><a href=/tags/agents/>Agents</a>
+<a href=/tags/claude-code/>Claude-Code</a>
+<a href=/tags/development/>Development</a>
+<a href=/tags/best-practices/>Best-Practices</a></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/git-workflow-with-code-agents/><div class=article-details><h2 class=article-title>Git Workflow with Code Agents</h2></div></a></article><article><a href=/p/on-the-refinement-of-prompts-a-tutorial-composed-in-the-manner-of-victor-hugo/><div class=article-details><h2 class=article-title>On the Refinement of Prompts: A Tutorial Composed in the Manner of Victor Hugo</h2></div></a></article><article><a href=/p/tutorial-building-a-full-stack-web-project-with-claude-code/><div class=article-details><h2 class=article-title>Tutorial: Building a Full-Stack Web Project with Claude Code</h2></div></a></article><article><a href=/p/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/><div class=article-details><h2 class=article-title>项目开发</h2></div></a></article><article><a href=/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/><div class=article-details><h2 class=article-title>项目学习</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2026 tech-ox</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.33.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
