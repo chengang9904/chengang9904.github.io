@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="中等 · 哈希表优化 · O(n)解法"><title>128. 最长连续序列</title><link rel=canonical href=http://tech-ox.com/p/128.-%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/><link rel=stylesheet href=/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css><meta property='og:title' content="128. 最长连续序列"><meta property='og:description' content="中等 · 哈希表优化 · O(n)解法"><meta property='og:url' content='http://tech-ox.com/p/128.-%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/'><meta property='og:site_name' content='tech-ox'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='哈希表'><meta property='article:tag' content='并查集'><meta property='article:published_time' content='2026-01-05T13:17:12+08:00'><meta property='article:modified_time' content='2026-01-05T13:17:12+08:00'><meta name=twitter:title content="128. 最长连续序列"><meta name=twitter:description content="中等 · 哈希表优化 · O(n)解法"><link rel="shortcut icon" href=/favicon.svg></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="中等 · 排序、哈希集合、区间合并"><title>128. 最长连续序列</title><link rel=canonical href=http://tech-ox.com/p/128.-%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/><link rel=stylesheet href=/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css><meta property='og:title' content="128. 最长连续序列"><meta property='og:description' content="中等 · 排序、哈希集合、区间合并"><meta property='og:url' content='http://tech-ox.com/p/128.-%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/'><meta property='og:site_name' content='tech-ox'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='哈希表'><meta property='article:tag' content='排序'><meta property='article:tag' content='区间合并'><meta property='article:published_time' content='2026-01-05T13:17:12+08:00'><meta property='article:modified_time' content='2026-01-05T13:17:12+08:00'><meta name=twitter:title content="128. 最长连续序列"><meta name=twitter:description content="中等 · 排序、哈希集合、区间合并"><link rel="shortcut icon" href=/favicon.svg></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
 <span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_1e03ac8a4528f217.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
 </a><span class=emoji>😊</span></figure><div class=site-meta><h1 class=site-name><a href=/>tech-ox</a></h1><h2 class=site-description>记录技术与生活点滴</h2></div></header><ol class=menu-social><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
 <span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
@@ -7,9 +7,55 @@
 <span>搜索</span></a></li><li><a href=/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
 <span>友情链接</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
 <svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#题目>题目</a></li><li><a href=#方法一哈希表>方法一：哈希表</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/leetcode-hot-100/>Leetcode Hot 100</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/128.-%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/>128. 最长连续序列</a></h2><h3 class=article-subtitle>中等 · 哈希表优化 · O(n)解法</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#题目>题目</a></li><li><a href=#方法一排序>方法一：排序</a></li><li><a href=#方法二区间合并>方法二：区间合并</a></li><li><a href=#方法三哈希集合--从起点扩展>方法三：哈希集合 + 从起点扩展</a></li><li><a href=#小结>小结</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/leetcode-hot-100/>Leetcode Hot 100</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/128.-%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/>128. 最长连续序列</a></h2><h3 class=article-subtitle>中等 · 排序、哈希集合、区间合并</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
 <time class=article-time--published datetime=2026-01-05T13:17:12+08:00>Jan 05, 2026</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading>阅读时长: 1 分钟</time></div></footer></div></header><section class=article-content><h2 id=题目>题目</h2><p><a class=link href="https://leetcode.cn/problems/longest-consecutive-sequence/description/?envType=problem-list-v2&amp;envId=2cktkvj" target=_blank rel=noopener>128. 最长连续序列</a><br><a class=link href="https://leetcode.cn/problems/longest-consecutive-sequence/solutions/535971/zui-chang-lian-xu-xu-lie-by-leetcode-solution-3pkl/?envType=problem-list-v2&amp;envId=2cktkvj" target=_blank rel=noopener>官方题解</a></p><h2 id=方法一哈希表>方法一：哈希表</h2><p>使用哈希表存储数组中的元素，然后对于每个元素，检查其前驱元素是否存在，以此来找到连续序列的起点，并计算序列长度。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+<time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></div></header><section class=article-content><h2 id=题目>题目</h2><p><a class=link href="https://leetcode.cn/problems/longest-consecutive-sequence/description/?envType=problem-list-v2&amp;envId=2cktkvj" target=_blank rel=noopener>128. 最长连续序列</a><br><a class=link href="https://leetcode.cn/problems/longest-consecutive-sequence/solutions/535971/zui-chang-lian-xu-xu-lie-by-leetcode-solution-3pkl/?envType=problem-list-v2&amp;envId=2cktkvj" target=_blank rel=noopener>官方题解</a></p><p>这道题的核心是：给你一个无序数组，要求找到最长的连续整数序列长度。</p><p>如果直接排序，思路非常直观；如果想做到线性复杂度，就要借助哈希结构，跳过重复元素，并且只从“序列起点”开始向后扩展。</p><h2 id=方法一排序>方法一：排序</h2><p>最容易想到的做法是先排序，再扫描一遍统计连续段长度。</p><p>排序之后，连续整数会聚在一起。我们只需要维护当前连续段长度 <code>ans</code>，以及答案 <code>res</code>。</p><p>需要注意两类情况：</p><ol><li>相邻元素相等，说明是重复数字，直接跳过。</li><li>相邻元素差值大于 1，说明连续段断开，重新开始统计。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>public</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>longestConsecutive</span><span class=p>(</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;&amp;</span> <span class=n>nums</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>nums</span><span class=p>.</span><span class=n>size</span><span class=p>()</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>sort</span><span class=p>(</span><span class=n>nums</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span> <span class=n>nums</span><span class=p>.</span><span class=n>end</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>res</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span> <span class=n>ans</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>nums</span><span class=p>.</span><span class=n>size</span><span class=p>();</span> <span class=n>i</span> <span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>i</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=k>continue</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>nums</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>==</span> <span class=n>nums</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>])</span> <span class=k>continue</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>nums</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>==</span> <span class=n>nums</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>]</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>ans</span> <span class=o>+=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>res</span> <span class=o>=</span> <span class=n>max</span><span class=p>(</span><span class=n>res</span><span class=p>,</span> <span class=n>ans</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=k>continue</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=n>ans</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>res</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><p>时间复杂度：O(n log n)</p><p>空间复杂度：O(1)</p><h2 id=方法二区间合并>方法二：区间合并</h2><p>这个思路比排序更接近题目的本质：我们维护若干个连续区间，并在插入新数字时尝试把它接到左边、右边，或者把左右两个区间合并起来。</p><p>可以用两个映射分别表示区间边界：</p><ul><li><code>prepost</code>：起点 -> 终点</li><li><code>postpre</code>：终点 -> 起点</li></ul><p>再用 <code>visited</code> 去重，避免重复数字影响区间维护。</p><p>当插入数字 <code>x</code> 时，有四种情况：</p><ol><li>左边和右边都存在区间，直接合并成一个大区间。</li><li>只有左边存在区间，把 <code>x</code> 接到左边区间末尾。</li><li>只有右边存在区间，把 <code>x</code> 接到右边区间开头。</li><li>两边都不存在，创建一个新的单元素区间。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -35,34 +81,171 @@
 </span><span class=lnt>24
 </span><span class=lnt>25
 </span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl><span class=k>public</span><span class=o>:</span>
 </span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>longestConsecutive</span><span class=p>(</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;&amp;</span> <span class=n>nums</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=n>unordered_set</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>num_set</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=p>(</span><span class=k>auto</span> <span class=nl>num</span> <span class=p>:</span> <span class=n>nums</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>            <span class=n>num_set</span><span class=p>.</span><span class=n>insert</span><span class=p>(</span><span class=n>num</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>nums</span><span class=p>.</span><span class=n>empty</span><span class=p>())</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>        <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>res</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=p>(</span><span class=k>auto</span> <span class=nl>num</span> <span class=p>:</span> <span class=n>num_set</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>num_set</span><span class=p>.</span><span class=n>count</span><span class=p>(</span><span class=n>num</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>                <span class=kt>int</span> <span class=n>cur</span> <span class=o>=</span> <span class=n>num</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>                <span class=kt>int</span> <span class=n>len</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 起点 -&gt; 终点
+</span></span></span><span class=line><span class=cl>        <span class=n>map</span><span class=o>&lt;</span><span class=kt>int</span><span class=p>,</span> <span class=kt>int</span><span class=o>&gt;</span> <span class=n>prepost</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>                <span class=k>while</span> <span class=p>(</span><span class=n>num_set</span><span class=p>.</span><span class=n>count</span><span class=p>(</span><span class=n>cur</span> <span class=o>+</span> <span class=mi>1</span><span class=p>))</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>                    <span class=n>len</span> <span class=o>++</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>                    <span class=n>cur</span> <span class=o>++</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>                <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 终点 -&gt; 起点
+</span></span></span><span class=line><span class=cl>        <span class=n>map</span><span class=o>&lt;</span><span class=kt>int</span><span class=p>,</span> <span class=kt>int</span><span class=o>&gt;</span> <span class=n>postpre</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>                <span class=n>res</span> <span class=o>=</span> <span class=n>max</span><span class=p>(</span><span class=n>res</span><span class=p>,</span> <span class=n>len</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>unordered_set</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>visited</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>res</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=nl>x</span> <span class=p>:</span> <span class=n>nums</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>visited</span><span class=p>.</span><span class=n>count</span><span class=p>(</span><span class=n>x</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=k>continue</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=n>visited</span><span class=p>.</span><span class=n>insert</span><span class=p>(</span><span class=n>x</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kt>bool</span> <span class=n>preflag</span> <span class=o>=</span> <span class=n>postpre</span><span class=p>.</span><span class=n>find</span><span class=p>(</span><span class=n>x</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span> <span class=o>!=</span> <span class=n>postpre</span><span class=p>.</span><span class=n>end</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>            <span class=kt>bool</span> <span class=n>postflag</span> <span class=o>=</span> <span class=n>prepost</span><span class=p>.</span><span class=n>find</span><span class=p>(</span><span class=n>x</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span> <span class=o>!=</span> <span class=n>prepost</span><span class=p>.</span><span class=n>end</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>preflag</span> <span class=o>&amp;&amp;</span> <span class=n>postflag</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=kt>int</span> <span class=n>preIdx</span> <span class=o>=</span> <span class=n>postpre</span><span class=p>[</span><span class=n>x</span> <span class=o>-</span> <span class=mi>1</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>                <span class=kt>int</span> <span class=n>postIdx</span> <span class=o>=</span> <span class=n>prepost</span><span class=p>[</span><span class=n>x</span> <span class=o>+</span> <span class=mi>1</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>postpre</span><span class=p>.</span><span class=n>erase</span><span class=p>(</span><span class=n>x</span> <span class=o>-</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=n>prepost</span><span class=p>.</span><span class=n>erase</span><span class=p>(</span><span class=n>x</span> <span class=o>+</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>prepost</span><span class=p>[</span><span class=n>preIdx</span><span class=p>]</span> <span class=o>=</span> <span class=n>postIdx</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>postpre</span><span class=p>[</span><span class=n>postIdx</span><span class=p>]</span> <span class=o>=</span> <span class=n>preIdx</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>res</span> <span class=o>=</span> <span class=n>max</span><span class=p>(</span><span class=n>res</span><span class=p>,</span> <span class=n>postIdx</span> <span class=o>-</span> <span class=n>preIdx</span> <span class=o>+</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span> <span class=nf>if</span> <span class=p>(</span><span class=n>preflag</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=kt>int</span> <span class=n>preIdx</span> <span class=o>=</span> <span class=n>postpre</span><span class=p>[</span><span class=n>x</span> <span class=o>-</span> <span class=mi>1</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>postpre</span><span class=p>.</span><span class=n>erase</span><span class=p>(</span><span class=n>x</span> <span class=o>-</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>prepost</span><span class=p>[</span><span class=n>preIdx</span><span class=p>]</span> <span class=o>=</span> <span class=n>x</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>postpre</span><span class=p>[</span><span class=n>x</span><span class=p>]</span> <span class=o>=</span> <span class=n>preIdx</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>res</span> <span class=o>=</span> <span class=n>max</span><span class=p>(</span><span class=n>res</span><span class=p>,</span> <span class=n>x</span> <span class=o>-</span> <span class=n>preIdx</span> <span class=o>+</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span> <span class=nf>if</span> <span class=p>(</span><span class=n>postflag</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=kt>int</span> <span class=n>postIdx</span> <span class=o>=</span> <span class=n>prepost</span><span class=p>[</span><span class=n>x</span> <span class=o>+</span> <span class=mi>1</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>prepost</span><span class=p>.</span><span class=n>erase</span><span class=p>(</span><span class=n>x</span> <span class=o>+</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>prepost</span><span class=p>[</span><span class=n>x</span><span class=p>]</span> <span class=o>=</span> <span class=n>postIdx</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>postpre</span><span class=p>[</span><span class=n>postIdx</span><span class=p>]</span> <span class=o>=</span> <span class=n>x</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>res</span> <span class=o>=</span> <span class=n>max</span><span class=p>(</span><span class=n>res</span><span class=p>,</span> <span class=n>postIdx</span> <span class=o>-</span> <span class=n>x</span> <span class=o>+</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>prepost</span><span class=p>[</span><span class=n>x</span><span class=p>]</span> <span class=o>=</span> <span class=n>x</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>postpre</span><span class=p>[</span><span class=n>x</span><span class=p>]</span> <span class=o>=</span> <span class=n>x</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>            <span class=p>}</span>
 </span></span><span class=line><span class=cl>        <span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>res</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>};</span>
-</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/>哈希表</a>
-<a href=/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/>并查集</a></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/448.-%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/><div class=article-details><h2 class=article-title>448. 找到所有数组中消失的数字</h2></div></a></article><article><a href=/p/49.-%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/><div class=article-details><h2 class=article-title>49. 字母异位词分组</h2></div></a></article><article><a href=/p/438.-%E6%89%BE%E5%88%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E6%89%80%E6%9C%89%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D/><div class=article-details><h2 class=article-title>438. 找到字符串中所有字母异位词</h2></div></a></article><article><a href=/p/347.-%E5%89%8D-k-%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/><div class=article-details><h2 class=article-title>347. 前 K 个高频元素</h2></div></a></article><article><a href=/p/560.-%E5%92%8C%E4%B8%BA-k-%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/><div class=article-details><h2 class=article-title>560. 和为 K 的子数组</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+</span></span></code></pre></td></tr></table></div></div><p>这个写法的优点是区间关系非常直观，适合自己推导和理解；缺点是实现细节比较多，代码量也更大。</p><p>时间复杂度：O(n log n)</p><p>空间复杂度：O(n)</p><h2 id=方法三哈希集合--从起点扩展>方法三：哈希集合 + 从起点扩展</h2><p>这是官方题解的核心思路，也是面试里最推荐的写法。</p><p>先把所有数字放进哈希集合。然后遍历集合中的每个数字，只有当当前数字的前驱 <code>num - 1</code> 不存在时，才把它当作一段连续序列的起点，向后不断扩展。</p><p>这样做的关键收益是：</p><ol><li>每个连续段只会从起点扫描一次。</li><li>不是起点的数字不会重复向后扩展，避免了重复计算。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>public</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>longestConsecutive</span><span class=p>(</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;&amp;</span> <span class=n>nums</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>unordered_set</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>num_set</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=p>(</span><span class=k>const</span> <span class=kt>int</span><span class=o>&amp;</span> <span class=nl>num</span> <span class=p>:</span> <span class=n>nums</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>num_set</span><span class=p>.</span><span class=n>insert</span><span class=p>(</span><span class=n>num</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>longestStreak</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=p>(</span><span class=k>const</span> <span class=kt>int</span><span class=o>&amp;</span> <span class=nl>num</span> <span class=p>:</span> <span class=n>num_set</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>num_set</span><span class=p>.</span><span class=n>count</span><span class=p>(</span><span class=n>num</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=kt>int</span> <span class=n>currentNum</span> <span class=o>=</span> <span class=n>num</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=kt>int</span> <span class=n>currentStreak</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=k>while</span> <span class=p>(</span><span class=n>num_set</span><span class=p>.</span><span class=n>count</span><span class=p>(</span><span class=n>currentNum</span> <span class=o>+</span> <span class=mi>1</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>currentNum</span> <span class=o>+=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                    <span class=n>currentStreak</span> <span class=o>+=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>longestStreak</span> <span class=o>=</span> <span class=n>max</span><span class=p>(</span><span class=n>longestStreak</span><span class=p>,</span> <span class=n>currentStreak</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>longestStreak</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><p>时间复杂度：O(n)</p><p>空间复杂度：O(n)</p><h2 id=小结>小结</h2><p>这题本质上是在找“连续段”的最大长度。</p><ul><li>如果想要最容易写，对数组排序后扫描即可。</li><li>如果想把思路做得更结构化，可以用“区间合并”。</li><li>如果追求最优复杂度，官方的“哈希集合 + 从起点扩展”是最标准的解法。</li></ul><p>面试或者刷题时，建议优先掌握第三种写法；前两种可以帮助理解为什么第三种能做到线性复杂度。</p></section><footer class=article-footer><section class=article-tags><a href=/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/>哈希表</a>
+<a href=/tags/%E6%8E%92%E5%BA%8F/>排序</a>
+<a href=/tags/%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6/>区间合并</a></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=[".main-article",".widget--toc"];e.forEach(e=>{const t=document.querySelector(e);t&&renderMathInElement(t,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/49.-%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/><div class=article-details><h2 class=article-title>49. 字母异位词分组</h2></div></a></article><article><a href=/p/406.-%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/><div class=article-details><h2 class=article-title>406. 根据身高重建队列</h2></div></a></article><article><a href=/p/448.-%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/><div class=article-details><h2 class=article-title>448. 找到所有数组中消失的数字</h2></div></a></article><article><a href=/p/581.-%E6%9C%80%E7%9F%AD%E6%97%A0%E5%BA%8F%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/><div class=article-details><h2 class=article-title>581. 最短无序连续子数组</h2></div></a></article><article><a href=/p/438.-%E6%89%BE%E5%88%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E6%89%80%E6%9C%89%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D/><div class=article-details><h2 class=article-title>438. 找到字符串中所有字母异位词</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
 2026 tech-ox</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.33.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
