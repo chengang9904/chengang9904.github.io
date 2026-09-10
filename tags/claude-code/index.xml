@@ -2269,7 +2269,7 @@
 &lt;hr&gt;
 &lt;h2 id="closing-thought"&gt;Closing thought
 &lt;/h2&gt;&lt;p&gt;Agents are amplifiers. They amplify what you give them — clear specs become great code, vague specs become confident garbage. The infrastructure described in this tutorial is not overhead; it&amp;rsquo;s the leverage point.&lt;/p&gt;
-&lt;p&gt;Build the system, then let the system do the work.&lt;/p&gt;</description></item><item><title>Windows 下 Claude Code /resume 显示不全的处理方法</title><link>http://tech-ox.com/p/windows-%E4%B8%8B-claude-code-/resume-%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</link><pubDate>Sun, 26 Apr 2026 00:00:00 +0800</pubDate><guid>http://tech-ox.com/p/windows-%E4%B8%8B-claude-code-/resume-%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</guid><description>&lt;p&gt;如果你在 Windows 上使用 Claude Code，可能会遇到这样一个现象：&lt;/p&gt;
+&lt;p&gt;Build the system, then let the system do the work.&lt;/p&gt;</description></item><item><title>Windows 下 Claude Code /resume 显示不全的处理方法</title><link>http://tech-ox.com/p/windows-%E4%B8%8B-claude-code-resume-%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</link><pubDate>Sun, 26 Apr 2026 00:00:00 +0800</pubDate><guid>http://tech-ox.com/p/windows-%E4%B8%8B-claude-code-resume-%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</guid><description>&lt;p&gt;如果你在 Windows 上使用 Claude Code，可能会遇到这样一个现象：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;正常开发对话时，内容是一点一点输出的，显示完全正常。&lt;/li&gt;
 &lt;li&gt;但使用 &lt;code&gt;/resume&lt;/code&gt; 或 &lt;code&gt;claude -c&lt;/code&gt; 恢复上一次会话时，内容会一次性灌入终端。&lt;/li&gt;
