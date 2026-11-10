@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>矩阵 on tech-ox</title><link>http://tech-ox.com/tags/%E7%9F%A9%E9%98%B5/</link><description>Recent content in 矩阵 on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Fri, 16 Jan 2026 09:57:30 +0800</lastBuildDate><atom:link href="http://tech-ox.com/tags/%E7%9F%A9%E9%98%B5/index.xml" rel="self" type="application/rss+xml"/><item><title>79. 单词搜索</title><link>http://tech-ox.com/p/79.-%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</link><pubDate>Fri, 16 Jan 2026 09:57:30 +0800</pubDate><guid>http://tech-ox.com/p/79.-%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</guid><description>&lt;h2 id="题目"&gt;题目
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>矩阵 on codgem</title><link>https://codgem.com/tags/%E7%9F%A9%E9%98%B5/</link><description>Recent content in 矩阵 on codgem</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>codgem</copyright><lastBuildDate>Fri, 16 Jan 2026 09:57:30 +0800</lastBuildDate><atom:link href="https://codgem.com/tags/%E7%9F%A9%E9%98%B5/index.xml" rel="self" type="application/rss+xml"/><item><title>79. 单词搜索</title><link>https://codgem.com/p/79.-%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</link><pubDate>Fri, 16 Jan 2026 09:57:30 +0800</pubDate><guid>https://codgem.com/p/79.-%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/word-search/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;79. 单词搜索&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/word-search/solutions/535240/dan-ci-sou-xun-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -95,7 +95,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;时间复杂度：O(N * 3^L)，其中 N 是矩阵中的单元格数量，L 是单词的长度。最坏情况下，我们需要从每个单元格开始进行深度优先搜索，每次搜索有最多 3 个方向可选（因为不能回到上一个单元格）。
-空间复杂度：O(L)，递归调用栈的深度最大为单词的长度 L，同时还需要一个大小为 N 的布尔矩阵来记录访问状态，但主要空间开销来自递归栈。&lt;/p&gt;</description></item><item><title>240. 搜索二维矩阵 II</title><link>http://tech-ox.com/p/240.-%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5-ii/</link><pubDate>Sun, 04 Jan 2026 14:24:40 +0800</pubDate><guid>http://tech-ox.com/p/240.-%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5-ii/</guid><description>&lt;h2 id="题目"&gt;题目
+空间复杂度：O(L)，递归调用栈的深度最大为单词的长度 L，同时还需要一个大小为 N 的布尔矩阵来记录访问状态，但主要空间开销来自递归栈。&lt;/p&gt;</description></item><item><title>240. 搜索二维矩阵 II</title><link>https://codgem.com/p/240.-%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5-ii/</link><pubDate>Sun, 04 Jan 2026 14:24:40 +0800</pubDate><guid>https://codgem.com/p/240.-%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5-ii/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/search-a-2d-matrix-ii/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;240. 搜索二维矩阵 II&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/search-a-2d-matrix-ii/solutions/535821/sou-suo-er-wei-ju-zhen-ii-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -200,15 +200,15 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;时间复杂度&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;O(2^(m+n))，m 和 n 分别是矩阵的行数和列数。&lt;/p&gt;
-&lt;p&gt;117 / 130 个通过的测试用例&lt;/p&gt;</description></item><item><title>85. 最大矩形</title><link>http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</link><pubDate>Sun, 04 Jan 2026 10:37:02 +0800</pubDate><guid>http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;p&gt;117 / 130 个通过的测试用例&lt;/p&gt;</description></item><item><title>85. 最大矩形</title><link>https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</link><pubDate>Sun, 04 Jan 2026 10:37:02 +0800</pubDate><guid>https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/maximal-rectangle/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;85. 最大矩形&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/maximal-rectangle/solutions/535672/zui-da-ju-xing-by-leetcode-solution-bjlu/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;官方题解&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image.png"
+&lt;p&gt;&lt;img src="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image.png"
 width="1886"
 height="1711"
-srcset="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_fc566ea4dd741c5.png 480w, http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_6a9dc5abb583a75f.png 1024w"
+srcset="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_fc566ea4dd741c5.png 480w, https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_6a9dc5abb583a75f.png 1024w"
 loading="lazy"
 alt="题目示例"
 class="gallery-image"
@@ -411,10 +411,10 @@ $$&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;p&gt;O((mn)^3)，m 和 n 分别是矩阵的行数和列数。&lt;/p&gt;
 &lt;p&gt;70/75 TLE&lt;/p&gt;
 &lt;h2 id="暴力优化"&gt;暴力优化
-&lt;/h2&gt;&lt;p&gt;&lt;img src="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2.png"
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2.png"
 width="2000"
 height="1125"
-srcset="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2_hu_f6265f71ce5f0fc0.png 480w, http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2_hu_855cad2ff4f7388c.png 1024w"
+srcset="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2_hu_f6265f71ce5f0fc0.png 480w, https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2_hu_855cad2ff4f7388c.png 1024w"
 loading="lazy"
 alt="暴力优化示意图"
 class="gallery-image"
@@ -422,10 +422,10 @@ data-flex-grow="177"
 data-flex-basis="426px"
 &gt;&lt;/p&gt;
 &lt;p&gt;我们首先计算出矩阵的每个元素的左边连续 1 的数量，使用二维数组 left 记录，其中 left[i][j] 为矩阵第 i 行第 j 列元素的左边连续 1 的数量。&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1.png"
+&lt;p&gt;&lt;img src="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1.png"
 width="2000"
 height="1125"
-srcset="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1_hu_b37af737af321589.png 480w, http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1_hu_856118efaf8550fd.png 1024w"
+srcset="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1_hu_b37af737af321589.png 480w, https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1_hu_856118efaf8550fd.png 1024w"
 loading="lazy"
 alt="left数组计算"
 class="gallery-image"

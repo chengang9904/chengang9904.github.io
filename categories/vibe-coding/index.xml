@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vibe-Coding on tech-ox</title><link>http://tech-ox.com/categories/vibe-coding/</link><description>Recent content in Vibe-Coding on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Fri, 08 May 2026 04:24:51 -0700</lastBuildDate><atom:link href="http://tech-ox.com/categories/vibe-coding/index.xml" rel="self" type="application/rss+xml"/><item><title>Prd Writing Guide</title><link>http://tech-ox.com/p/prd-writing-guide/</link><pubDate>Fri, 08 May 2026 04:24:51 -0700</pubDate><guid>http://tech-ox.com/p/prd-writing-guide/</guid><description>&lt;p&gt;A practical tutorial for producing Product Requirements Documents (PRDs) for large-scale web projects when AI coding agents (Claude Code, Cursor, Copilot, Codex) are part of the team.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vibe-Coding on codgem</title><link>https://codgem.com/categories/vibe-coding/</link><description>Recent content in Vibe-Coding on codgem</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>codgem</copyright><lastBuildDate>Fri, 08 May 2026 04:24:51 -0700</lastBuildDate><atom:link href="https://codgem.com/categories/vibe-coding/index.xml" rel="self" type="application/rss+xml"/><item><title>Prd Writing Guide</title><link>https://codgem.com/p/prd-writing-guide/</link><pubDate>Fri, 08 May 2026 04:24:51 -0700</pubDate><guid>https://codgem.com/p/prd-writing-guide/</guid><description>&lt;p&gt;A practical tutorial for producing Product Requirements Documents (PRDs) for large-scale web projects when AI coding agents (Claude Code, Cursor, Copilot, Codex) are part of the team.&lt;/p&gt;
 &lt;h2 id="table-of-contents"&gt;Table of Contents
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;&lt;a class="link" href="#1-why-prds-are-different-now" &gt;Why PRDs Are Different Now&lt;/a&gt;&lt;/li&gt;
@@ -1439,7 +1439,7 @@
 &gt;Anthropic&amp;rsquo;s Claude Code documentation on &lt;code&gt;CLAUDE.md&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;This is a living document. Improvements welcome — open a PR.&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Agent Driven Development</title><link>http://tech-ox.com/p/agent-driven-development/</link><pubDate>Fri, 08 May 2026 04:12:12 -0700</pubDate><guid>http://tech-ox.com/p/agent-driven-development/</guid><description>&lt;p&gt;A complete guide to building large-scale web projects with code agents (Claude Code and similar). Read top to bottom; each section builds on the last.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This is a living document. Improvements welcome — open a PR.&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Agent Driven Development</title><link>https://codgem.com/p/agent-driven-development/</link><pubDate>Fri, 08 May 2026 04:12:12 -0700</pubDate><guid>https://codgem.com/p/agent-driven-development/</guid><description>&lt;p&gt;A complete guide to building large-scale web projects with code agents (Claude Code and similar). Read top to bottom; each section builds on the last.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="introduction"&gt;Introduction
 &lt;/h2&gt;&lt;h3 id="what-this-is"&gt;What this is
@@ -3710,7 +3710,7 @@
 &lt;hr&gt;
 &lt;h2 id="closing-thought"&gt;Closing thought
 &lt;/h2&gt;&lt;p&gt;Agents are amplifiers. They amplify what you give them — clear specs become great code, vague specs become confident garbage. The infrastructure described in this tutorial is not overhead; it&amp;rsquo;s the leverage point.&lt;/p&gt;
-&lt;p&gt;Build the system, then let the system do the work.&lt;/p&gt;</description></item><item><title>On the Refinement of Prompts: A Tutorial Composed in the Manner of Victor Hugo</title><link>http://tech-ox.com/p/on-the-refinement-of-prompts-a-tutorial-composed-in-the-manner-of-victor-hugo/</link><pubDate>Fri, 08 May 2026 04:12:12 -0600</pubDate><guid>http://tech-ox.com/p/on-the-refinement-of-prompts-a-tutorial-composed-in-the-manner-of-victor-hugo/</guid><description>&lt;h3 id="a-tutorial-composed-in-the-manner-of-victor-hugo"&gt;&lt;em&gt;A Tutorial Composed in the Manner of Victor Hugo&lt;/em&gt;
+&lt;p&gt;Build the system, then let the system do the work.&lt;/p&gt;</description></item><item><title>On the Refinement of Prompts: A Tutorial Composed in the Manner of Victor Hugo</title><link>https://codgem.com/p/on-the-refinement-of-prompts-a-tutorial-composed-in-the-manner-of-victor-hugo/</link><pubDate>Fri, 08 May 2026 04:12:12 -0600</pubDate><guid>https://codgem.com/p/on-the-refinement-of-prompts-a-tutorial-composed-in-the-manner-of-victor-hugo/</guid><description>&lt;h3 id="a-tutorial-composed-in-the-manner-of-victor-hugo"&gt;&lt;em&gt;A Tutorial Composed in the Manner of Victor Hugo&lt;/em&gt;
 &lt;/h3&gt;&lt;hr&gt;
 &lt;h2 id="preface"&gt;Preface
 &lt;/h2&gt;&lt;p&gt;There has appeared, in this strange and electric century, a species of conversation unknown to all the ages that came before it. It is the dialogue between man and machine; between the trembling soul, which doubts and hesitates and yearns, and the silent engine, which calculates without fatigue and answers without conscience. To this new interlocutor we bring our questions — small questions and immense ones, questions of bread and questions of God — and from it we receive replies. But what replies! Sometimes brilliant as the noonday sun upon the sea; sometimes flat, gray, and mediocre as a Parisian afternoon in November.&lt;/p&gt;
@@ -3799,7 +3799,7 @@
 &lt;p&gt;These are not techniques. They are &lt;em&gt;dispositions&lt;/em&gt;. The man who adopts them shall find, after a little practice, that the same machine which yesterday produced platitudes today produces something approaching wisdom. The chisel has not changed; the hand has learned.&lt;/p&gt;
 &lt;p&gt;And here, dear reader, this little manual ends — for I have followed my own counsel, and I will not summarize what I have already said.&lt;/p&gt;
 &lt;p&gt;Go now. Pick up your chisel. The marble is waiting.&lt;/p&gt;
-&lt;p&gt;— &lt;em&gt;Fin&lt;/em&gt; —&lt;/p&gt;</description></item><item><title>Git Workflow with Code Agents</title><link>http://tech-ox.com/p/git-workflow-with-code-agents/</link><pubDate>Fri, 08 May 2026 00:00:00 +0000</pubDate><guid>http://tech-ox.com/p/git-workflow-with-code-agents/</guid><description>&lt;h2 id="why-this-guide-exists"&gt;Why this guide exists
+&lt;p&gt;— &lt;em&gt;Fin&lt;/em&gt; —&lt;/p&gt;</description></item><item><title>Git Workflow with Code Agents</title><link>https://codgem.com/p/git-workflow-with-code-agents/</link><pubDate>Fri, 08 May 2026 00:00:00 +0000</pubDate><guid>https://codgem.com/p/git-workflow-with-code-agents/</guid><description>&lt;h2 id="why-this-guide-exists"&gt;Why this guide exists
 &lt;/h2&gt;&lt;p&gt;Code agents change the economics of writing code: they produce diffs fast, sometimes faster than you can read them. That makes the &lt;em&gt;Git workflow around the agent&lt;/em&gt; — how you isolate its work, review it, and integrate it — more important than the workflow you&amp;rsquo;d use working solo.&lt;/p&gt;
 &lt;p&gt;This tutorial walks through a practical setup: how to use branches, when worktrees help, whether you need a &lt;code&gt;dev&lt;/code&gt; branch, and how to land agent-authored work on &lt;code&gt;main&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="core-principles"&gt;Core principles
@@ -3999,7 +3999,7 @@
 &gt;Trunk-Based Development&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="link" href="https://docs.github.com/en/get-started/using-github/github-flow" target="_blank" rel="noopener"
 &gt;GitHub Flow&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Tutorial: Building a Full-Stack Web Project with Claude Code</title><link>http://tech-ox.com/p/tutorial-building-a-full-stack-web-project-with-claude-code/</link><pubDate>Wed, 06 May 2026 10:50:55 +0800</pubDate><guid>http://tech-ox.com/p/tutorial-building-a-full-stack-web-project-with-claude-code/</guid><description>&lt;h1 id="building-a-full-stack-web-project-with-claude-code"&gt;Building a Full-Stack Web Project with Claude Code
+&lt;/ul&gt;</description></item><item><title>Tutorial: Building a Full-Stack Web Project with Claude Code</title><link>https://codgem.com/p/tutorial-building-a-full-stack-web-project-with-claude-code/</link><pubDate>Wed, 06 May 2026 10:50:55 +0800</pubDate><guid>https://codgem.com/p/tutorial-building-a-full-stack-web-project-with-claude-code/</guid><description>&lt;h1 id="building-a-full-stack-web-project-with-claude-code"&gt;Building a Full-Stack Web Project with Claude Code
 &lt;/h1&gt;&lt;p&gt;A concrete, session-by-session walk-through of using Claude Code as a co-developer on a real, multi-module web application — designed around context-window constraints rather than against them.&lt;/p&gt;
 &lt;p&gt;The example project is &lt;strong&gt;FocusBoard&lt;/strong&gt;, a team kanban with time tracking and reports. It&amp;rsquo;s big enough to demonstrate the workflow but small enough to be specific.&lt;/p&gt;
 &lt;hr&gt;
@@ -4724,7 +4724,7 @@
 &lt;li&gt;&lt;strong&gt;Every ~5-10 sessions:&lt;/strong&gt; audit ritual to catch drift.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Always:&lt;/strong&gt; the type system + CI + Playwright are the safety net. Invest in them early; they pay back tenfold.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;The discipline is: &lt;strong&gt;the codebase is the truth, the docs are the index, and every session loads only the slice it needs.&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>项目开发</title><link>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</link><pubDate>Sat, 25 Apr 2026 10:55:20 +0800</pubDate><guid>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;The discipline is: &lt;strong&gt;the codebase is the truth, the docs are the index, and every session loads only the slice it needs.&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>项目开发</title><link>https://codgem.com/p/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</link><pubDate>Sat, 25 Apr 2026 10:55:20 +0800</pubDate><guid>https://codgem.com/p/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;项目开发的提示词&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id="重要工具清单"&gt;重要工具清单
@@ -4977,7 +4977,7 @@
 &lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;我在执行[命令/操作]时出现错误：[粘贴报错]。
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>项目学习</title><link>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</link><pubDate>Sat, 25 Apr 2026 10:50:55 +0800</pubDate><guid>http://tech-ox.com/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</guid><description>&lt;blockquote&gt;
+&lt;/div&gt;</description></item><item><title>项目学习</title><link>https://codgem.com/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</link><pubDate>Sat, 25 Apr 2026 10:50:55 +0800</pubDate><guid>https://codgem.com/p/%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;项目学习的提示词&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Now I have enough material. Let me synthesize the key findings.&lt;/p&gt;

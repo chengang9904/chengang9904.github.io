@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>栈 on tech-ox</title><link>http://tech-ox.com/tags/%E6%A0%88/</link><description>Recent content in 栈 on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Tue, 31 Mar 2026 16:32:17 +0800</lastBuildDate><atom:link href="http://tech-ox.com/tags/%E6%A0%88/index.xml" rel="self" type="application/rss+xml"/><item><title>C++ 算法面试中的二叉树迭代遍历</title><link>http://tech-ox.com/p/c-%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E4%B8%AD%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E8%BF%AD%E4%BB%A3%E9%81%8D%E5%8E%86/</link><pubDate>Tue, 31 Mar 2026 16:32:17 +0800</pubDate><guid>http://tech-ox.com/p/c-%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E4%B8%AD%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E8%BF%AD%E4%BB%A3%E9%81%8D%E5%8E%86/</guid><description>&lt;h2 id="c-算法面试中的二叉树迭代遍历"&gt;C++ 算法面试中的二叉树迭代遍历
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>栈 on codgem</title><link>https://codgem.com/tags/%E6%A0%88/</link><description>Recent content in 栈 on codgem</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>codgem</copyright><lastBuildDate>Tue, 31 Mar 2026 16:32:17 +0800</lastBuildDate><atom:link href="https://codgem.com/tags/%E6%A0%88/index.xml" rel="self" type="application/rss+xml"/><item><title>C++ 算法面试中的二叉树迭代遍历</title><link>https://codgem.com/p/c-%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E4%B8%AD%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E8%BF%AD%E4%BB%A3%E9%81%8D%E5%8E%86/</link><pubDate>Tue, 31 Mar 2026 16:32:17 +0800</pubDate><guid>https://codgem.com/p/c-%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E4%B8%AD%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E8%BF%AD%E4%BB%A3%E9%81%8D%E5%8E%86/</guid><description>&lt;h2 id="c-算法面试中的二叉树迭代遍历"&gt;C++ 算法面试中的二叉树迭代遍历
 &lt;/h2&gt;&lt;p&gt;在算法面试中，二叉树是常见的数据结构，其遍历算法是考察递归和栈操作的基本功。递归实现简单直观，但迭代实现更能体现对栈的理解和控制，尤其在避免递归深度过大导致栈溢出的场景下更为稳健。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id="1-二叉树基础"&gt;1. 二叉树基础
@@ -210,7 +210,7 @@
 &lt;hr&gt;
 &lt;h3 id="总结"&gt;总结
 &lt;/h3&gt;&lt;p&gt;二叉树迭代遍历是算法面试中的经典问题，掌握前序、中序、后序的迭代实现，能有效展示你的编程基础和对数据结构的理解。递归简单，但迭代更考验逻辑思维。&lt;/p&gt;
-&lt;p&gt;祝你面试顺利，拿到心仪的 Offer！&lt;/p&gt;</description></item><item><title>394. 字符串解码</title><link>http://tech-ox.com/p/394.-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81/</link><pubDate>Thu, 19 Mar 2026 22:16:29 +0800</pubDate><guid>http://tech-ox.com/p/394.-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;p&gt;祝你面试顺利，拿到心仪的 Offer！&lt;/p&gt;</description></item><item><title>394. 字符串解码</title><link>https://codgem.com/p/394.-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81/</link><pubDate>Thu, 19 Mar 2026 22:16:29 +0800</pubDate><guid>https://codgem.com/p/394.-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/decode-string/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;394. 字符串解码&lt;/a&gt;&lt;br&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/decode-string/solutions/522553/zi-fu-chuan-jie-ma-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -326,7 +326,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>155. 最小栈</title><link>http://tech-ox.com/p/155.-%E6%9C%80%E5%B0%8F%E6%A0%88/</link><pubDate>Wed, 28 Jan 2026 11:10:24 +0800</pubDate><guid>http://tech-ox.com/p/155.-%E6%9C%80%E5%B0%8F%E6%A0%88/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;/div&gt;</description></item><item><title>155. 最小栈</title><link>https://codgem.com/p/155.-%E6%9C%80%E5%B0%8F%E6%A0%88/</link><pubDate>Wed, 28 Jan 2026 11:10:24 +0800</pubDate><guid>https://codgem.com/p/155.-%E6%9C%80%E5%B0%8F%E6%A0%88/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/min-stack/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;155. 最小栈&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/min-stack/solutions/535557/zui-xiao-zhan-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -410,7 +410,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>32. 最长有效括号</title><link>http://tech-ox.com/p/32.-%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</link><pubDate>Mon, 05 Jan 2026 10:39:13 +0800</pubDate><guid>http://tech-ox.com/p/32.-%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;/div&gt;</description></item><item><title>32. 最长有效括号</title><link>https://codgem.com/p/32.-%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</link><pubDate>Mon, 05 Jan 2026 10:39:13 +0800</pubDate><guid>https://codgem.com/p/32.-%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/longest-valid-parentheses/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;32. 最长有效括号&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/longest-valid-parentheses/solutions/535619/zui-chang-you-xiao-gua-hao-by-leetcode-solution-bjlu/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"

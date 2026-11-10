@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>回溯 on tech-ox</title><link>http://tech-ox.com/tags/%E5%9B%9E%E6%BA%AF/</link><description>Recent content in 回溯 on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Thu, 10 Sep 2026 08:10:19 -0700</lastBuildDate><atom:link href="http://tech-ox.com/tags/%E5%9B%9E%E6%BA%AF/index.xml" rel="self" type="application/rss+xml"/><item><title>22. 括号生成</title><link>http://tech-ox.com/p/22.-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</link><pubDate>Thu, 10 Sep 2026 08:10:19 -0700</pubDate><guid>http://tech-ox.com/p/22.-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</guid><description>&lt;h2 id="题目"&gt;题目
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>回溯 on codgem</title><link>https://codgem.com/tags/%E5%9B%9E%E6%BA%AF/</link><description>Recent content in 回溯 on codgem</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>codgem</copyright><lastBuildDate>Thu, 10 Sep 2026 08:10:19 -0700</lastBuildDate><atom:link href="https://codgem.com/tags/%E5%9B%9E%E6%BA%AF/index.xml" rel="self" type="application/rss+xml"/><item><title>22. 括号生成</title><link>https://codgem.com/p/22.-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</link><pubDate>Thu, 10 Sep 2026 08:10:19 -0700</pubDate><guid>https://codgem.com/p/22.-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/generate-parentheses/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;22. 括号生成&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/generate-parentheses/solutions/535717/gua-hao-sheng-cheng-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -55,7 +55,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>306. 累加数</title><link>http://tech-ox.com/p/306.-%E7%B4%AF%E5%8A%A0%E6%95%B0/</link><pubDate>Tue, 08 Sep 2026 04:54:41 -0700</pubDate><guid>http://tech-ox.com/p/306.-%E7%B4%AF%E5%8A%A0%E6%95%B0/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;/div&gt;</description></item><item><title>306. 累加数</title><link>https://codgem.com/p/306.-%E7%B4%AF%E5%8A%A0%E6%95%B0/</link><pubDate>Tue, 08 Sep 2026 04:54:41 -0700</pubDate><guid>https://codgem.com/p/306.-%E7%B4%AF%E5%8A%A0%E6%95%B0/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/additive-number/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;306. 累加数&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/additive-number/solutions/522554/lei-jia-shu-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -297,7 +297,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>79. 单词搜索</title><link>http://tech-ox.com/p/79.-%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</link><pubDate>Fri, 16 Jan 2026 09:57:30 +0800</pubDate><guid>http://tech-ox.com/p/79.-%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;/div&gt;</description></item><item><title>79. 单词搜索</title><link>https://codgem.com/p/79.-%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</link><pubDate>Fri, 16 Jan 2026 09:57:30 +0800</pubDate><guid>https://codgem.com/p/79.-%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/word-search/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;79. 单词搜索&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/word-search/solutions/535240/dan-ci-sou-xun-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -394,7 +394,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;时间复杂度：O(N * 3^L)，其中 N 是矩阵中的单元格数量，L 是单词的长度。最坏情况下，我们需要从每个单元格开始进行深度优先搜索，每次搜索有最多 3 个方向可选（因为不能回到上一个单元格）。
-空间复杂度：O(L)，递归调用栈的深度最大为单词的长度 L，同时还需要一个大小为 N 的布尔矩阵来记录访问状态，但主要空间开销来自递归栈。&lt;/p&gt;</description></item><item><title>39. 组合总和</title><link>http://tech-ox.com/p/39.-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</link><pubDate>Fri, 09 Jan 2026 09:54:04 +0800</pubDate><guid>http://tech-ox.com/p/39.-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</guid><description>&lt;h2 id="题目"&gt;题目
+空间复杂度：O(L)，递归调用栈的深度最大为单词的长度 L，同时还需要一个大小为 N 的布尔矩阵来记录访问状态，但主要空间开销来自递归栈。&lt;/p&gt;</description></item><item><title>39. 组合总和</title><link>https://codgem.com/p/39.-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</link><pubDate>Fri, 09 Jan 2026 09:54:04 +0800</pubDate><guid>https://codgem.com/p/39.-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/combination-sum/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;39. 组合总和&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/combination-sum/solutions/535708/zu-he-zong-he-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -524,7 +524,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>437. 路径总和 III</title><link>http://tech-ox.com/p/437.-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C-iii/</link><pubDate>Thu, 08 Jan 2026 20:27:02 +0800</pubDate><guid>http://tech-ox.com/p/437.-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C-iii/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;/div&gt;</description></item><item><title>437. 路径总和 III</title><link>https://codgem.com/p/437.-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C-iii/</link><pubDate>Thu, 08 Jan 2026 20:27:02 +0800</pubDate><guid>https://codgem.com/p/437.-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C-iii/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/path-sum-iii/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;437. 路径总和 III&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/path-sum-iii/solutions/535606/lu-jing-zong-he-iii-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -742,7 +742,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;时间复杂度：O(n)，n为节点数&lt;/p&gt;
-&lt;p&gt;空间复杂度：O(h)，h为树的高度&lt;/p&gt;</description></item><item><title>78. 子集</title><link>http://tech-ox.com/p/78.-%E5%AD%90%E9%9B%86/</link><pubDate>Tue, 06 Jan 2026 11:39:48 +0800</pubDate><guid>http://tech-ox.com/p/78.-%E5%AD%90%E9%9B%86/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;p&gt;空间复杂度：O(h)，h为树的高度&lt;/p&gt;</description></item><item><title>78. 子集</title><link>https://codgem.com/p/78.-%E5%AD%90%E9%9B%86/</link><pubDate>Tue, 06 Jan 2026 11:39:48 +0800</pubDate><guid>https://codgem.com/p/78.-%E5%AD%90%E9%9B%86/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/subsets/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;78. 子集&lt;/a&gt;&lt;br&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/subsets/solutions/523043/zi-ji-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>动态规划 on tech-ox</title><link>http://tech-ox.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link><description>Recent content in 动态规划 on tech-ox</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>tech-ox</copyright><lastBuildDate>Sun, 12 Jul 2026 00:00:00 +0800</lastBuildDate><atom:link href="http://tech-ox.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.xml" rel="self" type="application/rss+xml"/><item><title>122. 买卖股票的最佳时机 II</title><link>http://tech-ox.com/p/122.-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-ii/</link><pubDate>Sun, 12 Jul 2026 00:00:00 +0800</pubDate><guid>http://tech-ox.com/p/122.-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-ii/</guid><description>&lt;h2 id="题目"&gt;题目
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>动态规划 on codgem</title><link>https://codgem.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link><description>Recent content in 动态规划 on codgem</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>codgem</copyright><lastBuildDate>Sun, 12 Jul 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://codgem.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.xml" rel="self" type="application/rss+xml"/><item><title>122. 买卖股票的最佳时机 II</title><link>https://codgem.com/p/122.-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-ii/</link><pubDate>Sun, 12 Jul 2026 00:00:00 +0800</pubDate><guid>https://codgem.com/p/122.-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-ii/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;122. 买卖股票的最佳时机 II&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/solutions/535553/mai-mai-gu-piao-de-zui-jia-shi-ji-ii-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -75,7 +75,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;时间复杂度：O(N)，其中 N 是数组 &lt;code&gt;prices&lt;/code&gt; 的长度。只需要遍历一遍数组。&lt;/p&gt;
 &lt;p&gt;空间复杂度：O(N)，需要一个二维数组记录每一天的两种状态。&lt;/p&gt;
-&lt;p&gt;如果想继续优化，也可以把二维数组压缩成两个变量，只保留上一天的状态。&lt;/p&gt;</description></item><item><title>322. 零钱兑换</title><link>http://tech-ox.com/p/322.-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</link><pubDate>Tue, 31 Mar 2026 19:25:11 +0800</pubDate><guid>http://tech-ox.com/p/322.-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;p&gt;如果想继续优化，也可以把二维数组压缩成两个变量，只保留上一天的状态。&lt;/p&gt;</description></item><item><title>322. 零钱兑换</title><link>https://codgem.com/p/322.-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</link><pubDate>Tue, 31 Mar 2026 19:25:11 +0800</pubDate><guid>https://codgem.com/p/322.-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/coin-change/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;322. 零钱兑换&lt;/a&gt;&lt;br&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/coin-change/solutions/522557/ling-qian-dui-huan-by-leetcode/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -235,7 +235,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>312. 戳气球</title><link>http://tech-ox.com/p/312.-%E6%88%B3%E6%B0%94%E7%90%83/</link><pubDate>Thu, 19 Mar 2026 22:20:02 +0800</pubDate><guid>http://tech-ox.com/p/312.-%E6%88%B3%E6%B0%94%E7%90%83/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;/div&gt;</description></item><item><title>312. 戳气球</title><link>https://codgem.com/p/312.-%E6%88%B3%E6%B0%94%E7%90%83/</link><pubDate>Thu, 19 Mar 2026 22:20:02 +0800</pubDate><guid>https://codgem.com/p/312.-%E6%88%B3%E6%B0%94%E7%90%83/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/burst-balloons/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;312. 戳气球&lt;/a&gt;&lt;br&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/burst-balloons/solutions/522553/chu-qi-qiu-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -293,7 +293,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>152. 乘积最大子数组</title><link>http://tech-ox.com/p/152.-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/</link><pubDate>Thu, 19 Mar 2026 20:41:47 +0800</pubDate><guid>http://tech-ox.com/p/152.-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;/div&gt;</description></item><item><title>152. 乘积最大子数组</title><link>https://codgem.com/p/152.-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/</link><pubDate>Thu, 19 Mar 2026 20:41:47 +0800</pubDate><guid>https://codgem.com/p/152.-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/maximum-product-subarray/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;152. 乘积最大子数组&lt;/a&gt;&lt;br&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/maximum-product-subarray/solutions/522553/chen-ji-zui-da-zi-shu-zu-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -377,7 +377,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>309. 最佳买卖股票时机含冷冻期</title><link>http://tech-ox.com/p/309.-%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%BA%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F/</link><pubDate>Wed, 28 Jan 2026 12:45:22 +0800</pubDate><guid>http://tech-ox.com/p/309.-%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%BA%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;/div&gt;</description></item><item><title>309. 最佳买卖股票时机含冷冻期</title><link>https://codgem.com/p/309.-%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%BA%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F/</link><pubDate>Wed, 28 Jan 2026 12:45:22 +0800</pubDate><guid>https://codgem.com/p/309.-%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%BA%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;309. 最佳买卖股票时机含冷冻期&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/solutions/535549/zui-jia-mai-mai-gu-piao-shi-ji-han-leng-dong-q-2/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -446,7 +446,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;时间复杂度：O(N)，其中 N 是数组 prices 的长度。我们只需遍历一次数组。&lt;/p&gt;
-&lt;p&gt;空间复杂度：O(N)，需要使用一个大小为 N 的二维数组来存储状态。&lt;/p&gt;</description></item><item><title>494. 目标和</title><link>http://tech-ox.com/p/494.-%E7%9B%AE%E6%A0%87%E5%92%8C/</link><pubDate>Wed, 28 Jan 2026 10:15:36 +0800</pubDate><guid>http://tech-ox.com/p/494.-%E7%9B%AE%E6%A0%87%E5%92%8C/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;p&gt;空间复杂度：O(N)，需要使用一个大小为 N 的二维数组来存储状态。&lt;/p&gt;</description></item><item><title>494. 目标和</title><link>https://codgem.com/p/494.-%E7%9B%AE%E6%A0%87%E5%92%8C/</link><pubDate>Wed, 28 Jan 2026 10:15:36 +0800</pubDate><guid>https://codgem.com/p/494.-%E7%9B%AE%E6%A0%87%E5%92%8C/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/target-sum/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;494. 目标和&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/target-sum/solutions/535553/mu-biao-he-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -666,7 +666,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;则 package_a = (target + sum)/2。
 所以根据题意给的target和sum，我们可以求出package_a的值。&lt;/p&gt;
-&lt;p&gt;那这道题就可以转化为：给定一个大小为package_a的背包，有多少种组合方式能把背包装满？ 妥妥的0-1背包。&lt;/p&gt;</description></item><item><title>647. 回文子串</title><link>http://tech-ox.com/p/647.-%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</link><pubDate>Sun, 25 Jan 2026 11:52:40 +0800</pubDate><guid>http://tech-ox.com/p/647.-%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;p&gt;那这道题就可以转化为：给定一个大小为package_a的背包，有多少种组合方式能把背包装满？ 妥妥的0-1背包。&lt;/p&gt;</description></item><item><title>647. 回文子串</title><link>https://codgem.com/p/647.-%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</link><pubDate>Sun, 25 Jan 2026 11:52:40 +0800</pubDate><guid>https://codgem.com/p/647.-%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/palindromic-substrings/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;647. 回文子串&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/palindromic-substrings/solutions/535906/hui-wen-zi-chuan-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -780,7 +780,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;时间复杂度：O(N^2)，其中 N 是字符串 s 的长度。最坏情况下，所有字符都相同，需要检查所有可能的回文子串。&lt;/p&gt;
-&lt;p&gt;空间复杂度：O(1)，只使用了常数级别的额外空间。&lt;/p&gt;</description></item><item><title>279. 完全平方数</title><link>http://tech-ox.com/p/279.-%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</link><pubDate>Fri, 16 Jan 2026 10:53:29 +0800</pubDate><guid>http://tech-ox.com/p/279.-%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;p&gt;空间复杂度：O(1)，只使用了常数级别的额外空间。&lt;/p&gt;</description></item><item><title>279. 完全平方数</title><link>https://codgem.com/p/279.-%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</link><pubDate>Fri, 16 Jan 2026 10:53:29 +0800</pubDate><guid>https://codgem.com/p/279.-%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/perfect-squares/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;279. 完全平方数&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/perfect-squares/solutions/535882/wan-quan-ping-fang-shu-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -1026,7 +1026,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;时间复杂度：O(√n)&lt;/p&gt;
 &lt;p&gt;空间复杂度：O(1)&lt;/p&gt;
-&lt;p&gt;基于数论中的四平方和定理，任何正整数都可以表示为四个整数的平方和。通过排除法，可以确定最少需要多少个完全平方数来表示给定的整数 n。&lt;/p&gt;</description></item><item><title>337. 打家劫舍 III</title><link>http://tech-ox.com/p/337.-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D-iii/</link><pubDate>Fri, 16 Jan 2026 10:28:48 +0800</pubDate><guid>http://tech-ox.com/p/337.-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D-iii/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;p&gt;基于数论中的四平方和定理，任何正整数都可以表示为四个整数的平方和。通过排除法，可以确定最少需要多少个完全平方数来表示给定的整数 n。&lt;/p&gt;</description></item><item><title>337. 打家劫舍 III</title><link>https://codgem.com/p/337.-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D-iii/</link><pubDate>Fri, 16 Jan 2026 10:28:48 +0800</pubDate><guid>https://codgem.com/p/337.-%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D-iii/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/house-robber-iii/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;337. 打家劫舍 III&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/house-robber-iii/solutions/535751/da-jia-jie-she-iii-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -1233,7 +1233,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;时间复杂度：O(N) ，其中 N 是二叉树的节点数。我们对每个节点访问一次。&lt;/p&gt;
-&lt;p&gt;空间复杂度：O(H) ，其中 H 是二叉树的高度。递归调用栈的空间取决于二叉树的高度，最坏情况下二叉树退化成链表，高度为 N 。&lt;/p&gt;</description></item><item><title>72. 编辑距离</title><link>http://tech-ox.com/p/72.-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</link><pubDate>Tue, 13 Jan 2026 11:22:35 +0800</pubDate><guid>http://tech-ox.com/p/72.-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;p&gt;空间复杂度：O(H) ，其中 H 是二叉树的高度。递归调用栈的空间取决于二叉树的高度，最坏情况下二叉树退化成链表，高度为 N 。&lt;/p&gt;</description></item><item><title>72. 编辑距离</title><link>https://codgem.com/p/72.-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</link><pubDate>Tue, 13 Jan 2026 11:22:35 +0800</pubDate><guid>https://codgem.com/p/72.-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/edit-distance/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;72. 编辑距离&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/edit-distance/solutions/535708/bian-ji-ju-chi-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -1296,7 +1296,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;时间复杂度：O(mn)，其中 m 和 n 分别是字符串 word1 和 word2 的长度。我们需要计算并存储一个大小为 m×n 的二维数组 f。
-空间复杂度：O(mn)，即为存储二维数组 f 需要的空间。&lt;/p&gt;</description></item><item><title>139. 单词拆分</title><link>http://tech-ox.com/p/139.-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</link><pubDate>Thu, 08 Jan 2026 13:04:17 +0800</pubDate><guid>http://tech-ox.com/p/139.-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</guid><description>&lt;h2 id="题目"&gt;题目
+空间复杂度：O(mn)，即为存储二维数组 f 需要的空间。&lt;/p&gt;</description></item><item><title>139. 单词拆分</title><link>https://codgem.com/p/139.-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</link><pubDate>Thu, 08 Jan 2026 13:04:17 +0800</pubDate><guid>https://codgem.com/p/139.-%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/word-break/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;139. 单词拆分&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/word-break/solutions/535599/dan-ci-chai-fen-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -1422,7 +1422,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;时间复杂度：O(n^2)&lt;/p&gt;
-&lt;p&gt;空间复杂度：O(n)&lt;/p&gt;</description></item><item><title>10. 正则表达式匹配</title><link>http://tech-ox.com/p/10.-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/</link><pubDate>Tue, 06 Jan 2026 10:17:24 +0800</pubDate><guid>http://tech-ox.com/p/10.-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;p&gt;空间复杂度：O(n)&lt;/p&gt;</description></item><item><title>10. 正则表达式匹配</title><link>https://codgem.com/p/10.-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/</link><pubDate>Tue, 06 Jan 2026 10:17:24 +0800</pubDate><guid>https://codgem.com/p/10.-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/regular-expression-matching/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;10. 正则表达式匹配&lt;/a&gt;&lt;br&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/regular-expression-matching/solutions/522491/zheng-ze-biao-da-shi-pi-pei-by-leetcode-solution/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -1430,10 +1430,10 @@
 &lt;h2 id="方法1动态规划"&gt;方法1：动态规划
 &lt;/h2&gt;&lt;p&gt;详见官方题解。&lt;/p&gt;
 &lt;p&gt;状态转移方程&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://tech-ox.com/p/10.-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/image.png"
+&lt;p&gt;&lt;img src="https://codgem.com/p/10.-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/image.png"
 width="1042"
 height="213"
-srcset="http://tech-ox.com/p/10.-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/image_hu_5f304f2c63890ec.png 480w, http://tech-ox.com/p/10.-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/image_hu_eb28f0c5233437a1.png 1024w"
+srcset="https://codgem.com/p/10.-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/image_hu_5f304f2c63890ec.png 480w, https://codgem.com/p/10.-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/image_hu_eb28f0c5233437a1.png 1024w"
 loading="lazy"
 alt="alt text"
 class="gallery-image"
@@ -1511,7 +1511,7 @@ data-flex-basis="1174px"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id="小结"&gt;小结
-&lt;/h2&gt;&lt;p&gt;好难，好难啊！&lt;/p&gt;</description></item><item><title>64. 最小路径和</title><link>http://tech-ox.com/p/64.-%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</link><pubDate>Mon, 05 Jan 2026 12:39:13 +0800</pubDate><guid>http://tech-ox.com/p/64.-%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;/h2&gt;&lt;p&gt;好难，好难啊！&lt;/p&gt;</description></item><item><title>64. 最小路径和</title><link>https://codgem.com/p/64.-%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</link><pubDate>Mon, 05 Jan 2026 12:39:13 +0800</pubDate><guid>https://codgem.com/p/64.-%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/minimum-path-sum/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;64. 最小路径和&lt;/a&gt;&lt;br&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/minimum-path-sum/solutions/535954/zui-xiao-lu-jing-he-by-leetcode-solution-3pkl/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -1626,7 +1626,7 @@ data-flex-basis="1174px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;时间复杂度：O(m * n)，空间复杂度：O(n)。&lt;/p&gt;</description></item><item><title>32. 最长有效括号</title><link>http://tech-ox.com/p/32.-%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</link><pubDate>Mon, 05 Jan 2026 10:39:13 +0800</pubDate><guid>http://tech-ox.com/p/32.-%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;/div&gt;&lt;p&gt;时间复杂度：O(m * n)，空间复杂度：O(n)。&lt;/p&gt;</description></item><item><title>32. 最长有效括号</title><link>https://codgem.com/p/32.-%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</link><pubDate>Mon, 05 Jan 2026 10:39:13 +0800</pubDate><guid>https://codgem.com/p/32.-%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/longest-valid-parentheses/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;32. 最长有效括号&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/longest-valid-parentheses/solutions/535619/zui-chang-you-xiao-gua-hao-by-leetcode-solution-bjlu/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
@@ -1730,15 +1730,15 @@ data-flex-basis="1174px"
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>85. 最大矩形</title><link>http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</link><pubDate>Sun, 04 Jan 2026 10:37:02 +0800</pubDate><guid>http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</guid><description>&lt;h2 id="题目"&gt;题目
+&lt;/div&gt;</description></item><item><title>85. 最大矩形</title><link>https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</link><pubDate>Sun, 04 Jan 2026 10:37:02 +0800</pubDate><guid>https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</guid><description>&lt;h2 id="题目"&gt;题目
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://leetcode.cn/problems/maximal-rectangle/description/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;85. 最大矩形&lt;/a&gt;
 &lt;a class="link" href="https://leetcode.cn/problems/maximal-rectangle/solutions/535672/zui-da-ju-xing-by-leetcode-solution-bjlu/?envType=problem-list-v2&amp;amp;envId=2cktkvj" target="_blank" rel="noopener"
 &gt;官方题解&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image.png"
+&lt;p&gt;&lt;img src="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image.png"
 width="1886"
 height="1711"
-srcset="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_fc566ea4dd741c5.png 480w, http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_6a9dc5abb583a75f.png 1024w"
+srcset="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_fc566ea4dd741c5.png 480w, https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image_hu_6a9dc5abb583a75f.png 1024w"
 loading="lazy"
 alt="题目示例"
 class="gallery-image"
@@ -1941,10 +1941,10 @@ $$&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;p&gt;O((mn)^3)，m 和 n 分别是矩阵的行数和列数。&lt;/p&gt;
 &lt;p&gt;70/75 TLE&lt;/p&gt;
 &lt;h2 id="暴力优化"&gt;暴力优化
-&lt;/h2&gt;&lt;p&gt;&lt;img src="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2.png"
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2.png"
 width="2000"
 height="1125"
-srcset="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2_hu_f6265f71ce5f0fc0.png 480w, http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2_hu_855cad2ff4f7388c.png 1024w"
+srcset="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2_hu_f6265f71ce5f0fc0.png 480w, https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-2_hu_855cad2ff4f7388c.png 1024w"
 loading="lazy"
 alt="暴力优化示意图"
 class="gallery-image"
@@ -1952,10 +1952,10 @@ data-flex-grow="177"
 data-flex-basis="426px"
 &gt;&lt;/p&gt;
 &lt;p&gt;我们首先计算出矩阵的每个元素的左边连续 1 的数量，使用二维数组 left 记录，其中 left[i][j] 为矩阵第 i 行第 j 列元素的左边连续 1 的数量。&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1.png"
+&lt;p&gt;&lt;img src="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1.png"
 width="2000"
 height="1125"
-srcset="http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1_hu_b37af737af321589.png 480w, http://tech-ox.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1_hu_856118efaf8550fd.png 1024w"
+srcset="https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1_hu_b37af737af321589.png 480w, https://codgem.com/p/85.-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/image-1_hu_856118efaf8550fd.png 1024w"
 loading="lazy"
 alt="left数组计算"
 class="gallery-image"
